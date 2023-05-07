@@ -4,19 +4,17 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 
 import TopNav from "./components/topNav";
+import Payments from "./pages/payments";
 
 const App = () => {
     return (
         <Router>
-            <div>
-                <TopNav />
+            <TopNav />
 
-                <Switch>
-                    <Route path="/">
-                        <Dashboard />
-                    </Route>
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path="/payments" component={Payments} />
+                <Route exact path="/" component={Dashboard} />
+            </Switch>
         </Router>
     );
 };
