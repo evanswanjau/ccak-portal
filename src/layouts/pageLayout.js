@@ -1,8 +1,12 @@
 import React from "react";
 import SideNav from "../components/sideNav";
+import { Empty } from "../components/empty";
+import { Loader } from "../components/loader";
 
+const PageLayout = ({ length, loading, content }) => {
+    if (length < 1) content = <Empty />;
+    if (loading) content = <Loader />;
 
-const PageLayout = ({ content }) => {
     return (
         <div className="flex">
             <div className="w-2/12">
