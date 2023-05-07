@@ -144,12 +144,12 @@ const SideNav = () => {
                     {pages.map((page) => (
                         <li
                             key={page.link}
-                            className="border-b border-teal-800 p-5"
+                            className="border-b border-teal-800 hover:bg-teal-700 transition duration-300 ease-in-out"
                         >
-                            <div className="flex space-x-4">
+                            <Link to={page.link} className="flex space-x-4 p-5">
                                 {page.icon}
-                                <Link to={page.link}>{page.title}</Link>
-                            </div>
+                                <span>{page.title}</span>
+                            </Link>
 
                             {/* {page.subPages && (
                                 <ul>
