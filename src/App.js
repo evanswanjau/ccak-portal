@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard";
 
 import TopNav from "./components/topNav";
 import Payments from "./pages/payments";
+import News from "./pages/pages/media-centre/news";
 
 const App = () => {
     return (
@@ -12,6 +13,7 @@ const App = () => {
             <TopNav />
 
             <Switch>
+                <Route exact path="/pages/media-centre/news" component={News} />
                 <Route exact path="/payments" component={Payments} />
                 <Route exact path="/" component={Dashboard} />
             </Switch>
