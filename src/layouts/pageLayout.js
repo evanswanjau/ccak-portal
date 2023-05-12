@@ -7,7 +7,7 @@ import { Loader } from "../components/loader";
 import { Empty } from "../components/empty";
 import { getForm } from "../helpers/forms";
 
-const PageLayout = ({ url, pageContent, addButton, form }) => {
+const PageLayout = ({ url, pageContent, addButton }) => {
     const [data, setData] = useState(false);
     const [loading, setLoading] = useState(true);
     const [revealForm, setRevealForm] = useState(false);
