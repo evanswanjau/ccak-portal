@@ -2,7 +2,7 @@ import { HiPlus } from "react-icons/hi2";
 
 export const AddButton = ({ setRevealForm }) => {
     return (
-        <div className="fixed bottom-5 right-5">
+        <div className="fixed bottom-10 right-10 flex flex-col place-items-end">
             <button
                 className="bg-[#ED7423] rounded-full p-3 shadow-lg"
                 onClick={() => {
