@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-export const PostEditor = ({ data, setData }) => {
+export const PostEditor = ({ data, updateData }) => {
     const editorRef = useRef(null);
 
     return (
@@ -11,7 +11,7 @@ export const PostEditor = ({ data, setData }) => {
                 onInit={(evt, editor) => (editorRef.current = editor)}
                 value={data.content}
                 onEditorChange={(content) => {
-                    setData({ ...data, content: content });
+                    updateData({ ...data, content: content });
                 }}
                 init={{
                     auto_focus: "tiny_mce",
