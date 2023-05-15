@@ -7,8 +7,9 @@ import {
     HiOutlineUsers,
     HiChevronRight,
     HiChevronDown,
+    HiOutlineNewspaper,
 } from "react-icons/hi2";
-import { IoDocumentsOutline } from "react-icons/io5";
+// import { IoDocumentsOutline } from "react-icons/io5";
 
 const pages = [
     {
@@ -16,110 +17,115 @@ const pages = [
         link: "/",
         icon: <HiOutlineSquares2X2 className="text-2xl mt-[1px]" />,
     },
+    // {
+    //     title: "Pages",
+    //     link: "#",
+    //     icon: <IoDocumentsOutline className="text-xl mt-[3px]" />,
+    //     subPages: [
+    //         {
+    //             title: "Home",
+    //             link: "/pages/home",
+    //         },
+    //         {
+    //             title: "Who We Are",
+    //             link: "#",
+    //             subPages: [
+    //                 {
+    //                     title: "About Us",
+    //                     link: "/pages/who-we-are/about-us",
+    //                 },
+    //                 {
+    //                     title: "Our Team",
+    //                     link: "/pages/who-we-are/our-team",
+    //                 },
+    //             ],
+    //         },
+    //         {
+    //             title: "What We Do",
+    //             link: "/pages/what-we-do",
+    //         },
+    //         {
+    //             title: "Get Involved",
+    //             link: "#",
+    //             subPages: [
+    //                 {
+    //                     title: "Careers",
+    //                     link: "/pages/get-involved/careers",
+    //                 },
+    //                 {
+    //                     title: "Consultancy",
+    //                     link: "/pages/get-involved/consultancy",
+    //                 },
+    //                 {
+    //                     title: "Funding Opportunities",
+    //                     link: "/pages/get-involved/funding-opportunities",
+    //                 },
+    //                 {
+    //                     title: "Donate",
+    //                     link: "/pages/get-involved/donate",
+    //                 },
+    //                 {
+    //                     title: "Contact Us",
+    //                     link: "/pages/get-involved/contact-us",
+    //                 },
+    //             ],
+    //         },
+    //         {
+    //             title: "Membership",
+    //             link: "#",
+    //             subPages: [
+    //                 {
+    //                     title: "Membership Packages",
+    //                     link: "/pages/membership/membership-packages",
+    //                 },
+    //             ],
+    //         },
+    //         {
+    //             title: "Media Centre",
+    //             link: "#",
+    //             subPages: [
+    //                 {
+    //                     title: "Press Releases",
+    //                     link: "/pages/media-centre/press-releases",
+    //                 },
+    //                 {
+    //                     title: "News",
+    //                     link: "/pages/media-centre/news",
+    //                 },
+    //                 {
+    //                     title: "Events",
+    //                     link: "/pages/media-centre/events",
+    //                 },
+    //                 {
+    //                     title: "Projects",
+    //                     link: "/pages/media-centre/projects",
+    //                 },
+    //                 {
+    //                     title: "Photo Gallery",
+    //                     link: "/pages/media-centre/photo-gallery",
+    //                 },
+    //             ],
+    //         },
+    //         {
+    //             title: "Resource Centre",
+    //             link: "#",
+    //             subPages: [
+    //                 {
+    //                     title: "Research Papers",
+    //                     link: "/pages/resource-centre/research-papers",
+    //                 },
+    //                 {
+    //                     title: "AGM Material",
+    //                     link: "/pages/resource-centre/agm-material",
+    //                 },
+    //             ],
+    //         },
+    //     ],
+    // },
     {
-        title: "Pages",
-        link: "#",
-        icon: <IoDocumentsOutline className="text-xl mt-[3px]" />,
-        subPages: [
-            {
-                title: "Home",
-                link: "/pages/home",
-            },
-            {
-                title: "Who We Are",
-                link: "#",
-                subPages: [
-                    {
-                        title: "About Us",
-                        link: "/pages/who-we-are/about-us",
-                    },
-                    {
-                        title: "Our Team",
-                        link: "/pages/who-we-are/our-team",
-                    },
-                ],
-            },
-            {
-                title: "What We Do",
-                link: "/pages/what-we-do",
-            },
-            {
-                title: "Get Involved",
-                link: "#",
-                subPages: [
-                    {
-                        title: "Careers",
-                        link: "/pages/get-involved/careers",
-                    },
-                    {
-                        title: "Consultancy",
-                        link: "/pages/get-involved/consultancy",
-                    },
-                    {
-                        title: "Funding Opportunities",
-                        link: "/pages/get-involved/funding-opportunities",
-                    },
-                    {
-                        title: "Donate",
-                        link: "/pages/get-involved/donate",
-                    },
-                    {
-                        title: "Contact Us",
-                        link: "/pages/get-involved/contact-us",
-                    },
-                ],
-            },
-            {
-                title: "Membership",
-                link: "#",
-                subPages: [
-                    {
-                        title: "Membership Packages",
-                        link: "/pages/membership/membership-packages",
-                    },
-                ],
-            },
-            {
-                title: "Media Centre",
-                link: "#",
-                subPages: [
-                    {
-                        title: "Press Releases",
-                        link: "/pages/media-centre/press-releases",
-                    },
-                    {
-                        title: "News",
-                        link: "/pages/media-centre/news",
-                    },
-                    {
-                        title: "Events",
-                        link: "/pages/media-centre/events",
-                    },
-                    {
-                        title: "Projects",
-                        link: "/pages/media-centre/projects",
-                    },
-                    {
-                        title: "Photo Gallery",
-                        link: "/pages/media-centre/photo-gallery",
-                    },
-                ],
-            },
-            {
-                title: "Resource Centre",
-                link: "#",
-                subPages: [
-                    {
-                        title: "Research Papers",
-                        link: "/pages/resource-centre/research-papers",
-                    },
-                    {
-                        title: "AGM Material",
-                        link: "/pages/resource-centre/agm-material",
-                    },
-                ],
-            },
-        ],
+        title: "Posts",
+        link: "/posts",
+        icon: <HiOutlineNewspaper className="text-xl mt-[3px]" />,
     },
     {
         title: "Payments",
@@ -144,7 +150,7 @@ const SideNav = () => {
 
     return (
         <div>
-            <nav className="bg-teal-900 h-[calc(100vh-3em)] text-white font-light mt-12 overflow-auto">
+            <nav className="bg-teal-900 h-[calc(100vh-3.4em)] text-white text-sm font-light mt-12 overflow-auto">
                 <ul>
                     {pages.map((page) => (
                         <li key={page.link}>
