@@ -6,7 +6,11 @@ import App from "./App";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <SnackbarProvider maxSnack={3}>
+    <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{ horizontal: "center", vertical: "top" }}
+        autoHideDuration={3000}
+    >
         <App />
     </SnackbarProvider>
 );
