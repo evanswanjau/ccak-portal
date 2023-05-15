@@ -1,6 +1,15 @@
 import axios from "axios";
 
-export const apiRequest = (method, url, data = {}) => {
+export const apiRequest = (
+    method,
+    url,
+    data,
+    updateData,
+    enqueueSnackbar,
+    message
+) => {
+    if (method === "patch") delete data["id"];
+
     return axios({
         method: method,
         url: process.env.REACT_APP_API_URL + url,
@@ -8,5 +17,18 @@ export const apiRequest = (method, url, data = {}) => {
         headers: {
             "Content-Type": "application/json",
         },
-    });
+    })
+        .then(({ data }) => {
+            method !== "delete" && updateData(data);
+            if (message)
+                enqueueSnackbar(message, {
+                    variant: "success",
+                });
+        })
+        .catch((error) => {
+            enqueueSnackbar(error.message, {
+                variant: "error",
+                anchorOrigin: { vertical: "top", horizontal: "center" },
+            });
+        });
 };
