@@ -1,4 +1,16 @@
+const parseDate = (datetime) => {
+    return new Date(
+        new Date(datetime).getTime() -
+            new Date(datetime).getTimezoneOffset() * 60000
+    )
+        .toISOString()
+        .slice(0, -8);
+};
+
 export const Input = ({ item, label = null, type, data, updateData }) => {
+    // parse date
+    if (type === "datetime-local") data[item] = parseDate(data[item]);
+
     return (
         <div className="w-full my-5">
             <label
