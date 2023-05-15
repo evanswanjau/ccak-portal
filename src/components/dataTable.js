@@ -29,8 +29,7 @@ export const DataTable = ({
         let newArray = [...data];
         let oldArray = [...data];
 
-        let response = newArray.splice(index, 1);
-        console.log("response", response);
+        newArray.splice(index, 1);
 
         updateData(newArray);
 
