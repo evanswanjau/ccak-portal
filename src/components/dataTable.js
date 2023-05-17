@@ -1,6 +1,7 @@
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import { useSnackbar } from "notistack";
 import { apiRequest } from "../api/api-calls";
+import { parseData } from "../helpers/parses";
 
 export const DataTable = ({
     titles,
@@ -91,7 +92,7 @@ export const DataTable = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((item, i) => {
+                    {parseData(url, data).map((item, i) => {
                         return (
                             <tr
                                 key={item.id}
