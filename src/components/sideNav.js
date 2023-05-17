@@ -134,7 +134,7 @@ const pages = [
     },
     {
         title: "Social Hub",
-        link: "/social-hub",
+        link: "/social-posts",
         icon: <HiOutlineHome className="text-xl mt-[3px]" />,
     },
     {
