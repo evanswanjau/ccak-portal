@@ -10,16 +10,19 @@ import { Published } from "./post-form/published";
 
 export const PostForm = ({ setRevealForm, id, getData }) => {
     const [loading, setLoading] = useState(true);
-    const { enqueueSnackbar } = useSnackbar();
     const [data, updateData] = useState({
         title: "",
         excerpt: "",
         content: "",
         published: new Date().toISOString().slice(0, -8),
         category: "",
+        folder: "",
+        files: { data: [] },
         image: "",
         step: "category",
     });
+
+    const { enqueueSnackbar } = useSnackbar();
 
     const submitData = (method, url, data, message = null) => {
         return apiRequest(
@@ -43,7 +46,6 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
 
     useEffect(() => {
         if (id) {
-            setLoading(true);
             apiRequest(
                 "get",
                 "post/" + id,
@@ -53,8 +55,9 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
             ).then(() => {
                 setLoading(false);
             });
+        } else {
+            setLoading(false);
         }
-        setLoading(false);
     }, []); // eslint-disable-line
 
     return (
@@ -74,17 +77,17 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
                         />
 
                         <div className="p-5">
-                            {data.step !== "category" ||
-                                (data.step !== "published" && (
-                                    <div>
-                                        <h2 className="text-3xl text-gray-900 capitalize">
-                                            {data.category.replace(/-/g, " ")}
-                                        </h2>
-                                        <h3 className="text-xl text-gray-400">
-                                            {data.title}
-                                        </h3>
-                                    </div>
-                                ))}
+                            {(data.step !== "category" &&
+                                data.step !== "published") && (
+                                <div>
+                                    <h2 className="text-3xl text-gray-900 capitalize">
+                                        {data.category.replace(/-/g, " ")}
+                                    </h2>
+                                    <h3 className="text-xl text-gray-400">
+                                        {data.title}
+                                    </h3>
+                                </div>
+                            )}
 
                             {data.step === "category" && (
                                 <ChooseCategory
