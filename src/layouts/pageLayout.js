@@ -8,23 +8,18 @@ import { Empty } from "../components/empty";
 import { getForm } from "../helpers/forms";
 
 const PageLayout = ({ url, pageContent, addButton }) => {
-    const [data, setData] = useState(false);
+    const [data, updateData] = useState(false);
     const [loading, setLoading] = useState(true);
     const [revealForm, setRevealForm] = useState(false);
+    const [id, setID] = useState(null);
     const { enqueueSnackbar } = useSnackbar();
 
     const getData = () => {
-        apiRequest("get", url)
-            .then(({ data }) => {
-                setData(data);
-                setLoading(false);
-            })
-            .catch(({ message }) => {
-                enqueueSnackbar(message, {
-                    variant: "error",
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
-                });
-            });
+        setLoading(true);
+        apiRequest("get", url, {}, updateData, enqueueSnackbar).then(() => {
+            setID(null);
+            setLoading(false);
+        });
     };
 
     const getContent = () => {
@@ -32,12 +27,13 @@ const PageLayout = ({ url, pageContent, addButton }) => {
 
         if (revealForm) {
             addButton = false;
-            return getForm(url, setRevealForm);
+            return getForm(url, setRevealForm, id, getData);
         }
 
         if (!revealForm && data) {
             if (data.length < 1) return <Empty />;
-            if (data.length > 1) return pageContent(data);
+            if (data.length > 0)
+                return pageContent(data, updateData, setRevealForm, setID);
         }
     };
 
@@ -50,7 +46,7 @@ const PageLayout = ({ url, pageContent, addButton }) => {
             <div className="w-2/12">
                 <SideNav />
             </div>
-            <div className="w-10/12 p-10 mt-12 h-[calc(100vh-3em)] overflow-scroll">
+            <div className="w-10/12 p-10 pb-24 mt-8 h-[calc(100vh-3em)] overflow-scroll">
                 {getContent()}
                 {!loading && addButton && (
                     <AddButton setRevealForm={setRevealForm} />
