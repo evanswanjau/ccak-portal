@@ -74,11 +74,13 @@ export const ChooseCategory = ({ data, updateData, submitData }) => {
                                     ...data,
                                     step: "writing",
                                     category: category.name,
+                                    folder: category.name.replace(/ /g, "_"),
                                 });
                                 submitData("post", "post", {
                                     ...data,
                                     step: "writing",
                                     category: category.name,
+                                    folder: category.name.replace(/ /g, "_"),
                                 });
                             }}
                         >
