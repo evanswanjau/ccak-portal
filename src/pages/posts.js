@@ -1,10 +1,9 @@
 import PageLayout from "../layouts/pageLayout";
 import { DataTable } from "../components/dataTable";
 import { getTitles } from "../helpers/titles";
-import { parsePosts } from "../helpers/parses";
 
 const Posts = () => {
-    const pageContent = (data) => {
+    const pageContent = (data, updateData, setRevealForm, setID) => {
         return (
             <div>
                 <h1 className="text-2xl font-semibold pb-7 text-gray-600">
@@ -12,7 +11,11 @@ const Posts = () => {
                 </h1>
                 <DataTable
                     titles={getTitles("posts")}
-                    data={parsePosts(data)}
+                    url="post"
+                    data={data}
+                    updateData={updateData}
+                    setRevealForm={setRevealForm}
+                    setID={setID}
                 />
             </div>
         );
