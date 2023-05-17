@@ -5,7 +5,7 @@ import { Select } from "../../../components/forms/select";
 
 export const StartPrepping = ({ data, updateData }) => {
     return (
-        <div className="flex">
+        <div className="flex my-8">
             <div className="w-full">
                 <TextArea item="excerpt" data={data} updateData={updateData} />
                 <Input
@@ -62,7 +62,7 @@ export const StartPrepping = ({ data, updateData }) => {
                 />
             </div>
             <div className="w-full pl-16">
-                <ImageUpload />
+                <ImageUpload data={data} updateData={updateData} />
             </div>
         </div>
     );
