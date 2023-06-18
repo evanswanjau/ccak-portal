@@ -37,7 +37,7 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                 response = true;
         } else if (
             data.category === "photo-gallery" ||
-            data.category === "pubications" ||
+            data.category === "publications" ||
             data.category === "newsletters"
         ) {
             if (
@@ -57,7 +57,7 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
         let response = false;
         if (
             data.category === "photo-gallery" ||
-            data.category === "pubications" ||
+            data.category === "publications" ||
             data.category === "newsletters"
         ) {
             response =
