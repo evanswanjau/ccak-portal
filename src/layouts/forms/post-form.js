@@ -77,17 +77,17 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
                         />
 
                         <div className="p-5">
-                            {(data.step !== "category" &&
-                                data.step !== "published") && (
-                                <div>
-                                    <h2 className="text-3xl text-gray-900 capitalize">
-                                        {data.category.replace(/-/g, " ")}
-                                    </h2>
-                                    <h3 className="text-xl text-gray-400">
-                                        {data.title}
-                                    </h3>
-                                </div>
-                            )}
+                            {data.step !== "category" &&
+                                data.step !== "published" && (
+                                    <div>
+                                        <h2 className="text-3xl text-gray-900 capitalize">
+                                            {data.category.replace(/-/g, " ")}
+                                        </h2>
+                                        <h3 className="text-xl text-gray-400">
+                                            {data.title}
+                                        </h3>
+                                    </div>
+                                )}
 
                             {data.step === "category" && (
                                 <ChooseCategory
