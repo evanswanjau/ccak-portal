@@ -8,6 +8,7 @@ import {
     HiOutlineCalendarDays,
     HiOutlineNewspaper,
     HiOutlineAcademicCap,
+    HiOutlinePencilSquare,
 } from "react-icons/hi2";
 
 const categories = [
@@ -24,6 +25,10 @@ const categories = [
         icon: (
             <HiOutlinePresentationChartBar className="text-3xl mr-5 w-2/12" />
         ),
+    },
+    {
+        name: "blog",
+        icon: <HiOutlinePencilSquare className="text-3xl mr-5 w-2/12" />,
     },
     {
         name: "careers",
@@ -48,11 +53,11 @@ const categories = [
     },
 
     {
-        name: "research-papers",
+        name: "publications",
         icon: <BsFilePdf className="text-3xl mr-5 w-2/12" />,
     },
     {
-        name: "agm-material",
+        name: "newsletters",
         icon: <BsFilePdf className="text-3xl mr-5 w-2/12" />,
     },
 ];
