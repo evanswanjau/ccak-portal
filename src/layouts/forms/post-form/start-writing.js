@@ -12,7 +12,7 @@ export const StartWriting = ({ data, updateData }) => {
                 updateData={updateData}
             />
             {data.category === "photo-gallery" ||
-            data.category === "publications" ||
+            data.category === "internal-publications" ||
             data.category === "newsletters" ? (
                 <BuilkImageUpload data={data} updateData={updateData} />
             ) : (

@@ -53,7 +53,11 @@ const categories = [
     },
 
     {
-        name: "publications",
+        name: "internal-publications",
+        icon: <BsFilePdf className="text-3xl mr-5 w-2/12" />,
+    },
+    {
+        name: "external-publications",
         icon: <BsFilePdf className="text-3xl mr-5 w-2/12" />,
     },
     {
