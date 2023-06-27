@@ -4,6 +4,7 @@ import { DataTable } from "../components/dataTable";
 import { getTitles } from "../helpers/titles";
 import { RiCloseCircleFill } from "react-icons/ri";
 import { capitalize } from "../helpers/strings";
+import { Pagination } from "../components/forms/pagination";
 
 const categories = [
     "press-release",
@@ -149,6 +150,9 @@ const Posts = () => {
                     setRevealForm={setRevealForm}
                     setID={setID}
                 />
+                <div className="my-5">
+                    <Pagination />
+                </div>
             </div>
         );
     };
