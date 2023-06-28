@@ -52,7 +52,6 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
         ) {
             if (
                 data.title === "" ||
-                data.folder === "" ||
                 data.files.data.length < 1 ||
                 data.excerpt === "" ||
                 data.access === ""
