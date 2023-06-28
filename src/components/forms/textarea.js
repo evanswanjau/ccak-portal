@@ -3,7 +3,7 @@ export const TextArea = ({ item, label = null, data, updateData }) => {
         <div className="w-full my-5">
             <label
                 className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
-                for={item}
+                htmlFor={item}
             >
                 {label ? label : item}
             </label>
