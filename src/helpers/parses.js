@@ -1,7 +1,6 @@
 import { RiQuillPenFill, RiSendPlaneFill } from "react-icons/ri";
 
 export const parseData = (url, data) => {
-    console.log("we are rendering");
     if (url === "post") {
         return data.map((item) => {
             if (item.title) {
