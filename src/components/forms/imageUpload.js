@@ -1,8 +1,8 @@
-import { useSnackbar } from "notistack";
-import { IoCloudUpload } from "react-icons/io5";
-import { IKContext, IKImage, IKUpload } from "imagekitio-react";
 import { useState } from "react";
+import { useSnackbar } from "notistack";
+import { IKContext, IKImage, IKUpload } from "imagekitio-react";
 import { Loader } from "../loader";
+import { IoCloudUpload, IoCloseCircle } from "react-icons/io5";
 
 export const ImageUpload = ({ data, updateData }) => {
     const [loading, setLoading] = useState(false);
@@ -22,13 +22,24 @@ export const ImageUpload = ({ data, updateData }) => {
 
     return (
         <div className="h-full">
-            <div className="h-full border-2 flex flex-col  items-center justify-center  cursor-pointer text-gray-400 border-gray-300 rounded-lg border-dashed">
+            <div className="h-full border-2 flex flex-col items-center justify-center text-gray-400 border-gray-300 rounded-lg border-dashed">
                 {loading ? (
                     <Loader />
                 ) : (
                     <>
                         <label htmlFor="image">
-                            <div className="flex flex-col  items-center justify-center">
+                            <div
+                                className={`${
+                                    data.category === "careers" ||
+                                    data.category === "consultancy" ||
+                                    data.category === "funding-opportunities" ||
+                                    data.category === "internal-publications" ||
+                                    data.category === "external-publications" ||
+                                    data.category === "newsletters"
+                                        ? "cursor-not-allowed"
+                                        : "cursor-pointer"
+                                } `}
+                            >
                                 {data.image !== "" ? (
                                     <IKImage
                                         className="object-cover rounded-lg"
@@ -38,13 +49,32 @@ export const ImageUpload = ({ data, updateData }) => {
                                         path={`${data.folder}/${data.image}`}
                                     />
                                 ) : (
-                                    <>
-                                        <IoCloudUpload className="text-6xl" />
-                                        <p className="mt-5">
-                                            Drag and drop or browse to choose
-                                            file
-                                        </p>
-                                    </>
+                                    <div className="px-20 py-24 flex flex-col items-center justify-center">
+                                        {data.category === "careers" ||
+                                        data.category === "consultancy" ||
+                                        data.category ===
+                                            "funding-opportunities" ||
+                                        data.category ===
+                                            "internal-publications" ||
+                                        data.category ===
+                                            "external-publications" ||
+                                        data.category === "newsletters" ? (
+                                            <>
+                                                <IoCloseCircle className="text-6xl" />
+                                                <p className="mt-5">
+                                                    Image not required
+                                                </p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <IoCloudUpload className="text-6xl" />
+                                                <p className="mt-5">
+                                                    Drag and drop or browse to
+                                                    choose file
+                                                </p>
+                                            </>
+                                        )}
+                                    </div>
                                 )}
                             </div>
                         </label>
@@ -63,6 +93,14 @@ export const ImageUpload = ({ data, updateData }) => {
                                 fileName={data.title + ".jpg"}
                                 useUniqueFileName={true}
                                 folder={data.folder}
+                                disabled={
+                                    data.category === "careers" ||
+                                    data.category === "consultancy" ||
+                                    data.category === "funding-opportunities" ||
+                                    data.category === "internal-publications" ||
+                                    data.category === "external-publications" ||
+                                    data.category === "newsletters"
+                                }
                                 onChange={() => {
                                     setLoading(true);
                                 }}

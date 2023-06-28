@@ -23,7 +23,17 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
             data.category === "press-release" ||
             data.category === "news" ||
             data.category === "projects" ||
-            data.category === "blog" ||
+            data.category === "blog"
+        ) {
+            if (
+                data.title === "" ||
+                data.content === "" ||
+                data.excerpt === "" ||
+                data.access === "" ||
+                data.image === ""
+            )
+                response = true;
+        } else if (
             data.category === "careers" ||
             data.category === "consultancy" ||
             data.category === "funding-opportunities"
