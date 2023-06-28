@@ -32,3 +32,25 @@ export const apiRequest = (
             });
         });
 };
+
+export const imageUpload = (formData) => {
+    return axios({
+        method: "post",
+        url: process.env.REACT_APP_API_URL + "imagekit/upload",
+        data: formData,
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
+};
+
+export const imageDelete = (data) => {
+    return axios({
+        method: "delete",
+        url: process.env.REACT_APP_API_URL + "imagekit/delete",
+        data: data,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+};
