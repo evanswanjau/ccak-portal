@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import { useSnackbar } from "notistack";
 import { apiRequest } from "../api/api-calls";
@@ -67,6 +68,10 @@ export const DataTable = ({
         });
     };
 
+    useEffect(() => {
+        updateData(parseData(url, data));
+    }, []); // eslint-disable-line
+
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -92,7 +97,7 @@ export const DataTable = ({
                     </tr>
                 </thead>
                 <tbody>
-                    {parseData(url, data).map((item, i) => {
+                    {data.map((item, i) => {
                         return (
                             <tr
                                 key={item.id}
