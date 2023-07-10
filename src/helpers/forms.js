@@ -1,7 +1,7 @@
 import { PostForm } from "../layouts/forms/post-form";
 
-export const getForm = (url, setRevealForm, id, getData) => {
-    if (url === "search/posts")
+export const getForm = (page, setRevealForm, id, getData) => {
+    if (page === "posts")
         return (
             <PostForm setRevealForm={setRevealForm} id={id} getData={getData} />
         );
