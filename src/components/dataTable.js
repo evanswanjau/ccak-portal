@@ -1,8 +1,6 @@
-import { useEffect } from "react";
 import { HiPencil, HiTrash } from "react-icons/hi2";
 import { useSnackbar } from "notistack";
 import { apiRequest } from "../api/api-calls";
-import { parseData } from "../helpers/parses";
 
 export const DataTable = ({
     titles,
@@ -59,10 +57,6 @@ export const DataTable = ({
             },
         });
     };
-
-    useEffect(() => {
-        updateData(parseData(url, data));
-    }, []); // eslint-disable-line
 
     return (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
