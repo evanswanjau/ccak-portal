@@ -160,7 +160,8 @@ const Posts = () => {
     return (
         <div>
             <PageLayout
-                url="posts"
+                url="search/posts"
+                searchQuery={search}
                 pageContent={pageContent}
                 addButton={true}
             />
