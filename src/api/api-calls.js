@@ -21,12 +21,32 @@ export const apiRequest = (
         .then(({ data }) => {
             method !== "delete" && updateData(data);
             if (message)
-                enqueueSnackbar(message, {
+                return enqueueSnackbar(message, {
                     variant: "success",
                 });
         })
         .catch((error) => {
-            enqueueSnackbar(error.message, {
+            return enqueueSnackbar(error.message, {
+                variant: "error",
+                anchorOrigin: { vertical: "top", horizontal: "center" },
+            });
+        });
+};
+
+export const searchPosts = (data, updateData, enqueueSnackbar) => {
+    return axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + `/search/posts`,
+        data: data,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(({ data }) => {
+            updateData(data);
+        })
+        .catch((error) => {
+            return enqueueSnackbar(error.message, {
                 variant: "error",
                 anchorOrigin: { vertical: "top", horizontal: "center" },
             });
