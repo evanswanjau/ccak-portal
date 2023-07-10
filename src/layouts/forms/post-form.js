@@ -14,7 +14,6 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
         title: "",
         excerpt: "",
         content: "",
-        published: new Date().toISOString().slice(0, -8),
         category: "",
         folder: "",
         files: { data: [] },
