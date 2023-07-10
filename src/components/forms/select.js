@@ -8,7 +8,7 @@ export const Select = ({ item, label = null, list, data, updateData }) => {
                 {label ? label : item.replace(/_/g, " ")}
             </label>
             <select
-                className="appearance-none block w-full text-gray-700 bg-white border-2 border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
+                className="appearance-none block w-full text-gray-700 bg-white border border-gray-200 rounded-lg py-3 px-4 leading-tight focus:outline-none focus:border-gray-500"
                 id={item}
                 onChange={(event) => {
                     updateData({

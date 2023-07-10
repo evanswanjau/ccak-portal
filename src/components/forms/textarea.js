@@ -10,7 +10,7 @@ export const TextArea = ({ item, label = null, data, updateData }) => {
             <textarea
                 id={item}
                 rows="2"
-                className="block p-2.5 w-full text-sm text-gray-700 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-gray-500"
+                className="block p-2.5 w-full text-sm text-gray-700 rounded-lg border border-gray-200 focus:outline-none focus:border-gray-500"
                 placeholder={`Write ${item} here...`}
                 value={data[item]}
                 onChange={(event) => {
