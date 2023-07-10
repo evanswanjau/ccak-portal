@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import {
     // HiOutlineSquares2X2,
     // HiOutlineCreditCard,
@@ -154,8 +153,8 @@ const SideNav = () => {
                 <ul>
                     {pages.map((page) => (
                         <li key={page.link}>
-                            <Link
-                                to={page.link}
+                            <a
+                                href={page.link}
                                 className={`flex justify-between border-b border-teal-800 ${
                                     page.title === current && "bg-teal-700"
                                 } space-x-4 p-5 hover:bg-teal-700 transition duration-300 ease-in-out`}
@@ -178,14 +177,14 @@ const SideNav = () => {
                                         )}
                                     </div>
                                 )}
-                            </Link>
+                            </a>
 
                             {page.title === current && page.subPages && (
                                 <ul>
                                     {page.subPages.map((subPage) => (
                                         <li key={subPage.link}>
-                                            <Link
-                                                to={subPage.link}
+                                            <a
+                                                href={subPage.link}
                                                 className={`flex justify-between space-y-4 py-4 pl-8 pr-5 cursor-pointer border-b border-teal-800 ${
                                                     subPage.title ===
                                                         subCurrent &&
@@ -211,14 +210,14 @@ const SideNav = () => {
                                                         )}
                                                     </div>
                                                 )}
-                                            </Link>
+                                            </a>
                                             {subPage.title === subCurrent &&
                                                 subPage?.subPages && (
                                                     <ul>
                                                         {subPage.subPages.map(
                                                             (subPage, i) => (
-                                                                <Link
-                                                                    to={
+                                                                <a
+                                                                    href={
                                                                         subPage.link
                                                                     }
                                                                 >
@@ -238,7 +237,7 @@ const SideNav = () => {
                                                                             subPage.title
                                                                         }
                                                                     </li>
-                                                                </Link>
+                                                                </a>
                                                             )
                                                         )}
                                                     </ul>
