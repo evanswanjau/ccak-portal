@@ -22,8 +22,8 @@ export const DataTable = ({
             updateData,
             enqueueSnackbar,
             "Item deleted successfully"
-        ).then(() => {
-            closeSnackbar();
+        ).then((snackbar) => {
+            closeSnackbar(snackbar);
         });
     };
 
@@ -40,7 +40,7 @@ export const DataTable = ({
                 vertical: "bottom",
                 horizontal: "left",
             },
-            autoHideDuration: 5000,
+            autoHideDuration: 3000,
             action: (
                 <div>
                     <button
@@ -51,14 +51,6 @@ export const DataTable = ({
                         }}
                     >
                         Undo
-                    </button>
-                    <button
-                        className="pt-2 pb-2 mx-1 text-sky-400 font-semibold rounded px-5 hover:bg-stone-900 transition-all ease-in-out"
-                        onClick={() => {
-                            deleteRequest(id);
-                        }}
-                    >
-                        Dismiss
                     </button>
                 </div>
             ),
