@@ -77,3 +77,24 @@ export const imageDelete = (data) => {
         },
     });
 };
+
+export const loginAdministrator = (data, setBtnLoading, setError) => {
+    return axios({
+        method: "post",
+        url: process.env.REACT_APP_API_URL + `auth/administrator/login`,
+        data: data,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(({ data }) => {
+            localStorage.setItem("token", data.access);
+            window.location.replace("/posts");
+        })
+        .catch((error) => {
+            setError(error.response.data.error);
+        })
+        .finally(() => {
+            setBtnLoading(false);
+        });
+};
