@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-    HiOutlineSquares2X2,
-    HiOutlineCreditCard,
-    HiOutlineHome,
-    HiOutlineUsers,
+    // HiOutlineSquares2X2,
+    // HiOutlineCreditCard,
+    // HiOutlineHome,
+    // HiOutlineUsers,
     HiChevronRight,
     HiChevronDown,
     HiOutlineNewspaper,
@@ -12,11 +12,11 @@ import {
 // import { IoDocumentsOutline } from "react-icons/io5";
 
 const pages = [
-    {
-        title: "Dashboard",
-        link: "/",
-        icon: <HiOutlineSquares2X2 className="text-2xl mt-[1px]" />,
-    },
+    // {
+    //     title: "Dashboard",
+    //     link: "/",
+    //     icon: <HiOutlineSquares2X2 className="text-2xl mt-[1px]" />,
+    // },
     // {
     //     title: "Pages",
     //     link: "#",
@@ -127,21 +127,21 @@ const pages = [
         link: "/posts",
         icon: <HiOutlineNewspaper className="text-xl mt-[3px]" />,
     },
-    {
-        title: "Payments",
-        link: "/payments",
-        icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
-    },
-    {
-        title: "Social Hub",
-        link: "/social-posts",
-        icon: <HiOutlineHome className="text-xl mt-[3px]" />,
-    },
-    {
-        title: "Users",
-        link: "/users",
-        icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
-    },
+    // {
+    //     title: "Payments",
+    //     link: "/payments",
+    //     icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
+    // },
+    // {
+    //     title: "Social Hub",
+    //     link: "/social-posts",
+    //     icon: <HiOutlineHome className="text-xl mt-[3px]" />,
+    // },
+    // {
+    //     title: "Users",
+    //     link: "/users",
+    //     icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
+    // },
 ];
 
 const SideNav = () => {
