@@ -33,20 +33,23 @@ export const apiRequest = (
         });
 };
 
-export const searchPosts = (data, updateData, enqueueSnackbar) => {
+export const searchPosts = (search, updateData, parseData, enqueueSnackbar) => {
     return axios({
-        method: "get",
+        method: "post",
         url: process.env.REACT_APP_API_URL + `/search/posts`,
-        data: data,
+        data: search,
         headers: {
             "Content-Type": "application/json",
         },
     })
         .then(({ data }) => {
-            updateData(data);
+            updateData(parseData("posts", data));
         })
-        .catch((error) => {
-            return enqueueSnackbar(error.message, {
+        .catch(({ response }) => {
+            let errors = response.data;
+            let keys = Object.keys(response.data);
+
+            return enqueueSnackbar(errors[keys[0]][0], {
                 variant: "error",
                 anchorOrigin: { vertical: "top", horizontal: "center" },
             });
