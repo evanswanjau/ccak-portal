@@ -1,27 +1,22 @@
-import { useState } from "react";
-import PageLayout from "../layouts/pageLayout";
+import { useState, useEffect } from "react";
+import { useSnackbar } from "notistack";
 import { DataTable } from "../components/dataTable";
 import { getTitles } from "../helpers/titles";
-import { RiCloseCircleFill } from "react-icons/ri";
-import { capitalize } from "../helpers/strings";
-import { Pagination } from "../components/forms/pagination";
-
-const categories = [
-    "press-release",
-    "news",
-    "projects",
-    "blog",
-    "careers",
-    "consultancy",
-    "funding-opportunities",
-    "events",
-    "photo-gallery",
-    "internal-publications",
-    "external-publications",
-    "newsletters",
-];
+// import { Pagination } from "../components/forms/pagination";
+import SideNav from "../components/sideNav";
+import { FilterForm } from "../components/forms/filter";
+import { searchPosts } from "../api/api-calls";
+import { parseData } from "../helpers/parses";
+import { Loader } from "../components/loader";
+import { Empty } from "../components/empty";
+import { AddButton } from "../components/addButton";
+import { getForm } from "../helpers/forms";
 
 const Posts = () => {
+    const [loading, setLoading] = useState(true);
+    const [data, updateData] = useState([]);
+    const [revealForm, setRevealForm] = useState(false);
+    const [id, setID] = useState(null);
     const [search, updateSearch] = useState({
         keyword: "",
         table: "posts",
@@ -31,117 +26,35 @@ const Posts = () => {
         access: "",
         status: "",
         page: 1,
-        limit: 10,
+        limit: 100,
         ip_address: "",
     });
 
-    const pageContent = (data, updateData, setRevealForm, setID) => {
-        return (
+    const { enqueueSnackbar } = useSnackbar();
+
+    const getData = () => {
+        searchPosts(search, updateData, parseData, enqueueSnackbar).finally(
+            () => {
+                setLoading(false);
+            }
+        );
+    };
+
+    useEffect(() => {
+        getData();
+    }, [search]); // eslint-disable-line
+
+    let content = <Loader />;
+
+    if (revealForm) content = getForm("posts", setRevealForm, id, getData);
+
+    if (!revealForm && loading) content = <Loader />;
+
+    if (!revealForm && !loading && data.length < 0) content = <Empty />;
+
+    if (!revealForm && !loading && data.length > 0)
+        content = (
             <div>
-                <h1 className="text-2xl font-semibold text-gray-600">Posts</h1>
-                <div className="py-3 flex justify-end space-x-2">
-                    <input
-                        className="w-3/12 text-sm block text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
-                        type="text"
-                        placeholder="Search posts"
-                        value={search.keyword}
-                        onChange={(event) => {
-                            updateSearch({
-                                ...search,
-                                keyword: event.target.value,
-                            });
-                        }}
-                    />
-                    <select
-                        className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
-                        onChange={(event) => {
-                            updateSearch({
-                                ...search,
-                                category: event.target.value,
-                            });
-                        }}
-                    >
-                        <option value={""}>Choose Category</option>
-                        {categories.map((category) => {
-                            return (
-                                <option
-                                    key={category}
-                                    value={category}
-                                    selected={search.category === category}
-                                >
-                                    {capitalize(category.replace(/-/, " "))}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    <select
-                        className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
-                        onChange={(event) => {
-                            updateSearch({
-                                ...search,
-                                access: event.target.value,
-                            });
-                        }}
-                    >
-                        <option value={""}>Choose Access</option>
-                        {["public", "private", "hidden"].map((item) => {
-                            return (
-                                <option
-                                    key={item}
-                                    value={item}
-                                    selected={search.access === item}
-                                >
-                                    {item.slice(0, 1).toUpperCase() +
-                                        item.substring(1)}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    <select
-                        className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
-                        onChange={(event) => {
-                            updateSearch({
-                                ...search,
-                                status: event.target.value,
-                            });
-                        }}
-                    >
-                        <option value={""}>Choose Status</option>
-                        {["published", "draft"].map((item) => {
-                            return (
-                                <option
-                                    key={item}
-                                    value={item.toLowerCase()}
-                                    selected={search.status === item}
-                                >
-                                    {item.slice(0, 1).toUpperCase() +
-                                        item.substring(1)}
-                                </option>
-                            );
-                        })}
-                    </select>
-                    <button
-                        type="button"
-                        className="flex focus:outline-none bg-gray-100 text-teal-900 hover:bg-gray-200 font-medium rounded-lg text-sm px-3 pt-2 pb-[0.8em] transition duration-150 ease-in-out"
-                        onClick={() => {
-                            updateSearch({
-                                keyword: "",
-                                table: "posts",
-                                category: "",
-                                technology: "",
-                                project_status: "",
-                                access: "",
-                                status: "",
-                                page: 1,
-                                limit: 10,
-                                ip_address: "",
-                            });
-                        }}
-                    >
-                        <RiCloseCircleFill className="text-sm mr-2 mt-1" />
-                        Reset
-                    </button>
-                </div>
                 <DataTable
                     titles={getTitles("posts")}
                     url="post"
@@ -150,21 +63,33 @@ const Posts = () => {
                     setRevealForm={setRevealForm}
                     setID={setID}
                 />
-                <div className="my-5">
-                    <Pagination />
-                </div>
+                {/* <div className="my-5">
+                    <Pagination search={search} count={data.length} />
+                </div> */}
             </div>
         );
-    };
 
     return (
-        <div>
-            <PageLayout
-                url="search/posts"
-                searchQuery={search}
-                pageContent={pageContent}
-                addButton={true}
-            />
+        <div className="flex">
+            <div className="w-2/12">
+                <SideNav />
+            </div>
+            <div className="w-10/12 p-10 pb-24 mt-8 h-[calc(100vh-3em)] overflow-scroll">
+                <h1 className="text-2xl font-semibold text-gray-600 mb-5">
+                    Posts
+                </h1>
+                {!loading && !revealForm && (
+                    <FilterForm
+                        page="posts"
+                        search={search}
+                        updateSearch={updateSearch}
+                    />
+                )}
+                {content}
+                {!loading && !revealForm && (
+                    <AddButton setRevealForm={setRevealForm} />
+                )}
+            </div>
         </div>
     );
 };
