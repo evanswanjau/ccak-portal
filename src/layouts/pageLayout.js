@@ -7,7 +7,7 @@ import { Loader } from "../components/loader";
 import { Empty } from "../components/empty";
 import { getForm } from "../helpers/forms";
 
-const PageLayout = ({ url, pageContent, addButton }) => {
+const PageLayout = ({ url, searchQuery, pageContent, addButton }) => {
     const [data, updateData] = useState(false);
     const [loading, setLoading] = useState(true);
     const [revealForm, setRevealForm] = useState(false);
@@ -15,11 +15,13 @@ const PageLayout = ({ url, pageContent, addButton }) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const getData = () => {
-        setLoading(true);
-        apiRequest("get", url, {}, updateData, enqueueSnackbar).then(() => {
-            setID(null);
-            setLoading(false);
-        });
+        // setLoading(true);
+        apiRequest("post", url, searchQuery, updateData, enqueueSnackbar).then(
+            () => {
+                setID(null);
+                setLoading(false);
+            }
+        );
     };
 
     const getContent = () => {
@@ -39,7 +41,7 @@ const PageLayout = ({ url, pageContent, addButton }) => {
 
     useEffect(() => {
         getData();
-    }, []); // eslint-disable-line
+    }, [getData]); // eslint-disable-line
 
     return (
         <div className="flex">
