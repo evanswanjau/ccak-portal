@@ -36,7 +36,7 @@ export const apiRequest = (
 export const searchPosts = (search, updateData, parseData, enqueueSnackbar) => {
     return axios({
         method: "post",
-        url: process.env.REACT_APP_API_URL + `/search/posts`,
+        url: process.env.REACT_APP_API_URL + `search/posts`,
         data: search,
         headers: {
             "Content-Type": "application/json",
