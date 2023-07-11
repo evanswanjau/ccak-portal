@@ -1,5 +1,8 @@
 import React from "react";
-import { HiOutlineUser, HiOutlineArrowRightOnRectangle } from "react-icons/hi2";
+import {
+    /*HiOutlineUser,*/ HiOutlineArrowRightOnRectangle,
+} from "react-icons/hi2";
+import { logout } from "../helpers/auth";
 
 const TopNav = () => {
     return (
@@ -10,11 +13,16 @@ const TopNav = () => {
                 </span>
             </div>
             <div className="flex space-x-6 font-light">
-                <button className="flex items-center text-white space-x-1">
+                {/* <button className="flex items-center text-white space-x-1">
                     <HiOutlineUser className="text-lg" />
                     <span>Account</span>
-                </button>
-                <button className="flex items-center text-white space-x-1">
+                </button> */}
+                <button
+                    className="flex items-center text-white space-x-1"
+                    onClick={() => {
+                        logout();
+                    }}
+                >
                     <HiOutlineArrowRightOnRectangle className="text-lg" />
                     <span>Logout</span>
                 </button>
