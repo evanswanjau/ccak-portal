@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
+import jwt_decode from "jwt-decode";
 import { DataTable } from "../components/dataTable";
 import { getTitles } from "../helpers/titles";
 // import { Pagination } from "../components/forms/pagination";
@@ -11,6 +12,7 @@ import { Loader } from "../components/loader";
 import { Empty } from "../components/empty";
 import { AddButton } from "../components/addButton";
 import { getForm } from "../helpers/forms";
+import { AuthAdministrator } from "../helpers/auth";
 
 const Posts = () => {
     const [loading, setLoading] = useState(true);
@@ -33,6 +35,7 @@ const Posts = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const getData = () => {
+         AuthAdministrator(jwt_decode);
         searchPosts(search, updateData, parseData, enqueueSnackbar).finally(
             () => {
                 setLoading(false);
