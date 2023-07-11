@@ -35,7 +35,7 @@ const Posts = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const getData = () => {
-         AuthAdministrator(jwt_decode);
+        AuthAdministrator(jwt_decode);
         searchPosts(search, updateData, parseData, enqueueSnackbar).finally(
             () => {
                 setLoading(false);
@@ -53,7 +53,7 @@ const Posts = () => {
 
     if (!revealForm && loading) content = <Loader />;
 
-    if (!revealForm && !loading && data.length < 0) content = <Empty />;
+    if (!revealForm && !loading && data.length < 1) content = <Empty />;
 
     if (!revealForm && !loading && data.length > 0)
         content = (
