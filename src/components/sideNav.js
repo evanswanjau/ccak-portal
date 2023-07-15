@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
     HiOutlineSquares2X2,
-    // HiOutlineCreditCard,
+    HiOutlineCreditCard,
     // HiOutlineHome,
     // HiOutlineUsers,
     HiChevronRight,
@@ -126,11 +126,11 @@ const pages = [
         link: "/posts",
         icon: <HiOutlineNewspaper className="text-xl mt-[3px]" />,
     },
-    // {
-    //     title: "Payments",
-    //     link: "/payments",
-    //     icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
-    // },
+    {
+        title: "Payments",
+        link: "/payments",
+        icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
+    },
     // {
     //     title: "Social Hub",
     //     link: "/social-posts",
