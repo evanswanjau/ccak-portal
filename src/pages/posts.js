@@ -14,7 +14,7 @@ import { AddButton } from "../components/addButton";
 import { getForm } from "../helpers/forms";
 import { AuthAdministrator } from "../helpers/auth";
 
-const Posts = () => {
+export const PostsPage = () => {
     const [loading, setLoading] = useState(true);
     const [data, updateData] = useState([]);
     const [revealForm, setRevealForm] = useState(false);
@@ -96,5 +96,3 @@ const Posts = () => {
         </div>
     );
 };
-
-export default Posts;
