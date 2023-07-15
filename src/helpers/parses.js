@@ -60,15 +60,11 @@ export const parseData = (page, data) => {
             return item;
         });
     }
-    
+
     if (page === "payments") {
         return data.map((item) => {
             if (item.method) {
-                item.method = (
-                    <p className="capitalize">
-                        {item.method.replace(/-/g, " ")}
-                    </p>
-                );
+                item.method = <p className="capitalize">{item.method}</p>;
             }
 
             if (item.type) {
