@@ -3,7 +3,7 @@ import {
     HiOutlineSquares2X2,
     HiOutlineCreditCard,
     // HiOutlineHome,
-    // HiOutlineUsers,
+    HiOutlineUsers,
     HiChevronRight,
     HiChevronDown,
     HiOutlineNewspaper,
@@ -130,6 +130,11 @@ const pages = [
         title: "Payments",
         link: "/payments",
         icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
+    },
+    {
+        title: "Administrators",
+        link: "/administrators",
+        icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
     },
     // {
     //     title: "Social Hub",

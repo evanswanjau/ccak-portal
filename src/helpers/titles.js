@@ -18,4 +18,12 @@ export const getTitles = (url) => {
             { name: "Amount", value: "amount" },
             { name: "Timestamp", value: "timestamp" },
         ];
+
+    if (url === "administrators")
+        return [
+            { name: "Name", value: "name" },
+            { name: "Email", value: "email" },
+            { name: "Status", value: "status" },
+            { name: "Created By", value: "created_by" },
+        ];
 };

@@ -6,6 +6,7 @@ import { PostsPage } from "./pages/posts";
 import { Login } from "./pages/login";
 import { DashboardPage } from "./pages/dashboard";
 import { PaymentsPage } from "./pages/payments";
+import { AdministratorsPage } from "./pages/administrators";
 
 const App = () => {
     return (
@@ -13,6 +14,11 @@ const App = () => {
             {window.location.pathname !== "/login" && <TopNav />}
 
             <Switch>
+                <Route
+                    exact
+                    path="/administrators"
+                    component={AdministratorsPage}
+                />
                 <Route exact path="/payments" component={PaymentsPage} />
                 <Route exact path="/posts" component={PostsPage} />
                 <Route exact path="/login" component={Login} />

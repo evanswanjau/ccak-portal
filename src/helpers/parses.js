@@ -78,4 +78,18 @@ export const parseData = (page, data) => {
             return item;
         });
     }
+
+    if (page === "administrators") {
+        return data.map((item) => {
+            if (item.first_name) {
+                item.name = (
+                    <p className="capitalize">
+                        {item.first_name} {item.last_name}
+                    </p>
+                );
+            }
+
+            return item;
+        });
+    }
 };
