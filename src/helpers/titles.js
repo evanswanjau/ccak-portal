@@ -11,11 +11,11 @@ export const getTitles = (url) => {
 
     if (url === "payments")
         return [
-            { name: "Transaction ID", value: "trans_id" },
+            { name: "Transaction ID", value: "transaction_id" },
             { name: "Method", value: "method" },
+            { name: "Invoice", value: "invoice_number" },
             { name: "Type", value: "type" },
             { name: "Amount", value: "amount" },
-            { name: "Customer ID", value: "customer_id" },
             { name: "Timestamp", value: "timestamp" },
         ];
 };
