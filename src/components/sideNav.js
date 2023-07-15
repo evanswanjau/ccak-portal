@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-    // HiOutlineSquares2X2,
+    HiOutlineSquares2X2,
     // HiOutlineCreditCard,
     // HiOutlineHome,
     // HiOutlineUsers,
@@ -11,11 +11,11 @@ import {
 // import { IoDocumentsOutline } from "react-icons/io5";
 
 const pages = [
-    // {
-    //     title: "Dashboard",
-    //     link: "/",
-    //     icon: <HiOutlineSquares2X2 className="text-2xl mt-[1px]" />,
-    // },
+    {
+        title: "Dashboard",
+        link: "/",
+        icon: <HiOutlineSquares2X2 className="text-2xl mt-[1px]" />,
+    },
     // {
     //     title: "Pages",
     //     link: "#",
