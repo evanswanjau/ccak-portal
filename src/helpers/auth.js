@@ -1,15 +1,19 @@
 export const AuthAdministrator = (jwt_decode) => {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-    if (!token) window.location.replace("/login");
+    if (!token) {
+        window.location.replace("/login");
+    } else {
+        const decodedToken = jwt_decode(token);
 
-    var decodedToken = jwt_decode(token);
-
-    if (!decodedToken || isTokenExpired(decodedToken)) logout();
+        if (!decodedToken || isTokenExpired(decodedToken)) {
+            logout();
+        }
+    }
 };
 
 export const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.setItem("token", "");
     window.location.replace("/login");
 };
 
