@@ -89,6 +89,83 @@ export const parseData = (page, data) => {
                 );
             }
 
+            if (item.status) {
+                let color =
+                    item.status === "active"
+                        ? "bg-green-600 w-fit mx-auto"
+                        : "bg-red-400 w-fit mx-auto";
+
+                item.status = (
+                    <p
+                        className={`flex justify-center capitalize ${color} text-white py-1 px-3 rounded-full text-center`}
+                    >
+                        {item.status}
+                    </p>
+                );
+            }
+
+            if (item.role) {
+                let color =
+                    item.role === "admin"
+                        ? "bg-emerald-900"
+                        : item.role === "content-admin"
+                        ? "bg-sky-900"
+                        : item.role === "finance-admin"
+                        ? "bg-purple-900"
+                        : "bg-black";
+                item.role = (
+                    <p
+                        className={` ${color} text-grey-600 pt-[0.2em] pb-[0.3em] px-2 rounded-lg text-white text-center w-fit`}
+                    >
+                        {item.role}
+                    </p>
+                );
+            }
+
+            return item;
+        });
+    }
+
+    if (page === "subscribers") {
+        return data.map((item) => {
+            if (item.created_at) {
+                item.created_at = new Date(
+                    new Date(item.created_at).getTime() -
+                        new Date(item.created_at).getTimezoneOffset() * 60000
+                )
+                    .toISOString()
+                    .slice(0, -5)
+                    .replace("T", " ");
+            }
+
+            return item;
+        });
+    }
+
+    if (page === "invoices") {
+        return data.map((item) => {
+            if (item.total_amount)
+                item.total_amount = <p>KES {item.total_amount}</p>;
+
+            if (item.paid_amount)
+                item.paid_amount = <p>KES {item.paid_amount}</p>;
+
+            if (item.balance) item.balance = <p>KES {item.balance}</p>;
+
+            if (item.status) {
+                item.status = (
+                    <p
+                        className={`flex justify-center capitalize ${
+                            item.status === "paid"
+                                ? "bg-green-600 w-fit mx-auto"
+                                : "bg-red-400 w-fit mx-auto"
+                        } text-white py-1 px-3 rounded-full text-center`}
+                    >
+                        {item.status}
+                    </p>
+                );
+            }
+
             return item;
         });
     }

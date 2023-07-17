@@ -23,7 +23,24 @@ export const getTitles = (url) => {
         return [
             { name: "Name", value: "name" },
             { name: "Email", value: "email" },
+            { name: "Role", value: "role" },
             { name: "Status", value: "status" },
             { name: "Created By", value: "created_by" },
+        ];
+    
+    if (url === "invoices")
+        return [
+            { name: "Invoice Number", value: "invoice_number" },
+            { name: "Total", value: "total_amount" },
+            { name: "Paid", value: "paid_amount" },
+            { name: "Balance", value: "balance" },
+            { name: "Status", value: "status" },
+            { name: "Created By", value: "created_by" },
+        ];
+
+    if (url === "subscribers")
+        return [
+            { name: "Email", value: "email" },
+            { name: "Created At", value: "created_at" },
         ];
 };
