@@ -34,6 +34,17 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
             )
                 response = true;
         } else if (
+            data.category === "events"
+        ) {
+            if (
+                data.title === "" ||
+                data.content === "" ||
+                data.excerpt === "" ||
+                data.access === "" ||
+                data.image === ""
+            )
+                response = true;
+        } else if (
             data.category === "careers" ||
             data.category === "consultancy" ||
             data.category === "funding-opportunities"
