@@ -1,6 +1,6 @@
 export const Select = ({ item, label = null, list, data, updateData }) => {
     return (
-        <div>
+        <div className="w-full mb-5">
             <label
                 className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
                 htmlFor={item}
