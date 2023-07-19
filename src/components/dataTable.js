@@ -4,7 +4,7 @@ import { apiRequest } from "../api/api-calls";
 
 export const DataTable = ({
     titles,
-    url,
+    page,
     data,
     updateData,
     setRevealForm,
@@ -15,7 +15,7 @@ export const DataTable = ({
     const deleteRequest = (id) => {
         apiRequest(
             "delete",
-            url + "/" + id,
+            page.substring(0, page.length - 1) + "/" + id,
             {},
             updateData,
             enqueueSnackbar,
@@ -63,7 +63,7 @@ export const DataTable = ({
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr className="border-b">
-                        <th scope="col" className="px-6 py-2 border-r">
+                        <th scope="col" className="px-2 py-2 border-r">
                             #
                         </th>
                         {titles.map((title, i) => {
@@ -71,15 +71,17 @@ export const DataTable = ({
                                 <th
                                     key={i}
                                     scope="col"
-                                    className="px-6 py-2 border-r"
+                                    className="px-2 py-2 border-r"
                                 >
                                     {title.name}
                                 </th>
                             );
                         })}
-                        <th scope="col" className="px-6 py-2 border-r">
-                            Actions
-                        </th>
+                        {page !== "invoices" && (
+                            <th scope="col" className="px-2 py-2 border-r">
+                                Actions
+                            </th>
+                        )}
                     </tr>
                 </thead>
                 <tbody>
@@ -89,34 +91,36 @@ export const DataTable = ({
                                 key={item.id}
                                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                             >
-                                <td className="px-6 py-3 border-r">{i + 1}</td>
+                                <td className="px-2 border-r">{i + 1}</td>
                                 {titles.map((title, i) => {
                                     return (
-                                        <td
-                                            key={i}
-                                            className="px-6 py-2 border-r"
-                                        >
+                                        <td key={i} className="px-2 py-2 border-r">
                                             {item[title.value]}
                                         </td>
                                     );
                                 })}
-                                <td className="flex justify-center">
-                                    <HiPencil
-                                        className="text-xl my-2 mx-3 cursor-pointer"
-                                        title="Edit"
-                                        onClick={() => {
-                                            setID(item.id);
-                                            setRevealForm(true);
-                                        }}
-                                    />
-                                    <HiTrash
-                                        className="text-xl my-2 mx-3 text-red-600 cursor-pointer"
-                                        title="Delete"
-                                        onClick={() => {
-                                            deleteItem(item.id, i);
-                                        }}
-                                    />
-                                </td>
+                                {page !== "invoices" && (
+                                    <td className="flex justify-center">
+                                        {page !== "subscribers" && (
+                                            <HiPencil
+                                                className="text-xl my-2 mx-3 cursor-pointer"
+                                                title="Edit"
+                                                onClick={() => {
+                                                    setID(item.id);
+                                                    setRevealForm(true);
+                                                }}
+                                            />
+                                        )}
+
+                                        <HiTrash
+                                            className="text-xl my-2 mx-3 text-red-600 cursor-pointer"
+                                            title="Delete"
+                                            onClick={() => {
+                                                deleteItem(item.id, i);
+                                            }}
+                                        />
+                                    </td>
+                                )}
                             </tr>
                         );
                     })}
