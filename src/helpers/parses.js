@@ -79,6 +79,10 @@ export const parseData = (page, data) => {
                 );
             }
 
+            if (item.timestamp) {
+                item.timestamp = item.timestamp.replace("T", " ");
+            }
+
             return item;
         });
     }
