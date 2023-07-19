@@ -12,9 +12,8 @@ export const getTitles = (url) => {
     if (url === "payments")
         return [
             { name: "Transaction ID", value: "transaction_id" },
-            { name: "Method", value: "method" },
             { name: "Invoice", value: "invoice_number" },
-            { name: "Type", value: "type" },
+            { name: "Method", value: "method" },
             { name: "Amount", value: "amount" },
             { name: "Timestamp", value: "timestamp" },
         ];
@@ -27,15 +26,15 @@ export const getTitles = (url) => {
             { name: "Status", value: "status" },
             { name: "Created By", value: "created_by" },
         ];
-    
+
     if (url === "invoices")
         return [
             { name: "Invoice Number", value: "invoice_number" },
+            { name: "Description", value: "description" },
             { name: "Total", value: "total_amount" },
             { name: "Paid", value: "paid_amount" },
             { name: "Balance", value: "balance" },
             { name: "Status", value: "status" },
-            { name: "Created By", value: "created_by" },
         ];
 
     if (url === "subscribers")

@@ -72,7 +72,11 @@ export const parseData = (page, data) => {
             }
 
             if (item.amount) {
-                item.amount = <p>KES {item.amount}</p>;
+                item.amount = (
+                    <p>
+                        KES {item.amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                );
             }
 
             return item;
@@ -145,12 +149,30 @@ export const parseData = (page, data) => {
     if (page === "invoices") {
         return data.map((item) => {
             if (item.total_amount)
-                item.total_amount = <p>KES {item.total_amount}</p>;
+                item.total_amount = (
+                    <p>
+                        KES{" "}
+                        {item.total_amount.replace(
+                            /\B(?=(\d{3})+(?!\d))/g,
+                            ","
+                        )}
+                    </p>
+                );
 
             if (item.paid_amount)
-                item.paid_amount = <p>KES {item.paid_amount}</p>;
+                item.paid_amount = (
+                    <p>
+                        KES{" "}
+                        {item.paid_amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                );
 
-            if (item.balance) item.balance = <p>KES {item.balance}</p>;
+            if (item.balance)
+                item.balance = (
+                    <p>
+                        KES {item.balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                );
 
             if (item.status) {
                 item.status = (
@@ -162,6 +184,14 @@ export const parseData = (page, data) => {
                         } text-white py-1 px-3 rounded-full text-center`}
                     >
                         {item.status}
+                    </p>
+                );
+            }
+
+            if (item.description) {
+                item.description = (
+                    <p className="truncate w-52" title={item.description}>
+                        {item.description}
                     </p>
                 );
             }
