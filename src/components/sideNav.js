@@ -4,6 +4,7 @@ import {
     HiOutlineCreditCard,
     // HiOutlineHome,
     HiOutlineUsers,
+    HiOutlineDocumentText,
     HiChevronRight,
     HiChevronDown,
     HiOutlineNewspaper,
@@ -127,9 +128,19 @@ const pages = [
         icon: <HiOutlineNewspaper className="text-xl mt-[3px]" />,
     },
     {
+        title: "Invoices",
+        link: "/invoices",
+        icon: <HiOutlineDocumentText className="text-xl mt-[3px]" />,
+    },
+    {
         title: "Payments",
         link: "/payments",
         icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
+    },
+    {
+        title: "Subscribers",
+        link: "/subscribers",
+        icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
     },
     {
         title: "Administrators",
