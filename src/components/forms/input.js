@@ -12,7 +12,7 @@ export const Input = ({ item, label = null, type, data, updateData }) => {
     if (type === "datetime-local") data[item] = parseDate(data[item]);
 
     return (
-        <div className="w-full my-5">
+        <div className="w-full mb-5">
             <label
                 className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2"
                 htmlFor={item}
