@@ -25,25 +25,75 @@ export const apiRequest = (
                     variant: "success",
                 });
         })
-        .catch((error) => {
-            return enqueueSnackbar(error.message, {
+        .catch(({ response }) => {
+            let errors = response.data;
+            let keys = Object.keys(response.data);
+
+            return enqueueSnackbar(errors[keys[0]][0], {
                 variant: "error",
                 anchorOrigin: { vertical: "top", horizontal: "center" },
             });
         });
 };
 
-export const searchPosts = (search, updateData, parseData, enqueueSnackbar) => {
+export const submitFormData = (method, url, data) => {
+    if (method === "patch") delete data["id"];
+    if (method === "patch" && data.password && data.password.length > 30)
+        delete data["password"];
+
+    return axios({
+        method: method,
+        url: process.env.REACT_APP_API_URL + url,
+        data: data,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+};
+
+export const searchData = (
+    page,
+    search,
+    updateData,
+    parseData,
+    enqueueSnackbar
+) => {
     return axios({
         method: "post",
-        url: process.env.REACT_APP_API_URL + `search/posts`,
+        url: `${process.env.REACT_APP_API_URL}search/${page}`,
         data: search,
         headers: {
             "Content-Type": "application/json",
         },
     })
         .then(({ data }) => {
-            updateData(parseData("posts", data));
+            if (parseData) {
+                updateData(parseData(page, data));
+            } else {
+                updateData(data);
+            }
+        })
+        .catch(({ response }) => {
+            let errors = response.data;
+            let keys = Object.keys(response.data);
+
+            return enqueueSnackbar(errors[keys[0]][0], {
+                variant: "error",
+                anchorOrigin: { vertical: "top", horizontal: "center" },
+            });
+        });
+};
+
+export const getListData = (url, parseData, updateData, enqueueSnackbar) => {
+    return axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + url,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then(({ data }) => {
+            updateData(parseData(url, data));
         })
         .catch(({ response }) => {
             let errors = response.data;
@@ -89,7 +139,7 @@ export const loginAdministrator = (data, setBtnLoading, setError) => {
     })
         .then(({ data }) => {
             localStorage.setItem("token", data.access);
-            window.location.replace("/posts");
+            window.location.replace("/");
         })
         .catch((error) => {
             setError(error.response.data.error);

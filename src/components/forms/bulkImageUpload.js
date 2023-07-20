@@ -40,6 +40,7 @@ export const BuilkImageUpload = ({ data, updateData }) => {
     const deleteImage = (file_id) => {
         return imageDelete({ file_id: file_id })
             .then(({ data }) => {
+                console.log(data);
                 enqueueSnackbar("Image delete successfully", {
                     variant: "success",
                 });
@@ -103,6 +104,7 @@ export const BuilkImageUpload = ({ data, updateData }) => {
     return (
         <div className="h-full">
             <div className="">
+                {/* {loading ? } */}
                 {loading ? (
                     <div className="py-24 flex flex-col items-center">
                         <Loader />
@@ -126,7 +128,7 @@ export const BuilkImageUpload = ({ data, updateData }) => {
                             >
                                 {upload
                                     ? "Cancel uploading"
-                                    : "Upload more images"}
+                                    : "Upload more files"}
                             </button>
                         )}
 
@@ -136,24 +138,11 @@ export const BuilkImageUpload = ({ data, updateData }) => {
                                     htmlFor="image"
                                     className="flex flex-col items-center justify-center w-full py-24"
                                 >
-                                    {data.image !== "" ? (
-                                        <IKImage
-                                            className="object-cover rounded-lg"
-                                            urlEndpoint={
-                                                process.env
-                                                    .REACT_APP_IMAGEKIT_URL
-                                            }
-                                            path={`${data.folder}/${data.image}`}
-                                        />
-                                    ) : (
-                                        <>
-                                            <IoCloudUpload className="text-6xl" />
-                                            <p className="mt-5">
-                                                Drag and drop files or browse to
-                                                choose files
-                                            </p>
-                                        </>
-                                    )}
+                                    <IoCloudUpload className="text-6xl" />
+                                    <p className="mt-5">
+                                        Drag and drop files or browse to choose
+                                        files
+                                    </p>
                                 </label>
                                 <input
                                     id="image"
@@ -166,50 +155,47 @@ export const BuilkImageUpload = ({ data, updateData }) => {
                                 />
                             </div>
                         )}
-
-                        {data.files.data.length > 0 && (
-                            <>
-                                <div className="grid grid-cols-5 gap-2">
-                                    {data.files.data.map((image, i) => {
-                                        return (
+                    </>
+                )}
+                {data.files.data.length > 0 && (
+                    <>
+                        <div className="grid grid-cols-5 gap-2">
+                            {data.files.data.map((image, i) => {
+                                return (
+                                    <div
+                                        className="group transition-all duration-600 ease-in-out"
+                                        key={i}
+                                    >
+                                        <IKImage
+                                            className="rounded-lg"
+                                            urlEndpoint={
+                                                process.env
+                                                    .REACT_APP_IMAGEKIT_URL
+                                            }
+                                            transformation={[
+                                                {
+                                                    height: 200,
+                                                    width: 200,
+                                                },
+                                            ]}
+                                            path={`${data.folder}/${image.name}`}
+                                            height="200"
+                                            width="200"
+                                        />
+                                        <div className="hidden group-hover:flex justify-end -mt-12 mr-1 transition-all duration-600 ease-in-out">
                                             <div
-                                                className="group transition-all duration-600 ease-in-out"
-                                                key={i}
+                                                className="bg-white hover:bg-red-600 hover:text-white p-3 shadow-lg rounded-full cursor-pointer"
+                                                onClick={() => {
+                                                    deleteImage(image.file_id);
+                                                }}
                                             >
-                                                <IKImage
-                                                    className="rounded-lg"
-                                                    urlEndpoint={
-                                                        process.env
-                                                            .REACT_APP_IMAGEKIT_URL
-                                                    }
-                                                    transformation={[
-                                                        {
-                                                            height: 200,
-                                                            width: 200,
-                                                        },
-                                                    ]}
-                                                    path={`${data.folder}/${image.name}`}
-                                                    height="200"
-                                                    width="200"
-                                                />
-                                                <div className="hidden group-hover:flex justify-end -mt-12 mr-1 transition-all duration-600 ease-in-out">
-                                                    <div
-                                                        className="bg-white hover:bg-red-600 hover:text-white p-3 shadow-lg rounded-full cursor-pointer"
-                                                        onClick={() => {
-                                                            deleteImage(
-                                                                image.file_id
-                                                            );
-                                                        }}
-                                                    >
-                                                        <HiTrash className="text-xl" />
-                                                    </div>
-                                                </div>
+                                                <HiTrash className="text-xl" />
                                             </div>
-                                        );
-                                    })}
-                                </div>
-                            </>
-                        )}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </>
                 )}
             </div>
