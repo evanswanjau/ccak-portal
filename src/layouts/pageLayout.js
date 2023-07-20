@@ -23,8 +23,6 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
     const { enqueueSnackbar } = useSnackbar();
 
     const getData = () => {
-        AuthAdministrator(jwt_decode);
-
         if (page === "invoices" || page === "payments" || page === "posts") {
             searchData(
                 page,
