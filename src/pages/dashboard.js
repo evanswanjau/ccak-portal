@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import jwt_decode from "jwt-decode";
 import { searchData } from "../api/api-calls";
 import { useSnackbar } from "notistack";
 import SideNav from "../components/sideNav";
 import { HiOutlineUsers } from "react-icons/hi2";
+import { AuthAdministrator } from "../helpers/auth";
 
 export const DashboardPage = () => {
     const [invoices, setInvoices] = useState([]);
@@ -11,6 +13,7 @@ export const DashboardPage = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
+        AuthAdministrator(jwt_decode);
         searchData(
             "invoices",
             {
@@ -37,7 +40,7 @@ export const DashboardPage = () => {
             null,
             enqueueSnackbar
         );
-    }, []);
+    }, []); // eslint-disable-line
 
     return (
         <div className="flex">
