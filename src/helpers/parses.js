@@ -203,4 +203,70 @@ export const parseData = (page, data) => {
             return item;
         });
     }
+
+    if (page === "members") {
+        return data.map((item) => {
+            if (item.first_name) {
+                item.name = (
+                    <p className="capitalize">
+                        {item.first_name} {item.last_name}
+                    </p>
+                );
+            }
+
+            if (item.company) {
+                item.company = <p className="capitalize">{item.company}</p>;
+            }
+
+            if (item.designation) {
+                item.designation = (
+                    <p className="capitalize">{item.designation}</p>
+                );
+            }
+
+            if (item.registration_status) {
+                item.registration_status = (
+                    <p
+                        className={`flex justify-center capitalize ${
+                            item.registration_status === "registered"
+                                ? "bg-green-600 w-fit mx-auto"
+                                : "bg-red-400 w-fit mx-auto"
+                        } text-white py-1 px-3 rounded-full text-center`}
+                    >
+                        {item.registration_status}
+                    </p>
+                );
+            }
+
+            if (item.subscription_status) {
+                item.subscription_status = (
+                    <p
+                        className={`flex justify-center capitalize ${
+                            item.subscription_status === "active"
+                                ? "bg-green-600 w-fit mx-auto"
+                                : "bg-red-400 w-fit mx-auto"
+                        } text-white py-1 px-3 rounded-full text-center`}
+                    >
+                        {item.subscription_status}
+                    </p>
+                );
+            }
+
+            if (item.status) {
+                item.status = (
+                    <p
+                        className={`flex justify-center capitalize ${
+                            item.status === "active"
+                                ? "bg-green-600 w-fit mx-auto"
+                                : "bg-red-400 w-fit mx-auto"
+                        } text-white py-1 px-3 rounded-full text-center`}
+                    >
+                        {item.status}
+                    </p>
+                );
+            }
+
+            return item;
+        });
+    }
 };

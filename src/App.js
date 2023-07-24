@@ -9,6 +9,7 @@ import { PaymentsPage } from "./pages/payments";
 import { AdministratorsPage } from "./pages/administrators";
 import { InvoicesPage } from "./pages/invoices";
 import { SubscribersPage } from "./pages/subscribers";
+import { MembersPage } from "./pages/members";
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
             {window.location.pathname !== "/login" && <TopNav />}
 
             <Switch>
+                <Route exact path="/members" component={MembersPage} />
                 <Route exact path="/subscribers" component={SubscribersPage} />
                 <Route exact path="/invoices" component={InvoicesPage} />
                 <Route

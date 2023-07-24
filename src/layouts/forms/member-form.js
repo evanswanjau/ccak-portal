@@ -5,11 +5,10 @@ import { Loader } from "../../components/loader";
 import { Input } from "../../components/forms/input";
 import { BtnLoader } from "../../components/btnLoader";
 import { IoClose } from "react-icons/io5";
-import { Select } from "../../components/forms/select";
 import { Toggle } from "../../components/forms/toggle";
 import { Alert } from "../../components/forms/alert";
 
-export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
+export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
     const [loading, setLoading] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [error, setError] = useState(false);
@@ -18,7 +17,10 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
         last_name: "",
         email: "",
         password: "",
-        role: "",
+        company: "",
+        designation: "",
+        registration_status: "unregistered",
+        subscription_status: "inactive",
         status: "active",
     });
 
@@ -47,7 +49,10 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
             last_name: "",
             email: "",
             password: "",
-            role: "",
+            company: "",
+            designation: "",
+            registration_status: "unregistered",
+            subscription_status: "inactive",
             status: "active",
         });
         getData();
@@ -59,7 +64,7 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
         setError("");
 
         let method = id ? "patch" : "post";
-        let url = `administrator${id ? "/" + id : ""}`;
+        let url = `member${id ? "/" + id : ""}`;
         let action = id ? "updated" : "created";
 
         if (id) {
@@ -67,7 +72,7 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
 
         submitFormData(method, url, data)
             .then(() => {
-                enqueueSnackbar(`Administrator ${action} successfully`, {
+                enqueueSnackbar(`Member ${action} successfully`, {
                     variant: "success",
                 });
                 exitForm();
@@ -87,14 +92,15 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
         data.first_name === "" ||
         data.last_name === "" ||
         data.email === "" ||
-        data.password === "" ||
-        data.role === "";
+        data.phone_number === "";
+
+    console.log(data);
 
     useEffect(() => {
         if (id) {
             apiRequest(
                 "get",
-                "administrator/" + id,
+                "member/" + id,
                 data,
                 updateData,
                 enqueueSnackbar
@@ -118,9 +124,7 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
                     <div className="w-7/12 mx-auto rounded-lg shadow-lg">
                         <div className="flex items-center justify-between px-5 py-2 shadow-sm rounded-t-lg">
                             <h3 className="text-xl text-gray-600">
-                                {id
-                                    ? "Update administrator"
-                                    : "Create new administrator"}
+                                {id ? "Update member" : "Create new member"}
                             </h3>
                             <div
                                 className="p-2 rounded-full hover:bg-gray-100 cursor-pointer transition duration-600"
@@ -132,7 +136,10 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
                                         last_name: "",
                                         email: "",
                                         password: "",
-                                        role: "",
+                                        company: "",
+                                        designation: "",
+                                        registration_status: "unregistered",
+                                        subscription_status: "inactive",
                                         status: "active",
                                     });
                                 }}
@@ -160,49 +167,48 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
                                 />
                             </div>
 
-                            <Input
-                                item="email"
-                                label="Email"
-                                type="text"
+                            <div className="flex space-x-4">
+                                <Input
+                                    item="email"
+                                    label="Email"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                                <Input
+                                    item="phone_number"
+                                    label="Phone"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                            </div>
+
+                            <div className="flex space-x-4">
+                                <Input
+                                    item="company"
+                                    label="Company (Optional)"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                                <Input
+                                    item="designation"
+                                    label="Designation (Optional)"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                            </div>
+
+                            <Toggle
+                                item="registration_status"
                                 data={data}
                                 updateData={updateData}
                             />
-                            <div className="flex space-x-4 justify-between items-center">
-                                <div className="w-8/12">
-                                    <Input
-                                        item="password"
-                                        label="Password"
-                                        type="text"
-                                        data={data}
-                                        updateData={updateData}
-                                    />
-                                </div>
-                                <div className="w-4/12">
-                                    <button
-                                        type="button"
-                                        className="bg-teal-900 hover:bg-teal-950 text-white font-medium rounded-lg text-sm pt-3 w-full pb-[1em] transition duration-150 ease-in-out"
-                                        onClick={() => {
-                                            generatePassword();
-                                        }}
-                                    >
-                                        Generate Password
-                                    </button>
-                                </div>
-                            </div>
 
-                            <Select
-                                item="role"
-                                list={[
-                                    { name: "Admin", value: "admin" },
-                                    {
-                                        name: "Content Admin",
-                                        value: "content-admin",
-                                    },
-                                    {
-                                        name: "Finance Admin",
-                                        value: "finance-admin",
-                                    },
-                                ]}
+                            <Toggle
+                                item="subscription_status"
                                 data={data}
                                 updateData={updateData}
                             />

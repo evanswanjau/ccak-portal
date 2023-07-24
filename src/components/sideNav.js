@@ -138,6 +138,11 @@ const pages = [
         icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
     },
     {
+        title: "Members",
+        link: "/members",
+        icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
+    },
+    {
         title: "Subscribers",
         link: "/subscribers",
         icon: <HiOutlineUsers className="text-xl mt-[3px]" />,

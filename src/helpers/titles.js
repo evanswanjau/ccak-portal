@@ -42,4 +42,14 @@ export const getTitles = (url) => {
             { name: "Email", value: "email" },
             { name: "Created At", value: "created_at" },
         ];
+    
+    if (url === "members")
+        return [
+            { name: "Name", value: "name" },
+            { name: "Company", value: "company" },
+            { name: "Designation", value: "designation" },
+            { name: "Technology", value: "technology" },
+            { name: "Registration", value: "registration_status" },
+            { name: "Subscription", value: "subscription_status" },
+        ];
 };

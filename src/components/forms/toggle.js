@@ -1,4 +1,17 @@
-export const Toggle = ({ item, label = null, data, updateData }) => {
+const getValue = (item, checked) => {
+    let value = "";
+
+    if (item === "status") value = checked ? "active" : "inactive";
+
+    if (item === "registration_status")
+        value = checked ? "registered" : "unregistered";
+
+    if (item === "subscription_status") value = checked ? "active" : "inactive";
+
+    return value;
+};
+
+export const Toggle = ({ item, data, updateData }) => {
     return (
         <div className="w-full mb-5">
             <p
@@ -12,21 +25,15 @@ export const Toggle = ({ item, label = null, data, updateData }) => {
                     type="checkbox"
                     value=""
                     class="sr-only peer"
-                    checked={data[item] === "active"}
+                    checked={data[item] === "active" || data[item] === "registered"}
                     onChange={(event) => {
                         updateData({
                             ...data,
-                            [item]: event.currentTarget.checked
-                                ? "active"
-                                : "inactive",
+                            [item]: getValue(item, event.currentTarget.checked),
                         });
                     }}
                 />
                 <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
-                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                    {label} is
-                    {data[item] === "active" ? ` active` : ` inactive`}
-                </span>
             </label>
         </div>
     );
