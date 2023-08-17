@@ -59,7 +59,7 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
         setError("");
 
         let method = id ? "patch" : "post";
-        let url = `administrator${id ? "/" + id : ""}`;
+        let url = `administrator${id ? "/update/" + id : ""}`;
         let action = id ? "updated" : "created";
 
         if (id) {

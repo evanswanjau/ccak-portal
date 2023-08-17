@@ -36,7 +36,7 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
 
     const exit = () => {
         if (data.step !== "category") {
-            submitData("patch", "post/" + data.id, data);
+            submitData("post", "post/update/" + data.id, data);
         }
 
         getData();

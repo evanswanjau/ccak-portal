@@ -62,7 +62,7 @@ export const PaymentForm = ({ setRevealForm, id, getData, setID }) => {
         setError("");
 
         let method = id ? "patch" : "post";
-        let url = `payment${id ? "/" + id : ""}`;
+        let url = `payment${id ? "/update/" + id : ""}`;
         let action = id ? "updated" : "created";
 
         if (id) {

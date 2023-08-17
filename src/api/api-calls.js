@@ -9,13 +9,15 @@ export const apiRequest = (
     message
 ) => {
     if (method === "patch") delete data["id"];
+    if (method === "post") delete data["id"];
 
     return axios({
-        method: method,
+        method: method === "delete" ? "post" : method,
         url: process.env.REACT_APP_API_URL + url,
         data: data,
         headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
         },
     })
         .then(({ data }) => {
@@ -42,11 +44,12 @@ export const submitFormData = (method, url, data) => {
         delete data["password"];
 
     return axios({
-        method: method,
+        method: "post",
         url: process.env.REACT_APP_API_URL + url,
         data: data,
         headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
         },
     });
 };
@@ -60,7 +63,7 @@ export const searchData = (
 ) => {
     return axios({
         method: "post",
-        url: `${process.env.REACT_APP_API_URL}search/${page}`,
+        url: `${process.env.REACT_APP_API_URL}${page}/search`,
         data: search,
         headers: {
             "Content-Type": "application/json",
@@ -90,6 +93,7 @@ export const getListData = (url, parseData, updateData, enqueueSnackbar) => {
         url: process.env.REACT_APP_API_URL + url,
         headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
         },
     })
         .then(({ data }) => {
@@ -113,6 +117,7 @@ export const imageUpload = (formData) => {
         data: formData,
         headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: "Bearer " + localStorage.getItem("token"),
         },
     });
 };
@@ -124,6 +129,7 @@ export const imageDelete = (data) => {
         data: data,
         headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
         },
     });
 };

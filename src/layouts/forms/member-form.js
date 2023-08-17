@@ -64,7 +64,7 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
         setError("");
 
         let method = id ? "patch" : "post";
-        let url = `member${id ? "/" + id : ""}`;
+        let url = `member${id ? "/update/" + id : ""}`;
         let action = id ? "updated" : "created";
 
         if (id) {

@@ -33,9 +33,7 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                 data.image === ""
             )
                 response = true;
-        } else if (
-            data.category === "events"
-        ) {
+        } else if (data.category === "events") {
             if (
                 data.title === "" ||
                 data.content === "" ||
@@ -117,8 +115,8 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                             onClick={() => {
                                 setLoading(true);
                                 submitData(
-                                    "patch",
-                                    "post/" + data.id,
+                                    "post",
+                                    "post/update/" + data.id,
                                     {
                                         ...data,
                                         status: "draft",
