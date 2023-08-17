@@ -169,7 +169,7 @@ const filterPages = (role) => {
         list = ["Invoices", "Payments", "Administrators"];
 
     if (role === "finance-admin")
-        list = ["Posts", "Social Hub", "Administrators"];
+        list = ["Posts", "Social Hub", "Subscribers", "Administrators"];
 
     list.map((value) => {
         pages = pages.filter((item) => item["title"] !== value);

@@ -39,7 +39,7 @@ export const apiRequest = (
 };
 
 export const submitFormData = (method, url, data) => {
-    if (method === "patch") delete data["id"];
+    console.log(url);
     if (method === "patch" && data.password && data.password.length > 30)
         delete data["password"];
 
@@ -100,10 +100,7 @@ export const getListData = (url, parseData, updateData, enqueueSnackbar) => {
             updateData(parseData(url, data));
         })
         .catch(({ response }) => {
-            let errors = response.data;
-            let keys = Object.keys(response.data);
-
-            return enqueueSnackbar(errors[keys[0]][0], {
+            return enqueueSnackbar(response.data.message, {
                 variant: "error",
                 anchorOrigin: { vertical: "top", horizontal: "center" },
             });
