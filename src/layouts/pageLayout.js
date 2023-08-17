@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
 import { getListData, searchData } from "../api/api-calls";
 import jwt_decode from "jwt-decode";
+import * as jsonexport from "jsonexport/dist";
 import SideNav from "../components/sideNav";
 import { FilterForm } from "../components/forms/filter";
 import { AddButton } from "../components/addButton";
@@ -21,6 +22,29 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
     const [search, updateSearch] = useState(searchQuery);
 
     const { enqueueSnackbar } = useSnackbar();
+
+    const handleExport = () => {
+        // Convert data to CSV format
+        jsonexport(data, (err, csv) => {
+            if (err) {
+                console.error("Error exporting data:", err);
+                return;
+            }
+
+            // Create a Blob with the CSV data
+            const blob = new Blob([csv], { type: "text/csv" });
+
+            // Create a URL for the Blob and trigger download
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "data.csv";
+            a.click();
+
+            // Clean up after download
+            URL.revokeObjectURL(url);
+        });
+    };
 
     const getData = () => {
         if (page === "invoices" || page === "payments" || page === "posts") {
@@ -58,6 +82,17 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
     if (!revealForm && !loading && data.length > 0)
         content = (
             <div>
+                {page === "subscribers" && (
+                    <button
+                        type="button"
+                        className="bg-teal-900 hover:bg-teal-950 text-white font-medium rounded-lg text-sm pt-3 px-4 pb-[0.8em] mb-4 transition duration-150 ease-in-out"
+                        onClick={() => {
+                            handleExport();
+                        }}
+                    >
+                        EXPORT DATA
+                    </button>
+                )}
                 <DataTable
                     titles={getTitles(page)}
                     page={page}
