@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useSnackbar } from "notistack";
+import jwt_decode from "jwt-decode";
 import {
     HiOutlineSquares2X2,
     HiOutlineCreditCard,
-    // HiOutlineHome,
+    HiOutlineHome,
     HiOutlineUsers,
     HiOutlineDocumentText,
     HiChevronRight,
@@ -10,8 +12,9 @@ import {
     HiOutlineNewspaper,
 } from "react-icons/hi2";
 // import { IoDocumentsOutline } from "react-icons/io5";
+import { apiRequest } from "../api/api-calls";
 
-const pages = [
+let pages = [
     {
         title: "Dashboard",
         link: "/",
@@ -152,21 +155,62 @@ const pages = [
         link: "/administrators",
         icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
     },
-    // {
-    //     title: "Social Hub",
-    //     link: "/social-posts",
-    //     icon: <HiOutlineHome className="text-xl mt-[3px]" />,
-    // },
-    // {
-    //     title: "Users",
-    //     link: "/users",
-    //     icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
-    // },
+    {
+        title: "Social Hub",
+        link: "/social-posts",
+        icon: <HiOutlineHome className="text-xl mt-[3px]" />,
+    },
 ];
+
+const filterPages = (role) => {
+    let list = [];
+
+    if (role === "content-admin")
+        list = ["Invoices", "Payments", "Administrators"];
+
+    if (role === "finance-admin")
+        list = ["Posts", "Social Hub", "Administrators"];
+
+    list.map((value) => {
+        pages = pages.filter((item) => item["title"] !== value);
+
+        return pages;
+    });
+};
+
+const getUserID = () => {
+    const token = localStorage.getItem("token");
+    let user_id = "";
+
+    if (!token) {
+        window.location.replace("/login");
+    } else {
+        const decodedToken = jwt_decode(token);
+
+        user_id = decodedToken.user_id;
+    }
+
+    return user_id;
+};
 
 const SideNav = () => {
     const [current, setCurrent] = useState("");
     const [subCurrent, setSubCurrent] = useState("");
+    const [user, setUser] = useState({});
+
+    const { enqueueSnackbar } = useSnackbar();
+
+    useEffect(() => {
+        apiRequest(
+            "get",
+            "administrator/" + getUserID(),
+            user,
+            setUser,
+            enqueueSnackbar
+        );
+    }, []); //eslint-disable-line
+
+    if (user) filterPages(user.role);
 
     return (
         <div>
