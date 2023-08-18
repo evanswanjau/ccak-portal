@@ -24,7 +24,7 @@ export const getTitles = (url) => {
             { name: "Email", value: "email" },
             { name: "Role", value: "role" },
             { name: "Status", value: "status" },
-            { name: "Created By", value: "created_by" },
+            { name: "Created By", value: "author" },
         ];
 
     if (url === "invoices")

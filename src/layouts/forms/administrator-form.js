@@ -72,11 +72,13 @@ export const AdministratorForm = ({ setRevealForm, id, getData, setID }) => {
                 });
                 exitForm();
             })
-            .catch(({ response }) => {
-                let errors = response.data;
-                let keys = Object.keys(response.data);
+            .catch((error) => {
+                console.log(error);
+                // console.log(response);
+                // let errors = response.data;
+                // let keys = Object.keys(response.data);
 
-                setError(errors[keys[0]][0]);
+                // setError(errors[keys[0]][0]);
             })
             .finally(() => {
                 setBtnLoading(false);

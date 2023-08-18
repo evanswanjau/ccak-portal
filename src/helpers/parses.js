@@ -130,6 +130,10 @@ export const parseData = (page, data) => {
                 );
             }
 
+            if (item.created_by) {
+                item.created_by = <p className="capitalize">{item.author}</p>;
+            }
+
             return item;
         });
     }
