@@ -113,7 +113,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             access: "",
                             status: "",
                             page: 1,
-                            limit: 10,
+                            limit: 100,
                             ip_address: "",
                         });
                     }}
