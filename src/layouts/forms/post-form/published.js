@@ -35,7 +35,7 @@ export const Published = ({
                             ...data,
                             status: "published",
                         });
-                        submitData("patch", "post/" + data.id, {
+                        submitData("post", "post/update/" + data.id, {
                             ...data,
                             step: "published",
                             status: "published",
