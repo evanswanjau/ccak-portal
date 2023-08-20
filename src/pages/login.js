@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Input } from "../components/forms/input";
 import { loginAdministrator } from "../api/api-calls";
+import { BtnLoader } from "../components/btnLoader";
 
 export const Login = () => {
     const [btnLoading, setBtnLoading] = useState(false);
@@ -55,7 +56,7 @@ export const Login = () => {
                     type="button"
                     disabled={disabled}
                     className={` ${
-                        disabled
+                        disabled || btnLoading
                             ? "bg-gray-100"
                             : " bg-teal-900 hover:bg-teal-950"
                     } w-full text-white font-medium rounded-lg text-sm pt-3 pb-[1em] transition duration-150 ease-in-out`}
@@ -64,7 +65,7 @@ export const Login = () => {
                     }}
                 >
                     {btnLoading ? (
-                        <span className="tracking-wide">Submitting ...</span>
+                        <BtnLoader />
                     ) : (
                         <span className="tracking-widest">SUBMIT</span>
                     )}
