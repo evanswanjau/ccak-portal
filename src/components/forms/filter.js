@@ -269,7 +269,163 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             type: "",
                             status: "",
                             page: 1,
-                            limit: 10,
+                            limit: 100,
+                        });
+                    }}
+                >
+                    <RiCloseCircleFill className="text-sm mr-2 mt-1" />
+                    Reset
+                </button>
+            </div>
+        );
+    }
+
+    if (page === "members") {
+        return (
+            <div className="py-3 flex justify-end space-x-2">
+                <input
+                    className="w-3/12 text-sm block text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                    type="text"
+                    placeholder="Search member"
+                    value={search.keyword}
+                    onChange={(event) => {
+                        updateSearch({
+                            ...search,
+                            keyword: event.target.value,
+                        });
+                    }}
+                />
+                <select
+                    className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                    onChange={(event) => {
+                        updateSearch({
+                            ...search,
+                            technology: event.target.value,
+                        });
+                    }}
+                >
+                    <option value={""}>Technology</option>
+                    {[
+                        "cook stoves providers",
+                        "ethanol",
+                        "biogas",
+                        "non-carbonized briquettes",
+                        "carbon briquettes",
+                        "research and consultancy",
+                        "lpg",
+                        "partners",
+                        "membership associations",
+                        "solar",
+                        "journalists",
+                        "imc",
+                    ].map((item) => {
+                        return (
+                            <option
+                                key={item}
+                                value={item}
+                                selected={search.technology === item}
+                            >
+                                {item.slice(0, 1).toUpperCase() +
+                                    item.substring(1)}
+                            </option>
+                        );
+                    })}
+                </select>
+                <select
+                    className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                    onChange={(event) => {
+                        updateSearch({
+                            ...search,
+                            subscription_category: event.target.value,
+                        });
+                    }}
+                >
+                    <option value={""}>Subscription Category</option>
+                    {[
+                        "corporate-large",
+                        "corporate-medium",
+                        "corporate-small",
+                        "corporate-micro",
+                        "ngo-international",
+                        "ngo-local",
+                        "donor-large",
+                        "association-membership",
+                        "CSO",
+                        "intitution-research,technology",
+                        "individual",
+                        "student",
+                    ].map((item) => {
+                        return (
+                            <option
+                                key={item}
+                                value={item}
+                                selected={search.subscription_category === item}
+                            >
+                                {item.slice(0, 1).toUpperCase() +
+                                    item.substring(1)}
+                            </option>
+                        );
+                    })}
+                </select>
+                <select
+                    className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                    onChange={(event) => {
+                        updateSearch({
+                            ...search,
+                            registration_status: event.target.value,
+                        });
+                    }}
+                >
+                    <option value={""}>Registration Status</option>
+                    {["registered", "unregistered"].map((item) => {
+                        return (
+                            <option
+                                key={item}
+                                value={item.toLowerCase()}
+                                selected={search.registration_status === item}
+                            >
+                                {item.slice(0, 1).toUpperCase() +
+                                    item.substring(1)}
+                            </option>
+                        );
+                    })}
+                </select>
+                <select
+                    className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
+                    onChange={(event) => {
+                        updateSearch({
+                            ...search,
+                            subscription_status: event.target.value,
+                        });
+                    }}
+                >
+                    <option value={""}>Subscription Status</option>
+                    {["active", "inactive"].map((item) => {
+                        return (
+                            <option
+                                key={item}
+                                value={item.toLowerCase()}
+                                selected={search.subscription_status === item}
+                            >
+                                {item.slice(0, 1).toUpperCase() +
+                                    item.substring(1)}
+                            </option>
+                        );
+                    })}
+                </select>
+                <button
+                    type="button"
+                    className="flex focus:outline-none bg-gray-100 text-teal-900 hover:bg-gray-200 font-medium rounded-lg text-sm px-3 pt-2 pb-[0.8em] transition duration-150 ease-in-out"
+                    onClick={() => {
+                        updateSearch({
+                            keyword: "",
+                            technology: "",
+                            registration_status: "",
+                            subscription_status: "",
+                            subscription_category: "",
+                            status: "",
+                            page: 1,
+                            limit: 100,
                         });
                     }}
                 >

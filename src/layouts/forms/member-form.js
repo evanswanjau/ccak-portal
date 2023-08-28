@@ -7,6 +7,7 @@ import { BtnLoader } from "../../components/btnLoader";
 import { IoClose } from "react-icons/io5";
 import { Toggle } from "../../components/forms/toggle";
 import { Alert } from "../../components/forms/alert";
+import { Select } from "../../components/forms/select";
 
 export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
     const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
         registration_status: "unregistered",
         subscription_status: "inactive",
         status: "active",
+        data_from: "portal",
     });
 
     const { enqueueSnackbar } = useSnackbar();
@@ -53,6 +55,7 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
             designation: "",
             registration_status: "unregistered",
             subscription_status: "inactive",
+            subscription_category: "category",
             status: "active",
         });
         getData();
@@ -149,7 +152,6 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                         </div>
                         <div className="p-5">
                             {error && <Alert type="error" message={error} />}
-
                             <div className="flex space-x-4">
                                 <Input
                                     item="first_name"
@@ -166,7 +168,6 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                                     updateData={updateData}
                                 />
                             </div>
-
                             <div className="flex space-x-4">
                                 <Input
                                     item="email"
@@ -183,7 +184,6 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                                     updateData={updateData}
                                 />
                             </div>
-
                             <div className="flex space-x-4">
                                 <Input
                                     item="company"
@@ -200,13 +200,63 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                                     updateData={updateData}
                                 />
                             </div>
-
+                            <Select
+                                item="subscription_category"
+                                list={[
+                                    {
+                                        name: "Corporate Large",
+                                        value: "corporate-large",
+                                    },
+                                    {
+                                        name: "Corporate Medium",
+                                        value: "corporate-medium",
+                                    },
+                                    {
+                                        name: "Corporate Small",
+                                        value: "corporate-small",
+                                    },
+                                    {
+                                        name: "Corporate Micro",
+                                        value: "corporate-micro",
+                                    },
+                                    {
+                                        name: "NGO International",
+                                        value: "ngo-international",
+                                    },
+                                    { name: "NGO Local", value: "ngo-local" },
+                                    {
+                                        name: "Donor Large",
+                                        value: "donor-large",
+                                    },
+                                    {
+                                        name: "Associaion Membership",
+                                        value: "association-membership",
+                                    },
+                                    {
+                                        name: "CSO",
+                                        value: "CSO",
+                                    },
+                                    {
+                                        name: "Intitution Research, Technology",
+                                        value: "intitution-research,technology",
+                                    },
+                                    {
+                                        name: "Individual",
+                                        value: "individual",
+                                    },
+                                    {
+                                        name: "Student",
+                                        value: "student",
+                                    },
+                                ]}
+                                data={data}
+                                updateData={updateData}
+                            />
                             <Toggle
                                 item="registration_status"
                                 data={data}
                                 updateData={updateData}
                             />
-
                             <Toggle
                                 item="subscription_status"
                                 data={data}

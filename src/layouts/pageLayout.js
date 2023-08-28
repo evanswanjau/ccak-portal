@@ -47,7 +47,7 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
     };
 
     const getData = () => {
-        if (page === "invoices" || page === "payments" || page === "posts") {
+        if (page === "invoices" || page === "payments" || page === "posts" || page === "members") {
             searchData(
                 page,
                 search,

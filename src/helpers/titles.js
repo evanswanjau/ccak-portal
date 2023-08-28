@@ -6,7 +6,7 @@ export const getTitles = (url) => {
             { name: "Access", value: "access" },
             { name: "Views", value: "views" },
             { name: "Status", value: "status" },
-            { name: "Author", value: "created_by" },
+            { name: "Author", value: "author" },
         ];
 
     if (url === "payments")
@@ -49,6 +49,7 @@ export const getTitles = (url) => {
             { name: "Company", value: "company" },
             { name: "Designation", value: "designation" },
             { name: "Technology", value: "technology" },
+            { name: "Package", value: "subscription_category" },
             { name: "Registration", value: "registration_status" },
             { name: "Subscription", value: "subscription_status" },
         ];

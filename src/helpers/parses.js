@@ -57,6 +57,10 @@ export const parseData = (page, data) => {
                 );
             }
 
+            if (item.author) {
+                item.author = <p className="capitalize">{item.author}</p>;
+            }
+
             return item;
         });
     }
@@ -225,6 +229,18 @@ export const parseData = (page, data) => {
             if (item.designation) {
                 item.designation = (
                     <p className="capitalize">{item.designation}</p>
+                );
+            }
+
+            if (item.technology) {
+                item.technology = (
+                    <p className="capitalize">{item.technology}</p>
+                );
+            }
+
+            if (item.subscription_category) {
+                item.subscription_category = (
+                    <p className="capitalize">{item.subscription_category.replace(/-/g, " ")}</p>
                 );
             }
 
