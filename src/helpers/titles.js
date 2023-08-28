@@ -46,7 +46,7 @@ export const getTitles = (url) => {
             { name: "Email", value: "email" },
             { name: "Created At", value: "created_at" },
         ];
-    
+
     if (url === "members")
         return [
             { name: "Name", value: "name" },
@@ -56,5 +56,16 @@ export const getTitles = (url) => {
             { name: "Package", value: "subscription_category" },
             { name: "Registration", value: "registration_status" },
             { name: "Subscription", value: "subscription_status" },
+        ];
+
+    if (url === "donations")
+        return [
+            { name: "Name", value: "name" },
+            { name: "Phone", value: "phone_number" },
+            { name: "Company", value: "company" },
+            { name: "Designation", value: "designation" },
+            { name: "Amount", value: "amount" },
+            { name: "Invoice", value: "invoice_number" },
+            { name: "Status", value: "status" },
         ];
 };

@@ -4,12 +4,13 @@ import jwt_decode from "jwt-decode";
 import {
     HiOutlineSquares2X2,
     HiOutlineCreditCard,
-    HiOutlineHome,
+    // HiOutlineHome,
     HiOutlineUsers,
     HiOutlineDocumentText,
     HiChevronRight,
     HiChevronDown,
     HiOutlineNewspaper,
+    HiOutlineCurrencyDollar,
 } from "react-icons/hi2";
 // import { IoDocumentsOutline } from "react-icons/io5";
 import { apiRequest } from "../api/api-calls";
@@ -141,6 +142,11 @@ let pages = [
         icon: <HiOutlineCreditCard className="text-xl mt-[3px]" />,
     },
     {
+        title: "Donations",
+        link: "/donations",
+        icon: <HiOutlineCurrencyDollar className="text-xl mt-[3px]" />,
+    },
+    {
         title: "Members",
         link: "/members",
         icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
@@ -155,11 +161,11 @@ let pages = [
         link: "/administrators",
         icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
     },
-    {
-        title: "Social Hub",
-        link: "/social-posts",
-        icon: <HiOutlineHome className="text-xl mt-[3px]" />,
-    },
+    // {
+    //     title: "Social Hub",
+    //     link: "/social-posts",
+    //     icon: <HiOutlineHome className="text-xl mt-[3px]" />,
+    // },
 ];
 
 const filterPages = (role) => {

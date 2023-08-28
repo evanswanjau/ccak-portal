@@ -47,7 +47,13 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
     };
 
     const getData = () => {
-        if (page === "invoices" || page === "payments" || page === "posts" || page === "members") {
+        if (
+            page === "invoices" ||
+            page === "payments" ||
+            page === "posts" ||
+            page === "members" ||
+            page === "donations"
+        ) {
             searchData(
                 page,
                 search,
@@ -70,6 +76,8 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
         AuthAdministrator(jwt_decode);
         getData();
     }, [search]); // eslint-disable-line
+
+    console.log(data)
 
     let content = <Loader />;
 

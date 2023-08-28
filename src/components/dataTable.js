@@ -77,7 +77,7 @@ export const DataTable = ({
                                 </th>
                             );
                         })}
-                        {page !== "invoices" && (
+                        {page !== "invoices" && page !== "donations" && (
                             <th scope="col" className="px-2 py-2 border-r">
                                 Actions
                             </th>
@@ -99,28 +99,29 @@ export const DataTable = ({
                                         </td>
                                     );
                                 })}
-                                {page !== "invoices" && (
-                                    <td className="flex justify-center">
-                                        {page !== "subscribers" && (
-                                            <HiPencil
-                                                className="text-xl my-2 mx-3 cursor-pointer"
-                                                title="Edit"
+                                {page !== "invoices" &&
+                                    page !== "donations" && (
+                                        <td className="flex justify-center">
+                                            {page !== "subscribers" && (
+                                                <HiPencil
+                                                    className="text-xl my-2 mx-3 cursor-pointer"
+                                                    title="Edit"
+                                                    onClick={() => {
+                                                        setID(item.id);
+                                                        setRevealForm(true);
+                                                    }}
+                                                />
+                                            )}
+
+                                            <HiTrash
+                                                className="text-xl my-2 mx-3 text-red-600 cursor-pointer"
+                                                title="Delete"
                                                 onClick={() => {
-                                                    setID(item.id);
-                                                    setRevealForm(true);
+                                                    deleteItem(item.id, i);
                                                 }}
                                             />
-                                        )}
-
-                                        <HiTrash
-                                            className="text-xl my-2 mx-3 text-red-600 cursor-pointer"
-                                            title="Delete"
-                                            onClick={() => {
-                                                deleteItem(item.id, i);
-                                            }}
-                                        />
-                                    </td>
-                                )}
+                                        </td>
+                                    )}
                             </tr>
                         );
                     })}

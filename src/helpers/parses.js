@@ -219,7 +219,9 @@ export const parseData = (page, data) => {
             }
 
             if (item.customer.phone_number) {
-                item.phone = <p className="capitalize">{item.customer.phone_number}</p>;
+                item.phone = (
+                    <p className="capitalize">{item.customer.phone_number}</p>
+                );
             }
 
             return item;
@@ -293,6 +295,52 @@ export const parseData = (page, data) => {
                     <p
                         className={`flex justify-center capitalize ${
                             item.status === "active"
+                                ? "bg-green-600 w-fit mx-auto"
+                                : "bg-red-400 w-fit mx-auto"
+                        } text-white py-1 px-3 rounded-full text-center`}
+                    >
+                        {item.status}
+                    </p>
+                );
+            }
+
+            return item;
+        });
+    }
+
+    if (page === "donations") {
+        return data.map((item) => {
+            if (item.first_name) {
+                item.name = (
+                    <p className="capitalize">
+                        {item.first_name} {item.last_name}
+                    </p>
+                );
+            }
+
+            if (item.company) {
+                item.company = <p className="capitalize">{item.company}</p>;
+            }
+
+            if (item.designation) {
+                item.designation = (
+                    <p className="capitalize">{item.designation}</p>
+                );
+            }
+
+            if (item.amount)
+                item.amount = (
+                    <p>
+                        KES{" "}
+                        {item.amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    </p>
+                );
+
+            if (item.status) {
+                item.status = (
+                    <p
+                        className={`flex justify-center capitalize ${
+                            item.status === "paid"
                                 ? "bg-green-600 w-fit mx-auto"
                                 : "bg-red-400 w-fit mx-auto"
                         } text-white py-1 px-3 rounded-full text-center`}
