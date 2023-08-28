@@ -75,6 +75,12 @@ export const parseData = (page, data) => {
                 item.type = <p className="capitalize">{item.type}</p>;
             }
 
+            if (item.name) {
+                item.name = (
+                    <p className="capitalize">{item.name.toLowerCase()}</p>
+                );
+            }
+
             if (item.amount) {
                 item.amount = (
                     <p>
@@ -240,7 +246,9 @@ export const parseData = (page, data) => {
 
             if (item.subscription_category) {
                 item.subscription_category = (
-                    <p className="capitalize">{item.subscription_category.replace(/-/g, " ")}</p>
+                    <p className="capitalize">
+                        {item.subscription_category.replace(/-/g, " ")}
+                    </p>
                 );
             }
 

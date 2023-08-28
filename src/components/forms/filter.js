@@ -131,24 +131,12 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                 <input
                     className="w-3/12 text-sm block text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
                     type="text"
-                    placeholder="Search transaction ID"
-                    value={search.transaction_id}
+                    placeholder="Search payment"
+                    value={search.keyword}
                     onChange={(event) => {
                         updateSearch({
                             ...search,
-                            transaction_id: event.target.value,
-                        });
-                    }}
-                />
-                <input
-                    className="w-3/12 text-sm block text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
-                    type="text"
-                    placeholder="Search invoice number"
-                    value={search.invoice_id}
-                    onChange={(event) => {
-                        updateSearch({
-                            ...search,
-                            invoice_number: event.target.value,
+                            keyword: event.target.value,
                         });
                     }}
                 />
@@ -180,9 +168,8 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                     className="flex focus:outline-none bg-gray-100 text-teal-900 hover:bg-gray-200 font-medium rounded-lg text-sm px-3 pt-2 pb-[0.8em] transition duration-150 ease-in-out"
                     onClick={() => {
                         updateSearch({
-                            transaction_id: "",
+                            keyword: "",
                             method: "",
-                            invoice_number: "",
                             page: 1,
                             limit: 100,
                         });

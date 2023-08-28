@@ -14,6 +14,8 @@ export const getTitles = (url) => {
             { name: "Transaction ID", value: "transaction_id" },
             { name: "Invoice", value: "invoice_number" },
             { name: "Method", value: "method" },
+            { name: "Name", value: "name" },
+            { name: "Phone", value: "phone_number" },
             { name: "Amount", value: "amount" },
             { name: "Timestamp", value: "timestamp" },
         ];
