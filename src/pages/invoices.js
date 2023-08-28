@@ -1,7 +1,8 @@
 import { PageLayout } from "../layouts/pageLayout";
 
 const searchQuery = {
-    invoice_number: "",
+    keyword: "",
+    member_id: "",
     type: "",
     status: "",
     page: 1,

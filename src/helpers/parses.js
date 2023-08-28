@@ -214,6 +214,14 @@ export const parseData = (page, data) => {
                 );
             }
 
+            if (item.customer.name) {
+                item.name = <p className="capitalize">{item.customer.name}</p>;
+            }
+
+            if (item.customer.phone_number) {
+                item.phone = <p className="capitalize">{item.customer.phone_number}</p>;
+            }
+
             return item;
         });
     }

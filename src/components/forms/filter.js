@@ -188,12 +188,12 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                 <input
                     className="w-3/12 text-sm block text-gray-700 border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
                     type="text"
-                    placeholder="Search invoice number"
+                    placeholder="Search invoice"
                     value={search.invoice_number}
                     onChange={(event) => {
                         updateSearch({
                             ...search,
-                            invoice_number: event.target.value,
+                            keyword: event.target.value,
                         });
                     }}
                 />
@@ -233,7 +233,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         });
                     }}
                 >
-                    <option value={""}>Choose Type</option>
+                    <option value={""}>Choose Status</option>
                     {["paid", "unpaid"].map((item) => {
                         return (
                             <option
@@ -252,7 +252,8 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                     className="flex focus:outline-none bg-gray-100 text-teal-900 hover:bg-gray-200 font-medium rounded-lg text-sm px-3 pt-2 pb-[0.8em] transition duration-150 ease-in-out"
                     onClick={() => {
                         updateSearch({
-                            invoice_number: "",
+                            keyword: "",
+                            member_id: "",
                             type: "",
                             status: "",
                             page: 1,

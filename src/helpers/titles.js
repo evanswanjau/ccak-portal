@@ -33,6 +33,8 @@ export const getTitles = (url) => {
         return [
             { name: "Invoice Number", value: "invoice_number" },
             { name: "Description", value: "description" },
+            { name: "Name", value: "name" },
+            { name: "Phone", value: "phone" },
             { name: "Total", value: "total_amount" },
             { name: "Paid", value: "paid_amount" },
             { name: "Balance", value: "balance" },
