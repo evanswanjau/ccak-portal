@@ -77,8 +77,6 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
         getData();
     }, [search]); // eslint-disable-line
 
-    console.log(data)
-
     let content = <Loader />;
 
     if (revealForm) content = getForm(page, setRevealForm, id, getData, setID);
@@ -93,7 +91,7 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                 {page === "subscribers" && (
                     <button
                         type="button"
-                        className="bg-teal-900 hover:bg-teal-950 text-white font-medium rounded-lg text-sm pt-3 px-4 pb-[0.8em] mb-4 transition duration-150 ease-in-out"
+                        className="bg-teal-900 hover:bg-teal-950 text-white font-medium rounded-lg text-sm pt-2 px-3 pb-[0.6em] mb-4 transition duration-150 ease-in-out"
                         onClick={() => {
                             handleExport();
                         }}
