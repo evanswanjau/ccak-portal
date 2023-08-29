@@ -67,6 +67,7 @@ export const searchData = (
         data: search,
         headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
         },
     })
         .then(({ data }) => {
@@ -150,4 +151,18 @@ export const loginAdministrator = (data, setBtnLoading, setError) => {
         .finally(() => {
             setBtnLoading(false);
         });
+};
+
+export const dashboardStats = (data, updateData, category) => {
+    return axios({
+        method: "get",
+        url: process.env.REACT_APP_API_URL + "dashboard/stats/" + category,
+        data: data,
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+    }).then(({ data }) => {
+        updateData(data);
+    });
 };

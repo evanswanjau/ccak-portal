@@ -1,23 +1,46 @@
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
-import { searchData } from "../api/api-calls";
+import { dashboardStats, searchData } from "../api/api-calls";
 import { useSnackbar } from "notistack";
 import SideNav from "../components/sideNav";
-import { HiOutlineUsers } from "react-icons/hi2";
 import { AuthAdministrator } from "../helpers/auth";
 
 export const DashboardPage = () => {
     const [invoices, setInvoices] = useState([]);
     const [payments, setPayments] = useState([]);
+    const [generalStats, setGeneralStats] = useState({
+        members: 0,
+        subscribers: 0,
+        posts: 0,
+        administrators: 0,
+    });
+    const [moneyStats, setMoneyStats] = useState({
+        completed: 0,
+        pending: 0,
+        donations: 0,
+        subscriptions: 0,
+    });
+    const [memberStats, setMemberStats] = useState({
+        subscribed: 0,
+        unsubscribed: 0,
+        registered: 0,
+        unregistered: 0,
+    });
 
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
         AuthAdministrator(jwt_decode);
+    
+        dashboardStats(generalStats, setGeneralStats, "general")
+        dashboardStats(moneyStats, setMoneyStats, "money")
+        dashboardStats(memberStats, setMemberStats, "member");
+
         searchData(
             "invoices",
             {
-                invoice_number: "",
+                keyword: "",
+                member_id:"",
                 type: "",
                 status: "",
                 page: 1,
@@ -47,84 +70,194 @@ export const DashboardPage = () => {
             <div className="w-2/12">
                 <SideNav />
             </div>
-            <div className="w-10/12 p-10 pb-24 mt-8 h-[calc(100vh-3em)] overflow-scroll">
+            <div className="w-10/12 p-10 pb-24 mt-8 h-[calc(100vh-3em)] overflow-y-auto">
                 <h1 className="text-2xl font-semibold text-gray-600 mb-5">
                     Dashboard
                 </h1>
-                <div className="flex space-x-4 my-5">
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">4,000</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                <div className="flex space-x-4 my-8">
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {generalStats.members.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                MEMBERS
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            MEMBERS
-                        </p>
+                        <img
+                            className="w-20 h-auto"
+                            src="/team.png"
+                            alt="Team"
+                        />
                     </div>
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">870</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {generalStats.subscribers.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                SUBSCRIBERS
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            SUBSCRIBERS
-                        </p>
+                        <img
+                            className="w-20 h-auto"
+                            src="/team.png"
+                            alt="Team"
+                        />
                     </div>
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">2300</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {generalStats.posts.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                POSTS
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            POSTS
-                        </p>
+                        <img
+                            className="w-20 h-auto"
+                            src="/team.png"
+                            alt="Team"
+                        />
                     </div>
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">3</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {generalStats.administrators.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                ADMINS
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            ADMINS
-                        </p>
+                        <img
+                            className="w-20 h-auto"
+                            src="/team.png"
+                            alt="Team"
+                        />
                     </div>
                 </div>
-                <div className="flex space-x-4 my-5">
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">4,000</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                <div className="flex space-x-4 my-8">
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {moneyStats.completed.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                COMPLETED
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            TOTAL MEMBERS
-                        </p>
+                        <img
+                            className="w-16 h-auto"
+                            src="/money.png"
+                            alt="Team"
+                        />
                     </div>
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">870</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {moneyStats.pending.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                PENDING
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            ACTIVE MEMBERS
-                        </p>
+                        <img
+                            className="w-16 h-auto"
+                            src="/money.png"
+                            alt="Team"
+                        />
                     </div>
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">2300</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {moneyStats.donations.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                DONATIONS
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            INACTIVE MEMBERS
-                        </p>
+                        <img
+                            className="w-16 h-auto"
+                            src="/money.png"
+                            alt="Team"
+                        />
                     </div>
-                    <div className="p-2 shadow-lg rounded-lg w-full">
-                        <div className="flex justify-between items-centertext-gray-600">
-                            <h3 className="text-3xl font-bold">3</h3>
-                            <HiOutlineUsers className="text-3xl text-teal-900" />
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {moneyStats.subscriptions.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                SUBSCRIPTIONS
+                            </p>
                         </div>
-                        <p className="text-sm my-2 tracking-widest font-semibold text-gray-600">
-                            ADMINS
-                        </p>
+                        <img
+                            className="w-16 h-auto"
+                            src="/money.png"
+                            alt="Team"
+                        />
+                    </div>
+                </div>
+                <div className="flex space-x-4 my-8">
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {memberStats.subscribed.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                SUBSCRIBED
+                            </p>
+                        </div>
+                        <img
+                            className="w-16 h-auto"
+                            src="/people.png"
+                            alt="Team"
+                        />
+                    </div>
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {memberStats.unsubscribed.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                UNSUBSCRIBED
+                            </p>
+                        </div>
+                        <img
+                            className="w-16 h-auto"
+                            src="/people.png"
+                            alt="Team"
+                        />
+                    </div>
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {memberStats.registered.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                REGISTERED
+                            </p>
+                        </div>
+                        <img
+                            className="w-16 h-auto"
+                            src="/people.png"
+                            alt="Team"
+                        />
+                    </div>
+                    <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
+                        <div>
+                            <h3 className="text-3xl font-bold text-teal-900">
+                                {memberStats.unregistered.toLocaleString("en-US")}
+                            </h3>
+                            <p className="text-sm my-2 tracking-widest font-bold text-black">
+                                UNREGISTERED
+                            </p>
+                        </div>
+                        <img
+                            className="w-16 h-auto"
+                            src="/people.png"
+                            alt="Team"
+                        />
                     </div>
                 </div>
                 <div className="flex space-x-4">
