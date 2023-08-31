@@ -23,7 +23,8 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
             data.category === "press-release" ||
             data.category === "news" ||
             data.category === "projects" ||
-            data.category === "blog"
+            data.category === "blog" ||
+            data.category === "external-publications"
         ) {
             if (
                 data.title === "" ||
