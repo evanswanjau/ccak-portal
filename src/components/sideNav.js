@@ -177,6 +177,9 @@ const filterPages = (role) => {
     if (role === "finance-admin")
         list = ["Posts", "Social Hub", "Subscribers", "Administrators"];
 
+        if (role === "admin")
+            list = ["Administrators"];
+
     list.map((value) => {
         pages = pages.filter((item) => item["title"] !== value);
 
