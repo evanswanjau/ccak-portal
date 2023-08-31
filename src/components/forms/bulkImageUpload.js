@@ -32,19 +32,21 @@ export const BuilkImageUpload = ({ data, updateData }) => {
                 updateData({
                     ...data,
                     files: { data: images },
-                    image: images[0].name,
+                    image:
+                        data.category !== "internal-publications" ||
+                        data.category !== "newsletters"
+                            ? images[0].name
+                            : "",
                 });
             });
     };
 
     const deleteImage = (file_id) => {
         return imageDelete({ file_id: file_id })
-            .then(({ data }) => {
-                console.log(data);
+            .then(({response}) => {
                 enqueueSnackbar("Image delete successfully", {
                     variant: "success",
                 });
-                // TODO: SET DATA TO NEW IMAGES
             })
             .catch(({ response }) => {
                 let errors = response.data;
@@ -76,8 +78,8 @@ export const BuilkImageUpload = ({ data, updateData }) => {
                     enqueueSnackbar("File type not allowed", {
                         variant: "error",
                     });
-                } else if (fileSize > 5) {
-                    enqueueSnackbar("File size exceeds 5 MB", {
+                } else if (fileSize > 10) {
+                    enqueueSnackbar("File size exceeds 10 MB", {
                         variant: "error",
                     });
                 } else {
@@ -166,22 +168,29 @@ export const BuilkImageUpload = ({ data, updateData }) => {
                                         className="group transition-all duration-600 ease-in-out"
                                         key={i}
                                     >
-                                        <IKImage
-                                            className="rounded-lg"
-                                            urlEndpoint={
-                                                process.env
-                                                    .REACT_APP_IMAGEKIT_URL
-                                            }
-                                            transformation={[
-                                                {
-                                                    height: 200,
-                                                    width: 200,
-                                                },
-                                            ]}
-                                            path={`${data.folder}/${image.name}`}
-                                            height="200"
-                                            width="200"
-                                        />
+                                        {data.category === "newsletters" ||
+                                        data.category ===
+                                            "internal-publications" ? (
+                                            <img src="/pdf.png" alt="pdf" />
+                                        ) : (
+                                            <IKImage
+                                                className="rounded-lg"
+                                                urlEndpoint={
+                                                    process.env
+                                                        .REACT_APP_IMAGEKIT_URL
+                                                }
+                                                transformation={[
+                                                    {
+                                                        height: 200,
+                                                        width: 200,
+                                                    },
+                                                ]}
+                                                path={`${data.folder}/${image.name}`}
+                                                height="200"
+                                                width="200"
+                                            />
+                                        )}
+
                                         <div className="hidden group-hover:flex justify-end -mt-12 mr-1 transition-all duration-600 ease-in-out">
                                             <div
                                                 className="bg-white hover:bg-red-600 hover:text-white p-3 shadow-lg rounded-full cursor-pointer"

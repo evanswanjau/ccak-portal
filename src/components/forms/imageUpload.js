@@ -34,7 +34,6 @@ export const ImageUpload = ({ data, updateData }) => {
                                     data.category === "consultancy" ||
                                     data.category === "funding-opportunities" ||
                                     data.category === "internal-publications" ||
-                                    data.category === "external-publications" ||
                                     data.category === "newsletters"
                                         ? "cursor-not-allowed"
                                         : "cursor-pointer"
@@ -56,8 +55,6 @@ export const ImageUpload = ({ data, updateData }) => {
                                             "funding-opportunities" ||
                                         data.category ===
                                             "internal-publications" ||
-                                        data.category ===
-                                            "external-publications" ||
                                         data.category === "newsletters" ? (
                                             <>
                                                 <IoCloseCircle className="text-6xl" />
@@ -98,7 +95,6 @@ export const ImageUpload = ({ data, updateData }) => {
                                     data.category === "consultancy" ||
                                     data.category === "funding-opportunities" ||
                                     data.category === "internal-publications" ||
-                                    data.category === "external-publications" ||
                                     data.category === "newsletters"
                                 }
                                 onChange={() => {
