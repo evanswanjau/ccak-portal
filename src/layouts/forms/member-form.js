@@ -1,25 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
+import { IKContext, IKImage, IKUpload } from "imagekitio-react";
 import { apiRequest, submitFormData } from "../../api/api-calls";
 import { Loader } from "../../components/loader";
 import { Input } from "../../components/forms/input";
 import { BtnLoader } from "../../components/btnLoader";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoCloudUpload } from "react-icons/io5";
 import { Toggle } from "../../components/forms/toggle";
 import { Alert } from "../../components/forms/alert";
 import { Select } from "../../components/forms/select";
+import { TextArea } from "../../components/forms/textarea";
 
 export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
     const [loading, setLoading] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [imageLoading, setImageLoading] = useState(false);
+
     const [data, updateData] = useState({
         first_name: "",
         last_name: "",
         email: "",
+        phone_number: "",
         password: "",
         company: "",
         designation: "",
+        bio: "",
+        technology: "",
+        company_email: "",
+        company_phone: "",
+        location: "",
+        postal_address: "",
+        website_link: "",
+        logo: "default.png",
         registration_status: "unregistered",
         subscription_status: "inactive",
         status: "active",
@@ -50,9 +63,18 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
             first_name: "",
             last_name: "",
             email: "",
+            phone_number:"",
             password: "",
             company: "",
             designation: "",
+            bio: "",
+            technology: "",
+            company_email: "",
+            company_phone: "",
+            location: "",
+            postal_address: "",
+            website_link: "",
+            logo: "default.png",
             registration_status: "unregistered",
             subscription_status: "inactive",
             subscription_category: "category",
@@ -60,6 +82,18 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
         });
         getData();
         setID(null);
+    };
+
+    const onError = ({ message }) => {
+        enqueueSnackbar(message, {
+            variant: "error",
+        });
+        setImageLoading(false);
+    };
+
+    const onSuccess = (response) => {
+        updateData({ ...data, logo: response.name });
+        setImageLoading(false);
     };
 
     const submitData = () => {
@@ -96,8 +130,6 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
         data.last_name === "" ||
         data.email === "" ||
         data.phone_number === "";
-
-    console.log(data);
 
     useEffect(() => {
         if (id) {
@@ -184,6 +216,18 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                                     updateData={updateData}
                                 />
                             </div>
+                            <div className="relative flex py-5 items-center">
+                                <div className="flex-grow border-t border-gray-200"></div>
+                                <span className="flex-shrink mx-4 text-gray-400">
+                                    Company
+                                </span>
+                                <div className="flex-grow border-t border-gray-200"></div>
+                            </div>
+                            <TextArea
+                                item="bio"
+                                data={data}
+                                updateData={updateData}
+                            />
                             <div className="flex space-x-4">
                                 <Input
                                     item="company"
@@ -199,6 +243,154 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                                     data={data}
                                     updateData={updateData}
                                 />
+                            </div>
+                            <div className="flex space-x-4">
+                                <Input
+                                    item="company_email"
+                                    label="Company Email (Optional)"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                                <Input
+                                    item="company_phone"
+                                    label="Company Phone (Optional)"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                            </div>
+                            <div className="flex space-x-4">
+                                <Input
+                                    item="location"
+                                    label="Location (Optional)"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                                <Input
+                                    item="postal_address"
+                                    label="Postal Address (Optional)"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                            </div>
+                            <div className="flex space-x-4">
+                                <Select
+                                    item="technology"
+                                    list={[
+                                        {
+                                            name: "Cook Stoves Providers",
+                                            value: "cook stoves providers",
+                                        },
+                                        { name: "Ethanol", value: "ethanol" },
+                                        { name: "Biogas", value: "biogas" },
+                                        {
+                                            name: "Non-Carbonized Briquettes",
+                                            value: "non-carbonized briquettes",
+                                        },
+                                        {
+                                            name: "Carbon Briquettes",
+                                            value: "carbon briquettes",
+                                        },
+                                        {
+                                            name: "Research and Consultancy",
+                                            value: "research and consultancy",
+                                        },
+                                        { name: "LPG", value: "lpg" },
+                                        { name: "Partners", value: "partners" },
+                                        {
+                                            name: "Membership Associations",
+                                            value: "membership associations",
+                                        },
+                                        { name: "Solar", value: "solar" },
+                                        {
+                                            name: "Journalists",
+                                            value: "journalists",
+                                        },
+                                        { name: "IMC", value: "imc" },
+                                    ]}
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                                <Input
+                                    item="website_link"
+                                    label="Website Link"
+                                    type="text"
+                                    data={data}
+                                    updateData={updateData}
+                                />
+                            </div>
+                            <h3 className="block uppercase tracking-wide text-gray-900 text-xs font-bold mb-2">
+                                COMPANY LOGO
+                            </h3>
+                            <div className="flex space-x-4 items-center">
+                                <div className="w-2/12">
+                                    <IKImage
+                                        className="object-cover rounded-lg w-full h-auto"
+                                        urlEndpoint={
+                                            process.env.REACT_APP_IMAGEKIT_URL
+                                        }
+                                        path={`members/${data.logo}`}
+                                    />
+                                </div>
+                                <div className="w-10/12">
+                                    <label htmlFor="image">
+                                        <div className="cursor-pointer border-2 rounded-lg border-dashed">
+                                            <div className="px-14 py-16 flex flex-col items-center justify-center">
+                                                {imageLoading ? (
+                                                    <Loader />
+                                                ) : (
+                                                    <>
+                                                        <IoCloudUpload className="text-5xl" />
+                                                        <p className="mt-5">
+                                                            Drag and drop or
+                                                            browse to choose
+                                                            file
+                                                        </p>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <IKContext
+                                        publicKey={
+                                            process.env
+                                                .REACT_APP_IMAGEKIT_PUBLIC_KEY
+                                        }
+                                        urlEndpoint={
+                                            process.env.REACT_APP_IMAGEKIT_URL
+                                        }
+                                        authenticationEndpoint={
+                                            process.env.REACT_APP_IMAGEKIT_AUTH
+                                        }
+                                    >
+                                        <IKUpload
+                                            id="image"
+                                            className="hidden"
+                                            fileName={data.title + ".jpg"}
+                                            useUniqueFileName={true}
+                                            folder="members"
+                                            onChange={() => {
+                                                setImageLoading(true);
+                                            }}
+                                            onError={(error) => {
+                                                onError(error);
+                                            }}
+                                            onSuccess={(response) => {
+                                                onSuccess(response);
+                                            }}
+                                        />
+                                    </IKContext>
+                                </div>
+                            </div>
+                            <div className="relative flex py-10 items-center">
+                                <div className="flex-grow border-t border-gray-200"></div>
+                                <span className="flex-shrink mx-4 text-gray-400">
+                                    Subscription
+                                </span>
+                                <div className="flex-grow border-t border-gray-200"></div>
                             </div>
                             <Select
                                 item="subscription_category"

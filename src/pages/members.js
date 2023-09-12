@@ -8,7 +8,7 @@ const searchQuery = {
     subscription_category: "",
     status: "",
     page: 1,
-    limit: 21,
+    limit: 100,
 };
 
 export const MembersPage = () => {
