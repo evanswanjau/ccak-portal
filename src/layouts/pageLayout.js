@@ -13,6 +13,7 @@ import { getForm } from "../helpers/forms";
 import { DataTable } from "../components/dataTable";
 import { getTitles } from "../helpers/titles";
 import { AuthAdministrator } from "../helpers/auth";
+import { Pagination } from "../components/pagination";
 
 export const PageLayout = ({ page, searchQuery, addButton }) => {
     const [loading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
     const [revealForm, setRevealForm] = useState(false);
     const [id, setID] = useState(null);
     const [search, updateSearch] = useState(searchQuery);
+    const [paginationData, setPaginationData] = useState({});
 
     const { enqueueSnackbar } = useSnackbar();
 
@@ -59,7 +61,8 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                 search,
                 updateData,
                 parseData,
-                enqueueSnackbar
+                enqueueSnackbar,
+                setPaginationData
             ).finally(() => {
                 setLoading(false);
             });
@@ -107,9 +110,15 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                     setRevealForm={setRevealForm}
                     setID={setID}
                 />
-                {/* <div className="my-5">
-                    <Pagination search={search} count={data.length} />
-                </div> */}
+                {search && (
+                    <div className="my-5">
+                        <Pagination
+                            paginationData={paginationData}
+                            search={search}
+                            updateSearch={updateSearch}
+                        />
+                    </div>
+                )}
             </div>
         );
 

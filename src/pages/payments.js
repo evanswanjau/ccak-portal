@@ -5,7 +5,7 @@ const searchQuery = {
     method: "",
     invoice_number: "",
     page: 1,
-    limit: 100,
+    limit: 10,
 };
 
 export const PaymentsPage = () => {

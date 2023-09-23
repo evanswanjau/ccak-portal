@@ -29,6 +29,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             keyword: event.target.value,
+                            page: 1,
                         });
                     }}
                 />
@@ -38,6 +39,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             category: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -60,6 +62,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             access: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -83,6 +86,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             status: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -113,7 +117,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             access: "",
                             status: "",
                             page: 1,
-                            limit: 100,
+                            limit: 10,
                             ip_address: "",
                         });
                     }}
@@ -137,6 +141,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             keyword: event.target.value,
+                            page: 1,
                         });
                     }}
                 />
@@ -146,6 +151,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             method: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -171,7 +177,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             keyword: "",
                             method: "",
                             page: 1,
-                            limit: 100,
+                            limit: 10,
                         });
                     }}
                 >
@@ -194,6 +200,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             keyword: event.target.value,
+                            page: 1,
                         });
                     }}
                 />
@@ -203,6 +210,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             type: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -230,6 +238,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             status: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -257,7 +266,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             type: "",
                             status: "",
                             page: 1,
-                            limit: 100,
+                            limit: 10,
                         });
                     }}
                 >
@@ -280,6 +289,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             keyword: event.target.value,
+                            page: 1,
                         });
                     }}
                 />
@@ -289,6 +299,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             technology: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -325,6 +336,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             subscription_category: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -361,6 +373,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             registration_status: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -384,6 +397,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             subscription_status: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -413,7 +427,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             subscription_category: "",
                             status: "",
                             page: 1,
-                            limit: 100,
+                            limit: 10,
                         });
                     }}
                 >
@@ -436,16 +450,18 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                         updateSearch({
                             ...search,
                             keyword: event.target.value,
+                            page: 1,
                         });
                     }}
                 />
-                
+
                 <select
                     className="w-2/12 block text-sm text-gray-700 bg-white border border-gray-200 rounded-lg py-2 px-3 leading-tight focus:outline-none focus:border-gray-500"
                     onChange={(event) => {
                         updateSearch({
                             ...search,
                             status: event.target.value,
+                            page: 1,
                         });
                     }}
                 >
@@ -471,7 +487,7 @@ export const FilterForm = ({ page, search, updateSearch }) => {
                             keyword: "",
                             status: "",
                             page: 1,
-                            limit: 100,
+                            limit: 10,
                         });
                     }}
                 >

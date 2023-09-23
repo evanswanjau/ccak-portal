@@ -57,7 +57,7 @@ export const DashboardPage = () => {
                 method: "",
                 invoice_number: "",
                 page: 1,
-                limit: 100,
+                limit: 5,
             },
             setPayments,
             null,

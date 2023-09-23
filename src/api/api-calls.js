@@ -28,13 +28,13 @@ export const apiRequest = (
                 });
         })
         .catch(({ response }) => {
-            let errors = response.data;
-            let keys = Object.keys(response.data);
-
-            return enqueueSnackbar(errors[keys[0]][0], {
-                variant: "error",
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
+            return enqueueSnackbar(
+                response.data.message || "Unknown error occurred",
+                {
+                    variant: "error",
+                    anchorOrigin: { vertical: "top", horizontal: "center" },
+                }
+            );
         });
 };
 
@@ -59,11 +59,14 @@ export const searchData = (
     search,
     updateData,
     parseData,
-    enqueueSnackbar
+    enqueueSnackbar,
+    setPaginationData
 ) => {
     return axios({
         method: "post",
-        url: `${process.env.REACT_APP_API_URL}${page}/search`,
+        url: `${process.env.REACT_APP_API_URL}${page}/search${
+            search.page > 1 ? "?page=" + search.page : ""
+        }`,
         data: search,
         headers: {
             "Content-Type": "application/json",
@@ -72,19 +75,24 @@ export const searchData = (
     })
         .then(({ data }) => {
             if (parseData) {
-                updateData(parseData(page, data));
+                updateData(parseData(page, data.results));
             } else {
-                updateData(data);
+                updateData(data.results);
+            }
+
+            if (setPaginationData) {
+                delete data.results;
+                setPaginationData(data);
             }
         })
         .catch(({ response }) => {
-            let errors = response.data;
-            let keys = Object.keys(response.data);
-
-            return enqueueSnackbar(errors[keys[0]][0], {
-                variant: "error",
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
+            return enqueueSnackbar(
+                response.data.message || "Unknown error occurred",
+                {
+                    variant: "error",
+                    anchorOrigin: { vertical: "top", horizontal: "center" },
+                }
+            );
         });
 };
 

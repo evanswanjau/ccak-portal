@@ -6,7 +6,7 @@ const searchQuery = {
     type: "",
     status: "",
     page: 1,
-    limit: 100,
+    limit: 10,
 };
 
 export const InvoicesPage = () => {

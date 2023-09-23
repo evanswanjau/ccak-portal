@@ -4,7 +4,7 @@ const searchQuery = {
     keyword: "",
     status: "",
     page: 1,
-    limit: 100,
+    limit: 10,
 };
 
 export const DonationsPage = () => {
