@@ -10,7 +10,15 @@ const TopNav = () => {
                     CMS-PORTAL
                 </span>
             </div>
-            <div className="flex space-x-6 font-light">
+            <div className="flex space-x-6">
+                <a
+                    href="https://www.ccak-ics.or.ke/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white hover:text-gray-200 font-bold"
+                >
+                    USSD PORTAL
+                </a>
                 <a href="/myaccount">
                     <button className="flex items-center text-white space-x-1">
                         <HiOutlineUser className="text-lg" />
