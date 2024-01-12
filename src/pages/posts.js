@@ -8,7 +8,7 @@ const searchQuery = {
     access: "",
     status: "",
     page: 1,
-    limit: 10,
+    limit: 15,
     ip_address: "",
 };
 
