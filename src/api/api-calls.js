@@ -141,6 +141,7 @@ export const imageDelete = (data) => {
 };
 
 export const loginAdministrator = (data, setBtnLoading, setError) => {
+    setBtnLoading(true);
     return axios({
         method: "post",
         url: process.env.REACT_APP_API_URL + `auth/administrator/login`,
@@ -154,7 +155,10 @@ export const loginAdministrator = (data, setBtnLoading, setError) => {
             window.location.replace("/");
         })
         .catch((error) => {
-            setError(error.response.data.error);
+            setError(
+                error.response.data.error ||
+                    "Unknown error occurred. Please try again later."
+            );
         })
         .finally(() => {
             setBtnLoading(false);
