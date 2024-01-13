@@ -39,7 +39,6 @@ export const apiRequest = (
 };
 
 export const submitFormData = (method, url, data) => {
-    console.log(url);
     if (method === "patch" && data.password && data.password.length > 30)
         delete data["password"];
 
@@ -63,7 +62,7 @@ export const searchData = (
     setPaginationData,
     setLoading
 ) => {
-    setLoading(true);
+    if (setLoading) setLoading(true);
     return axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}${page}/search${
