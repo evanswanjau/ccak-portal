@@ -34,9 +34,9 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
         );
     };
 
-    const exit = () => {
+    const exit = (update = true) => {
         if (data.step !== "category") {
-            submitData("post", "post/update/" + data.id, data);
+            if (update) submitData("post", "post/update/" + data.id, data);
             getData();
         }
 
