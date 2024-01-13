@@ -143,7 +143,7 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                                     "Article draft saved successfully"
                                 ).then(() => {
                                     setLoading(false);
-                                    exit();
+                                    exit(false);
                                 });
                             }}
                         >
