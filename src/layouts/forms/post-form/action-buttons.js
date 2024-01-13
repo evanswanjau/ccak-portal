@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     RiSendPlaneFill,
     RiArrowLeftLine,
@@ -8,6 +8,7 @@ import {
 
 export const ActionButtons = ({ data, updateData, submitData, exit }) => {
     const [loading, setLoading] = useState(false);
+    const [autoSave, setAutoSave] = useState(false);
 
     const onStepBack = () => {
         if (data.step === "published") return "prepping";
@@ -90,6 +91,26 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
 
     let continueDisabled = draftDisabled;
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setAutoSave(true);
+            submitData(
+                "post",
+                "post/update/" + data.id,
+                {
+                    ...data,
+                    status: "draft",
+                },
+            ).then(() => {
+                setAutoSave(false);
+            });
+        }, 60000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [data, submitData]);
+
     return (
         <div className="w-full flex justify-between shadow-sm rounded-t-lg p-2">
             <button
@@ -104,6 +125,7 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
             </button>
             {data.step !== "category" && (
                 <div className="flex space-x-4">
+                    {autoSave && <p className="mx-4 pt-1">Autosaving ...</p>}
                     {data.step !== "published" && (
                         <button
                             type="button"
@@ -125,10 +147,15 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                                     "Article draft saved successfully"
                                 ).then(() => {
                                     setLoading(false);
+                                    // exit();
                                 });
                             }}
                         >
-                            {loading ? <>Saving ...</> : <>Save as draft</>}
+                            {loading ? (
+                                <>Saving ...</>
+                            ) : (
+                                <>Save as draft and exit</>
+                            )}
                             <RiQuillPenFill className="text-sm ml-2 mt-1" />
                         </button>
                     )}
