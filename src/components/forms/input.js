@@ -1,10 +1,15 @@
 const parseDate = (datetime) => {
-    return new Date(
+    const date = new Date(
         new Date(datetime).getTime() -
             new Date(datetime).getTimezoneOffset() * 60000
-    )
-        .toISOString()
-        .slice(0, -8);
+    );
+
+    if (isNaN(date.getTime())) {
+        console.error("Invalid date");
+        return new Date().toISOString().slice(0, -8);
+    } else {
+        return date.toISOString().slice(0, -8);
+    }
 };
 
 export const Input = ({ item, label = null, type, data, updateData }) => {

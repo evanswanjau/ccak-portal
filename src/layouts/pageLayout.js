@@ -62,7 +62,8 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                 updateData,
                 parseData,
                 enqueueSnackbar,
-                setPaginationData
+                setPaginationData,
+                setLoading
             ).finally(() => {
                 setLoading(false);
             });

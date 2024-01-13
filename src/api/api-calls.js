@@ -39,7 +39,6 @@ export const apiRequest = (
 };
 
 export const submitFormData = (method, url, data) => {
-    console.log(url);
     if (method === "patch" && data.password && data.password.length > 30)
         delete data["password"];
 
@@ -60,8 +59,10 @@ export const searchData = (
     updateData,
     parseData,
     enqueueSnackbar,
-    setPaginationData
+    setPaginationData,
+    setLoading
 ) => {
+    if (setLoading) setLoading(true);
     return axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}${page}/search${
@@ -93,6 +94,9 @@ export const searchData = (
                     anchorOrigin: { vertical: "top", horizontal: "center" },
                 }
             );
+        })
+        .finally(() => {
+            setLoading(false);
         });
 };
 

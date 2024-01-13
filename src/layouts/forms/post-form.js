@@ -37,9 +37,18 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
     const exit = () => {
         if (data.step !== "category") {
             submitData("post", "post/update/" + data.id, data);
+            getData();
         }
 
-        getData();
+        if (
+            data.step === "writing" &&
+            (data.title === "" || data.content === "")
+        ) {
+            const confirmExit = window.confirm("Exit without title?");
+            if (!confirmExit) {
+                return;
+            }
+        }
         setRevealForm(false);
     };
 

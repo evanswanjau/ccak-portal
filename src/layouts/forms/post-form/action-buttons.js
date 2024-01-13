@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
     RiSendPlaneFill,
     RiArrowLeftLine,
@@ -8,6 +8,7 @@ import {
 
 export const ActionButtons = ({ data, updateData, submitData, exit }) => {
     const [loading, setLoading] = useState(false);
+    const [autoSave, setAutoSave] = useState(false);
 
     const onStepBack = () => {
         if (data.step === "published") return "prepping";
@@ -90,6 +91,22 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
 
     let continueDisabled = draftDisabled;
 
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setAutoSave(true);
+            submitData("post", "post/update/" + data.id, {
+                ...data,
+                status: "draft",
+            }).then(() => {
+                setAutoSave(false);
+            });
+        }, 10000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [data]); // eslint-disable-line
+
     return (
         <div className="w-full flex justify-between shadow-sm rounded-t-lg p-2">
             <button
@@ -104,6 +121,7 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
             </button>
             {data.step !== "category" && (
                 <div className="flex space-x-4">
+                    {autoSave && <p className="mx-4 pt-1">Autosaving ...</p>}
                     {data.step !== "published" && (
                         <button
                             type="button"
@@ -125,10 +143,15 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                                     "Article draft saved successfully"
                                 ).then(() => {
                                     setLoading(false);
+                                    exit();
                                 });
                             }}
                         >
-                            {loading ? <>Saving ...</> : <>Save as draft</>}
+                            {loading ? (
+                                <>Saving ...</>
+                            ) : (
+                                <>Save as draft and exit</>
+                            )}
                             <RiQuillPenFill className="text-sm ml-2 mt-1" />
                         </button>
                     )}
@@ -144,9 +167,22 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                                         : "text-teal-900 bg-gray-100 hover:bg-gray-200"
                                 }  font-medium rounded-lg text-sm px-4 pt-2 pb-[0.8em] transition duration-150 ease-in-out`}
                                 onClick={() => {
-                                    updateData({
-                                        ...data,
-                                        step: "prepping",
+                                    setLoading(true);
+                                    submitData(
+                                        "post",
+                                        "post/update/" + data.id,
+                                        {
+                                            ...data,
+                                            status: "draft",
+                                            step: "prepping",
+                                        },
+                                        "Article draft saved successfully"
+                                    ).then(() => {
+                                        setLoading(false);
+                                        updateData({
+                                            ...data,
+                                            step: "prepping",
+                                        });
                                     });
                                 }}
                             >
@@ -163,9 +199,22 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
                                         : "bg-teal-900 hover:bg-teal-950"
                                 }  text-white font-medium rounded-lg text-sm px-4 pt-2 pb-[0.8em] transition duration-150 ease-in-out`}
                                 onClick={() => {
-                                    updateData({
-                                        ...data,
-                                        step: "published",
+                                    setLoading(true);
+                                    submitData(
+                                        "post",
+                                        "post/update/" + data.id,
+                                        {
+                                            ...data,
+                                            status: "published",
+                                            step: "published",
+                                        },
+                                        "Article published successfully"
+                                    ).then(() => {
+                                        setLoading(false);
+                                        updateData({
+                                            ...data,
+                                            step: "published",
+                                        });
                                     });
                                 }}
                             >
