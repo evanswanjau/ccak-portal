@@ -132,6 +132,11 @@ let pages = [
         icon: <HiOutlineNewspaper className="text-xl mt-[3px]" />,
     },
     {
+        title: "Social Posts",
+        link: "/socialposts",
+        icon: <HiOutlineNewspaper className="text-xl mt-[3px]" />,
+    },
+    {
         title: "Invoices",
         link: "/invoices",
         icon: <HiOutlineDocumentText className="text-xl mt-[3px]" />,
@@ -177,8 +182,7 @@ const filterPages = (role) => {
     if (role === "finance-admin")
         list = ["Posts", "Social Hub", "Subscribers", "Administrators"];
 
-        if (role === "admin")
-            list = ["Administrators"];
+    if (role === "admin") list = ["Administrators"];
 
     list.map((value) => {
         pages = pages.filter((item) => item["title"] !== value);
@@ -226,7 +230,7 @@ const SideNav = () => {
             <nav className="bg-teal-900 h-[calc(100vh-3.4em)] text-white text-sm font-light mt-12 overflow-auto">
                 <ul>
                     {pages.map((page) => (
-                        <li key={page.link}>
+                        <li key={page.link} title={page.title}>
                             <a
                                 href={page.link}
                                 className={`flex justify-between border-b border-teal-800 ${
@@ -240,7 +244,9 @@ const SideNav = () => {
                             >
                                 <div className="flex space-x-4">
                                     {page.icon}
-                                    <span>{page.title}</span>
+                                    <span className="hidden md:block">
+                                        {page.title}
+                                    </span>
                                 </div>
                                 {page.subPages && (
                                     <div>

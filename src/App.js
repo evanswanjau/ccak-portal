@@ -12,6 +12,7 @@ import { SubscribersPage } from "./pages/subscribers";
 import { MembersPage } from "./pages/members";
 import { MyAccount } from "./pages/myaccount";
 import { DonationsPage } from "./pages/donations";
+import { SocialPostsPage } from "./pages/socialposts";
 
 const App = () => {
     return (
@@ -31,6 +32,7 @@ const App = () => {
                 <Route exact path="/payments" component={PaymentsPage} />
                 <Route exact path="/donations" component={DonationsPage} />
                 <Route exact path="/posts" component={PostsPage} />
+                <Route exact path="/socialposts" component={SocialPostsPage} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/" component={DashboardPage} />
             </Switch>
