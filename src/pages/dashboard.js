@@ -74,7 +74,7 @@ export const DashboardPage = () => {
                 <h1 className="text-2xl font-semibold text-gray-600 mb-5">
                     Dashboard
                 </h1>
-                <div className="flex space-x-4 my-8">
+                <div className="flex flex-col lg:flex-row lg:space-x-4 my-8">
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
@@ -93,7 +93,9 @@ export const DashboardPage = () => {
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
-                                {generalStats.subscribers.toLocaleString("en-US")}
+                                {generalStats.subscribers.toLocaleString(
+                                    "en-US"
+                                )}
                             </h3>
                             <p className="text-sm my-2 tracking-widest font-bold text-black">
                                 SUBSCRIBERS
@@ -123,7 +125,9 @@ export const DashboardPage = () => {
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
-                                {generalStats.administrators.toLocaleString("en-US")}
+                                {generalStats.administrators.toLocaleString(
+                                    "en-US"
+                                )}
                             </h3>
                             <p className="text-sm my-2 tracking-widest font-bold text-black">
                                 ADMINS
@@ -136,7 +140,7 @@ export const DashboardPage = () => {
                         />
                     </div>
                 </div>
-                <div className="flex space-x-4 my-8">
+                <div className="flex flex-col lg:flex-row lg:space-x-4 my-8">
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
@@ -185,7 +189,9 @@ export const DashboardPage = () => {
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
-                                {moneyStats.subscriptions.toLocaleString("en-US")}
+                                {moneyStats.subscriptions.toLocaleString(
+                                    "en-US"
+                                )}
                             </h3>
                             <p className="text-sm my-2 tracking-widest font-bold text-black">
                                 SUBSCRIPTIONS
@@ -198,7 +204,7 @@ export const DashboardPage = () => {
                         />
                     </div>
                 </div>
-                <div className="flex space-x-4 my-8">
+                <div className="flex flex-col lg:flex-row lg:space-x-4 my-8">
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
@@ -217,7 +223,9 @@ export const DashboardPage = () => {
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
-                                {memberStats.unsubscribed.toLocaleString("en-US")}
+                                {memberStats.unsubscribed.toLocaleString(
+                                    "en-US"
+                                )}
                             </h3>
                             <p className="text-sm my-2 tracking-widest font-bold text-black">
                                 UNSUBSCRIBED
@@ -247,7 +255,9 @@ export const DashboardPage = () => {
                     <div className="p-2 shadow-lg rounded-lg w-full flex justify-between items-center">
                         <div>
                             <h3 className="text-3xl font-bold text-teal-900">
-                                {memberStats.unregistered.toLocaleString("en-US")}
+                                {memberStats.unregistered.toLocaleString(
+                                    "en-US"
+                                )}
                             </h3>
                             <p className="text-sm my-2 tracking-widest font-bold text-black">
                                 UNREGISTERED
@@ -260,7 +270,7 @@ export const DashboardPage = () => {
                         />
                     </div>
                 </div>
-                <div className="flex space-x-4">
+                <div className="flex flex-col lg:flex-row space-y-4 space-x-0 lg:space-y-0 lg:space-x-4">
                     <div className="w-full rounded-lg shadow-lg">
                         <div className="w-full bg-yellow-200 rounded-t-lg p-2 shadow-md">
                             <h3 className="text-md">Invoices</h3>
