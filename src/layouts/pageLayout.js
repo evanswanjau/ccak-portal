@@ -14,6 +14,7 @@ import { DataTable } from "../components/dataTable";
 import { getTitles } from "../helpers/titles";
 import { AuthAdministrator } from "../helpers/auth";
 import { Pagination } from "../components/pagination";
+import { SocialHubPost } from "../components/socialpost";
 
 export const PageLayout = ({ page, searchQuery, addButton }) => {
     const [loading, setLoading] = useState(true);
@@ -54,7 +55,8 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
             page === "payments" ||
             page === "posts" ||
             page === "members" ||
-            page === "donations"
+            page === "donations" ||
+            page === "socialposts"
         ) {
             searchData(
                 page,
@@ -103,14 +105,23 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                         EXPORT DATA
                     </button>
                 )}
-                <DataTable
-                    titles={getTitles(page)}
-                    page={page}
-                    data={data}
-                    updateData={updateData}
-                    setRevealForm={setRevealForm}
-                    setID={setID}
-                />
+                {page === "socialposts" && (
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {data.map((item, index) => (
+                            <SocialHubPost key={index} data={item} />
+                        ))}
+                    </div>
+                )}
+                {page !== "socialposts" && (
+                    <DataTable
+                        titles={getTitles(page)}
+                        page={page}
+                        data={data}
+                        updateData={updateData}
+                        setRevealForm={setRevealForm}
+                        setID={setID}
+                    />
+                )}
                 {search && (
                     <div className="my-5">
                         <Pagination
@@ -135,7 +146,7 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                     </h1>
                 )}
 
-                {!loading && !revealForm && (
+                {!revealForm && (
                     <FilterForm
                         page={page}
                         search={search}

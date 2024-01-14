@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@tinymce/tinymce-react": "^4.3.0",
     "axios": "^1.4.0",
+    "date-fns": "^3.2.0",
     "imagekitio-react": "^2.0.0",
     "jsonexport": "^3.2.0",
     "jwt-decode": "^3.1.2",

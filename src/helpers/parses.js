@@ -331,8 +331,7 @@ export const parseData = (page, data) => {
             if (item.amount)
                 item.amount = (
                     <p>
-                        KES{" "}
-                        {item.amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        KES {item.amount.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                     </p>
                 );
 
@@ -353,4 +352,6 @@ export const parseData = (page, data) => {
             return item;
         });
     }
+
+    if (page === "socialposts") return data;
 };
