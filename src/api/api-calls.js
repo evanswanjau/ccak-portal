@@ -96,7 +96,7 @@ export const searchData = (
             );
         })
         .finally(() => {
-            setLoading(false);
+            if (setLoading) setLoading(false);
         });
 };
 
