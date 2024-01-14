@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useSnackbar } from "notistack";
-import { HiHeart } from "react-icons/hi2";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { submitFormData } from "../api/api-calls";
 
-export const SocialHubPost = ({ data }) => {
+export const SocialHubPost = ({ data, search, updateSearch }) => {
     const [showText, setShowText] = useState(false);
     const [post, setPost] = useState(data);
 
@@ -18,6 +16,34 @@ export const SocialHubPost = ({ data }) => {
             setPost(data);
         });
     };
+
+    const formatPost = (post) => {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        const hashtagRegex = /#(\w+)/g;
+        return post
+            .replace(
+                urlRegex,
+                (url) =>
+                    `<a href="${url}" class="text-blue-600" target="_blank" rel="noopener noreferrer">${url}</a>`
+            )
+            .replace(
+                hashtagRegex,
+                (hashtag) =>
+                    `<button id="hashtag${data.id}" class="text-blue-600">${hashtag}</button>`
+            );
+    };
+
+    if (document.getElementById(`hashtag${data.id}`)) {
+        document
+            .getElementById(`hashtag${data.id}`)
+            .addEventListener("click", (event) => {
+                event.preventDefault();
+                updateSearch({
+                    ...search,
+                    keyword: event.target.innerText.replace("#", ""),
+                });
+            });
+    }
 
     return (
         <div className="flex flex-col justify-between shadow-lg rounded-lg pt-4 px-4 group">
@@ -46,14 +72,13 @@ export const SocialHubPost = ({ data }) => {
                     <p className="text-sm text-gray-500">{post.company}</p>
                 </div>
             </div>
-            <p
+            <div
                 className={`${!showText && "line-clamp-3"}`}
                 onClick={() => {
                     setShowText(!showText);
                 }}
-            >
-                {post.post}
-            </p>
+                dangerouslySetInnerHTML={{ __html: formatPost(post.post) }}
+            />
             <img
                 src={post.image}
                 alt={post.post}

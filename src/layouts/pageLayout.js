@@ -108,7 +108,12 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                 {page === "socialposts" && (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {data.map((item, index) => (
-                            <SocialHubPost key={index} data={item} />
+                            <SocialHubPost
+                                key={index}
+                                data={item}
+                                search={search}
+                                updateSearch={updateSearch}
+                            />
                         ))}
                     </div>
                 )}
