@@ -7,7 +7,7 @@ export const AddButton = ({ setRevealForm, setID }) => {
                 className="bg-[#ED7423] rounded-full p-3 shadow-lg"
                 onClick={() => {
                     setRevealForm(true);
-                    setID(null);
+                    if (setID) setID(null);
                 }}
             >
                 <HiPlus className="text-3xl text-white" />

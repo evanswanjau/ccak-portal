@@ -78,7 +78,7 @@ export const searchData = (
             if (parseData) {
                 updateData(parseData(page, data.results));
             } else {
-                updateData(data.results);
+                updateData(data.results ? data.results : data);
             }
 
             if (setPaginationData) {
