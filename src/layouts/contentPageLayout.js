@@ -10,7 +10,7 @@ export const ContentPageLayout = ({
     content,
     data,
     updateData,
-    revealForm,
+    revealForm = true,
     setRevealForm,
 }) => {
     const [loading, setLoading] = useState(true);

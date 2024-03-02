@@ -88,8 +88,16 @@ let pages = [
                 link: "#",
                 subPages: [
                     {
-                        title: "Membership Packages",
-                        link: "/pages/membership/membership-packages",
+                        title: "Packages",
+                        link: "/pages/membership/packages",
+                    },
+                    {
+                        title: "Our Members",
+                        link: "/pages/membership/our-members",
+                    },
+                    {
+                        title: "Registration",
+                        link: "/pages/membership/registration",
                     },
                 ],
             },

@@ -24,6 +24,16 @@ import { NewslettersPage } from "./pages/pages/resource-centre/newsletters";
 import { ConsultancyPage } from "./pages/pages/get-involved/consultancy";
 import { FundingOpportunitiesPage } from "./pages/pages/get-involved/funding-opportunities";
 import { OurTeamPage } from "./pages/pages/who-we-are/our-team";
+import { HomePage } from "./pages/pages/home";
+import { ProjectsPage } from "./pages/pages/what-we-do/projects";
+import { AboutUsPage } from "./pages/pages/who-we-are/about-us";
+import { WhatWeDoPage } from "./pages/pages/what-we-do/what-we-do";
+import { CareersPage } from "./pages/pages/get-involved/careers";
+import { DontatePage } from "./pages/pages/get-involved/donate";
+import { PackagesPage } from "./pages/pages/membership/packages";
+import { OurMembersPage } from "./pages/pages/membership/our-members";
+import { RegistrationPage } from "./pages/pages/membership/register";
+import { ContactUsPage } from "./pages/pages/get-involved/contact-us";
 
 const App = () => {
     return (
@@ -73,6 +83,26 @@ const App = () => {
                 />
                 <Route
                     exact
+                    path="/pages/membership/packages"
+                    component={PackagesPage}
+                />
+                <Route
+                    exact
+                    path="/pages/membership/our-members"
+                    component={OurMembersPage}
+                />
+                <Route
+                    exact
+                    path="/pages/membership/registration"
+                    component={RegistrationPage}
+                />
+                <Route
+                    exact
+                    path="/pages/get-involved/careers"
+                    component={CareersPage}
+                />
+                <Route
+                    exact
                     path="/pages/get-involved/consultancy"
                     component={ConsultancyPage}
                 />
@@ -83,9 +113,23 @@ const App = () => {
                 />
                 <Route
                     exact
+                    path="/pages/get-involved/donate"
+                    component={DontatePage}
+                />
+                <Route
+                    exact
+                    path="/pages/get-involved/contact-us"
+                    component={ContactUsPage}
+                />
+                <WhatWeDoPage exact path="/pages/what-we-do" />
+                <ProjectsPage exact path="/pages/what-we-do/projects" />
+                <Route
+                    exact
                     path="/pages/who-we-are/our-team"
                     component={OurTeamPage}
                 />
+                <AboutUsPage exact path="/pages/who-we-are/about-us" />
+                <Route exact path="/pages/home" component={HomePage} />
                 <Route exact path="/myaccount" component={MyAccount} />
                 <Route exact path="/members" component={MembersPage} />
                 <Route exact path="/subscribers" component={SubscribersPage} />

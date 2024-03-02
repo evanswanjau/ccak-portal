@@ -1,36 +1,37 @@
 import React, { useState } from "react";
 import { useSnackbar } from "notistack";
-import { TextArea } from "../../components/forms/textarea";
 import { HiMinus, HiPlus } from "react-icons/hi2";
-import { BtnLoader } from "../../components/btnLoader";
-import { submitFormData } from "../../api/api-calls";
-import { Alert } from "../../components/forms/alert";
+import { submitFormData } from "../../../../api/api-calls";
+import { Alert } from "../../../../components/forms/alert";
+import { BtnLoader } from "../../../../components/btnLoader";
+import { Input } from "../../../../components/forms/input";
 
-export const HeaderForm = ({ data }) => {
-    const [headerData, updateHeaderData] = useState(data?.content);
+export const HomeVideo = ({ data }) => {
+    const [content, updateContent] = useState(data?.content);
     const [showForm, setShowForm] = useState(true);
     const [btnLoading, setBtnLoading] = useState(false);
     const [error, setError] = useState("");
 
     const { enqueueSnackbar } = useSnackbar();
-    const disabled = headerData.header === "";
+
+    const disabled = content.youtubeId === "";
 
     const submitData = () => {
+        setError("");
         setBtnLoading(true);
-        submitFormData("post", `/content/update/${data.id}`, {
+        submitFormData("post", `content/update/${data.id}`, {
             ...data,
-            content: headerData,
+            content: content,
         })
-            .then((data) => {
-                enqueueSnackbar(`Header updated successfully`, {
+            .then(() => {
+                enqueueSnackbar(`Section update successfully`, {
                     variant: "success",
                 });
             })
-            .catch(({ response }) => {
-                let errors = response.data;
-                let keys = Object.keys(response.data);
-
-                setError(errors[keys[0]][0]);
+            .catch(() => {
+                setError(
+                    "Unable to submit, please check your connection try again"
+                );
             })
             .finally(() => {
                 setBtnLoading(false);
@@ -45,7 +46,7 @@ export const HeaderForm = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">Header</h2>
+                <h2 className="text-xl font-semibold">Home Youtube Video</h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (
@@ -56,10 +57,22 @@ export const HeaderForm = ({ data }) => {
             {showForm && (
                 <div className="p-5">
                     {error && <Alert type="error" message={error} />}
-                    <TextArea
-                        item="header"
-                        data={headerData}
-                        updateData={updateHeaderData}
+                    <iframe
+                        width="100%"
+                        height="420"
+                        src={`https://www.youtube.com/embed/${content.youtubeId}`}
+                        title="Home Video"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        style={{ borderRadius: "10px", marginBottom: "20px" }}
+                    ></iframe>
+                    <Input
+                        item="youtubeId"
+                        label="Youtube Video ID"
+                        type="text"
+                        data={content}
+                        updateData={updateContent}
                     />
                     <button
                         type="button"
