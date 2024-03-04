@@ -38,7 +38,7 @@ export const DataTable = ({
                 vertical: "bottom",
                 horizontal: "left",
             },
-            autoHideDuration: 3000,
+            autoHideDuration: 5000,
             action: (
                 <div>
                     <button

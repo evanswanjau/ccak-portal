@@ -4,7 +4,6 @@ import jwt_decode from "jwt-decode";
 import {
     HiOutlineSquares2X2,
     HiOutlineCreditCard,
-    // HiOutlineHome,
     HiOutlineUsers,
     HiOutlineDocumentText,
     HiChevronRight,
@@ -12,7 +11,7 @@ import {
     HiOutlineNewspaper,
     HiOutlineCurrencyDollar,
 } from "react-icons/hi2";
-// import { IoDocumentsOutline } from "react-icons/io5";
+import { IoDocumentsOutline } from "react-icons/io5";
 import { apiRequest } from "../api/api-calls";
 
 let pages = [
@@ -21,111 +20,133 @@ let pages = [
         link: "/",
         icon: <HiOutlineSquares2X2 className="text-2xl mt-[1px]" />,
     },
-    // {
-    //     title: "Pages",
-    //     link: "#",
-    //     icon: <IoDocumentsOutline className="text-xl mt-[3px]" />,
-    //     subPages: [
-    //         {
-    //             title: "Home",
-    //             link: "/pages/home",
-    //         },
-    //         {
-    //             title: "Who We Are",
-    //             link: "#",
-    //             subPages: [
-    //                 {
-    //                     title: "About Us",
-    //                     link: "/pages/who-we-are/about-us",
-    //                 },
-    //                 {
-    //                     title: "Our Team",
-    //                     link: "/pages/who-we-are/our-team",
-    //                 },
-    //             ],
-    //         },
-    //         {
-    //             title: "What We Do",
-    //             link: "/pages/what-we-do",
-    //         },
-    //         {
-    //             title: "Get Involved",
-    //             link: "#",
-    //             subPages: [
-    //                 {
-    //                     title: "Careers",
-    //                     link: "/pages/get-involved/careers",
-    //                 },
-    //                 {
-    //                     title: "Consultancy",
-    //                     link: "/pages/get-involved/consultancy",
-    //                 },
-    //                 {
-    //                     title: "Funding Opportunities",
-    //                     link: "/pages/get-involved/funding-opportunities",
-    //                 },
-    //                 {
-    //                     title: "Donate",
-    //                     link: "/pages/get-involved/donate",
-    //                 },
-    //                 {
-    //                     title: "Contact Us",
-    //                     link: "/pages/get-involved/contact-us",
-    //                 },
-    //             ],
-    //         },
-    //         {
-    //             title: "Membership",
-    //             link: "#",
-    //             subPages: [
-    //                 {
-    //                     title: "Membership Packages",
-    //                     link: "/pages/membership/membership-packages",
-    //                 },
-    //             ],
-    //         },
-    //         {
-    //             title: "Media Centre",
-    //             link: "#",
-    //             subPages: [
-    //                 {
-    //                     title: "Press Releases",
-    //                     link: "/pages/media-centre/press-releases",
-    //                 },
-    //                 {
-    //                     title: "News",
-    //                     link: "/pages/media-centre/news",
-    //                 },
-    //                 {
-    //                     title: "Events",
-    //                     link: "/pages/media-centre/events",
-    //                 },
-    //                 {
-    //                     title: "Projects",
-    //                     link: "/pages/media-centre/projects",
-    //                 },
-    //                 {
-    //                     title: "Photo Gallery",
-    //                     link: "/pages/media-centre/photo-gallery",
-    //                 },
-    //             ],
-    //         },
-    //         {
-    //             title: "Resource Centre",
-    //             link: "#",
-    //             subPages: [
-    //                 {
-    //                     title: "Research Papers",
-    //                     link: "/pages/resource-centre/research-papers",
-    //                 },
-    //                 {
-    //                     title: "AGM Material",
-    //                     link: "/pages/resource-centre/agm-material",
-    //                 },
-    //             ],
-    //         },
-    //     ],
-    // },
+    {
+        title: "Pages",
+        link: "#",
+        icon: <IoDocumentsOutline className="text-xl mt-[3px]" />,
+        subPages: [
+            {
+                title: "Home",
+                link: "/pages/home",
+            },
+            {
+                title: "Who We Are",
+                link: "#",
+                subPages: [
+                    {
+                        title: "About Us",
+                        link: "/pages/who-we-are/about-us",
+                    },
+                    {
+                        title: "Our Team",
+                        link: "/pages/who-we-are/our-team",
+                    },
+                ],
+            },
+            {
+                title: "What We Do",
+                link: "#",
+                subPages: [
+                    {
+                        title: "What We Do",
+                        link: "/pages/what-we-do",
+                    },
+                    {
+                        title: "Projects",
+                        link: "/pages/what-we-do/projects",
+                    },
+                ],
+            },
+            {
+                title: "Get Involved",
+                link: "#",
+                subPages: [
+                    {
+                        title: "Careers",
+                        link: "/pages/get-involved/careers",
+                    },
+                    {
+                        title: "Consultancy",
+                        link: "/pages/get-involved/consultancy",
+                    },
+                    {
+                        title: "Funding Opportunities",
+                        link: "/pages/get-involved/funding-opportunities",
+                    },
+                    {
+                        title: "Donate",
+                        link: "/pages/get-involved/donate",
+                    },
+                    {
+                        title: "Contact Us",
+                        link: "/pages/get-involved/contact-us",
+                    },
+                ],
+            },
+            {
+                title: "Membership",
+                link: "#",
+                subPages: [
+                    {
+                        title: "Packages",
+                        link: "/pages/membership/packages",
+                    },
+                    {
+                        title: "Our Members",
+                        link: "/pages/membership/our-members",
+                    },
+                    {
+                        title: "Registration",
+                        link: "/pages/membership/registration",
+                    },
+                ],
+            },
+            {
+                title: "Media Centre",
+                link: "#",
+                subPages: [
+                    {
+                        title: "Press Release",
+                        link: "/pages/media-centre/press-release",
+                    },
+                    {
+                        title: "News",
+                        link: "/pages/media-centre/news",
+                    },
+                    {
+                        title: "Events",
+                        link: "/pages/media-centre/events",
+                    },
+                    {
+                        title: "Blog",
+                        link: "/pages/media-centre/blog",
+                    },
+                    {
+                        title: "Photo Gallery",
+                        link: "/pages/media-centre/photo-gallery",
+                    },
+                ],
+            },
+            {
+                title: "Resource Centre",
+                link: "#",
+                subPages: [
+                    {
+                        title: "Internal Publications",
+                        link: "/pages/resource-centre/internal-publications",
+                    },
+                    {
+                        title: "External Publications",
+                        link: "/pages/resource-centre/external-publications",
+                    },
+                    {
+                        title: "Newsletters",
+                        link: "/pages/resource-centre/newsletters",
+                    },
+                ],
+            },
+        ],
+    },
     {
         title: "Posts",
         link: "/posts",
@@ -166,11 +187,6 @@ let pages = [
         link: "/administrators",
         icon: <HiOutlineUsers className="text-xl mt-[3px]" />,
     },
-    // {
-    //     title: "Social Hub",
-    //     link: "/social-posts",
-    //     icon: <HiOutlineHome className="text-xl mt-[3px]" />,
-    // },
 ];
 
 const filterPages = (role) => {
