@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import { submitFormData } from "../api/api-calls";
 
@@ -79,11 +79,13 @@ export const SocialHubPost = ({ data, search, updateSearch }) => {
                 }}
                 dangerouslySetInnerHTML={{ __html: formatPost(post.post) }}
             />
-            <img
-                src={post.image}
-                alt={post.post}
-                className="rounded-lg my-5 max-h-48 object-cover"
-            />
+            {post.image && (
+                <img
+                    src={`${process.env.REACT_APP_IMAGEKIT_URL}/socialpost/${post.image}`}
+                    alt={post.post}
+                    className="rounded-lg my-5 max-h-48 object-cover"
+                />
+            )}
             <div className="flex justify-between mb-2">
                 <div className="flex items-center">
                     <p

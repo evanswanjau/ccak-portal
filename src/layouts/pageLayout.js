@@ -125,6 +125,8 @@ export const PageLayout = ({ page, searchQuery, addButton }) => {
                         updateData={updateData}
                         setRevealForm={setRevealForm}
                         setID={setID}
+                        pageNumber={search.page}
+                        pageLimit={search.limit}
                     />
                 )}
                 {search && (

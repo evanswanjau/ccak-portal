@@ -9,6 +9,8 @@ export const DataTable = ({
     updateData,
     setRevealForm,
     setID,
+    pageNumber,
+    pageLimit,
 }) => {
     const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
@@ -88,7 +90,10 @@ export const DataTable = ({
                     {data.map((item, i) => {
                         return (
                             <tr key={item.id} className="bg-white border-b">
-                                <td className="px-2 border-r">{i + 1}</td>
+                                <td className="px-2 border-r">
+                                    {/* prettier-ignore */}
+                                    {(pageNumber - 1) * pageLimit + (i + 1)}
+                                </td>
                                 {titles.map((title, i) => {
                                     return (
                                         <td
