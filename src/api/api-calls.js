@@ -28,13 +28,19 @@ export const apiRequest = (
                 });
         })
         .catch(({ response }) => {
-            return enqueueSnackbar(
-                response.data.message || "Unknown error occurred",
-                {
-                    variant: "error",
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
-                }
-            );
+            if (response.statusText === "Unauthorized") {
+                localStorage.setItem("token", "");
+                window.location.replace("/login");
+            } else {
+                enqueueSnackbar(
+                    response.data.message ||
+                        "Unable to fetch data, please check your internet and try again",
+                    {
+                        variant: "error",
+                        anchorOrigin: { vertical: "top", horizontal: "center" },
+                    }
+                );
+            }
         });
 };
 
@@ -87,13 +93,19 @@ export const searchData = (
             }
         })
         .catch(({ response }) => {
-            return enqueueSnackbar(
-                response.data.message || "Unknown error occurred",
-                {
-                    variant: "error",
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
-                }
-            );
+            if (response.statusText === "Unauthorized") {
+                localStorage.setItem("token", "");
+                window.location.replace("/login");
+            } else {
+                enqueueSnackbar(
+                    response.data.message ||
+                        "Unable to fetch data, please check your internet and try again",
+                    {
+                        variant: "error",
+                        anchorOrigin: { vertical: "top", horizontal: "center" },
+                    }
+                );
+            }
         })
         .finally(() => {
             if (setLoading) setLoading(false);
@@ -113,10 +125,19 @@ export const getListData = (url, parseData, updateData, enqueueSnackbar) => {
             updateData(parseData(url, data));
         })
         .catch(({ response }) => {
-            return enqueueSnackbar(response.data.message, {
-                variant: "error",
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
+            if (response.statusText === "Unauthorized") {
+                localStorage.setItem("token", "");
+                window.location.replace("/login");
+            } else {
+                enqueueSnackbar(
+                    response.data.message ||
+                        "Unable to fetch data, please check your internet and try again",
+                    {
+                        variant: "error",
+                        anchorOrigin: { vertical: "top", horizontal: "center" },
+                    }
+                );
+            }
         });
 };
 
@@ -161,7 +182,7 @@ export const loginAdministrator = (data, setBtnLoading, setError) => {
         .catch((error) => {
             setError(
                 error.response.data.error ||
-                    "Unknown error occurred. Please try again later."
+                    "Unable to login, please check your internet and try again"
             );
         })
         .finally(() => {
