@@ -65,6 +65,10 @@ export const DonateTodaySection = ({ data }) => {
                         submitData={submitData}
                         disabled={disabled}
                         btnLoading={btnLoading}
+                        custom={null}
+                        ratio={4 / 3}
+                        folder="donate"
+                        file_name={content.title + "jpg"}
                     />
                 </div>
             )}

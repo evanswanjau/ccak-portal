@@ -134,6 +134,9 @@ export const WhatWeDoSection = ({ data }) => {
                                 />
                             </div>
                         }
+                        ratio={5 / 4}
+                        folder="home"
+                        file_name={content.title + "jpg"}
                     />
                 </div>
             )}

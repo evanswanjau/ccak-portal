@@ -46,7 +46,9 @@ export const AdvocateSection = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">Clean Cooking Advocate</h2>
+                <h2 className="text-xl font-semibold">
+                    Clean Cooking Advocate
+                </h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (
@@ -63,8 +65,11 @@ export const AdvocateSection = ({ data }) => {
                         submitData={submitData}
                         disabled={disabled}
                         btnLoading={btnLoading}
+                        custom={null}
+                        ratio={4 / 3}
+                        folder="home"
+                        file_name={content.title + "jpg"}
                     />
-                    
                 </div>
             )}
         </div>

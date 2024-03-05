@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "../../../components/forms/input";
 import { TextArea } from "../../../components/forms/textarea";
 import { BtnLoader } from "../../../components/btnLoader";
+import { CustomImageUpload } from "../../../components/customImageUpload";
 
 export const Editor = ({
     data,
@@ -10,9 +11,15 @@ export const Editor = ({
     disabled,
     btnLoading,
     custom,
+    ratio = null,
+    folder = null,
+    file_name = null,
 }) => {
     return (
         <div>
+            {"image" in data && (
+                <CustomImageUpload data={data} updateData={updateData} ratio={ratio} folder={folder} file_name={file_name}  />
+            )}
             {"title" in data && (
                 <Input
                     item="title"

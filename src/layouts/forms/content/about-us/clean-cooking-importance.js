@@ -46,7 +46,9 @@ export const CleanCookingSection = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">Clean Cooking Importance</h2>
+                <h2 className="text-xl font-semibold">
+                    Clean Cooking Importance
+                </h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (
@@ -63,8 +65,11 @@ export const CleanCookingSection = ({ data }) => {
                         submitData={submitData}
                         disabled={disabled}
                         btnLoading={btnLoading}
+                        custom={null}
+                        ratio={4 / 3}
+                        folder="about-us"
+                        file_name={content.title + "jpg"}
                     />
-                    
                 </div>
             )}
         </div>
