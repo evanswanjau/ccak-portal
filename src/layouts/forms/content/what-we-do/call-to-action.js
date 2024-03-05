@@ -134,6 +134,9 @@ export const CallToActionSection = ({ data }) => {
                                 />
                             </div>
                         }
+                        ratio={21 / 9}
+                        folder="what-we-do"
+                        file_name={content.title + "jpg"}
                     />
                 </div>
             )}

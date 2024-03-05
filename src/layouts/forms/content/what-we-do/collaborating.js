@@ -46,9 +46,7 @@ export const CollaboratingSection = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">
-                    Collaboration
-                </h2>
+                <h2 className="text-xl font-semibold">Collaboration</h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (
@@ -65,6 +63,10 @@ export const CollaboratingSection = ({ data }) => {
                         submitData={submitData}
                         disabled={disabled}
                         btnLoading={btnLoading}
+                        custom={null}
+                        ratio={4 / 3}
+                        folder="what-we-do"
+                        file_name={content.title + "jpg"}
                     />
                 </div>
             )}
