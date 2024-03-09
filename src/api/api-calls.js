@@ -34,7 +34,7 @@ export const apiRequest = (
             } else {
                 enqueueSnackbar(
                     response.data.message ||
-                        "Unable to fetch data, please check your internet and try again",
+                        "Unable to fetch data, please check your connection and try again",
                     {
                         variant: "error",
                         anchorOrigin: { vertical: "top", horizontal: "center" },
@@ -99,7 +99,7 @@ export const searchData = (
             } else {
                 enqueueSnackbar(
                     response.data.message ||
-                        "Unable to fetch data, please check your internet and try again",
+                        "Unable to fetch data, please check your connection and try again",
                     {
                         variant: "error",
                         anchorOrigin: { vertical: "top", horizontal: "center" },
@@ -131,7 +131,7 @@ export const getListData = (url, parseData, updateData, enqueueSnackbar) => {
             } else {
                 enqueueSnackbar(
                     response.data.message ||
-                        "Unable to fetch data, please check your internet and try again",
+                        "Unable to fetch data, please check your connection and try again",
                     {
                         variant: "error",
                         anchorOrigin: { vertical: "top", horizontal: "center" },
@@ -182,7 +182,7 @@ export const loginAdministrator = (data, setBtnLoading, setError) => {
         .catch((error) => {
             setError(
                 error.response.data.error ||
-                    "Unable to login, please check your internet and try again"
+                    "Unable to login, please check your connection and try again"
             );
         })
         .finally(() => {

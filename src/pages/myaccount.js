@@ -7,6 +7,7 @@ import { Input } from "../components/forms/input";
 import { Alert } from "../components/forms/alert";
 import { apiRequest, submitFormData } from "../api/api-calls";
 import { BtnLoader } from "../components/btnLoader";
+import { ChangePassword } from "../layouts/forms/change-password";
 
 const getUserID = () => {
     const token = localStorage.getItem("token");
@@ -30,22 +31,6 @@ export const MyAccount = ({ page, searchQuery, addButton }) => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const generatePassword = () => {
-        const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
-        const shuffled = characters
-            .split("")
-            .sort(() => Math.random() - 0.5)
-            .join("");
-
-        let password = "";
-
-        for (let i = 0; i < 8; i++) {
-            password += shuffled[i];
-        }
-
-        updateData({ ...data, password: password });
-    };
-
     const submitData = () => {
         setBtnLoading(true);
         setError("");
@@ -60,10 +45,15 @@ export const MyAccount = ({ page, searchQuery, addButton }) => {
                 });
             })
             .catch(({ response }) => {
-                let errors = response.data;
-                let keys = Object.keys(response.data);
-
-                setError(errors[keys[0]][0]);
+                if (response.statusText === "Unauthorized") {
+                    localStorage.setItem("token", "");
+                    window.location.replace("/login");
+                } else {
+                    setError(
+                        response?.data?.error ||
+                            "Unable to submit, please check your connection and try again"
+                    );
+                }
             })
             .finally(() => {
                 setBtnLoading(false);
@@ -91,7 +81,7 @@ export const MyAccount = ({ page, searchQuery, addButton }) => {
             <div className="w-2/12">
                 <SideNav />
             </div>
-            <div className="w-10/12 p-10 pb-24 mt-8 h-[calc(100vh-2em)] overflow-y-auto">
+            <div className="w-full lg:w-10/12 flex flex-col space-y-8 p-10 pb-24 mt-8 h-[calc(100vh-2em)] overflow-y-auto">
                 <div className="w-7/12 mx-auto rounded-lg shadow-lg">
                     <div className="flex items-center justify-between px-5 py-2 shadow-sm rounded-t-lg">
                         <h3 className="text-xl text-gray-600">
@@ -117,28 +107,6 @@ export const MyAccount = ({ page, searchQuery, addButton }) => {
                                 updateData={updateData}
                             />
                         </div>
-                        <div className="flex space-x-4 justify-between items-center">
-                            <div className="w-8/12">
-                                <Input
-                                    item="password"
-                                    label="Password"
-                                    type="text"
-                                    data={data}
-                                    updateData={updateData}
-                                />
-                            </div>
-                            <div className="w-4/12">
-                                <button
-                                    type="button"
-                                    className="bg-teal-900 hover:bg-teal-950 text-white font-medium rounded-lg text-sm pt-3 w-full pb-[1em] transition duration-150 ease-in-out"
-                                    onClick={() => {
-                                        generatePassword();
-                                    }}
-                                >
-                                    Generate Password
-                                </button>
-                            </div>
-                        </div>
                         <button
                             type="button"
                             disabled={disabled || btnLoading}
@@ -159,6 +127,7 @@ export const MyAccount = ({ page, searchQuery, addButton }) => {
                         </button>
                     </div>
                 </div>
+                <ChangePassword id={data.id} />
             </div>
         </div>
     );

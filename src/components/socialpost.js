@@ -24,12 +24,12 @@ export const SocialHubPost = ({ data, search, updateSearch }) => {
             .replace(
                 urlRegex,
                 (url) =>
-                    `<a href="${url}" class="text-blue-600" target="_blank" rel="noopener noreferrer">${url}</a>`
+                    `<a href="${url}" className="text-blue-600" target="_blank" rel="noopener noreferrer">${url}</a>`
             )
             .replace(
                 hashtagRegex,
                 (hashtag) =>
-                    `<button id="hashtag${data.id}" class="text-blue-600">${hashtag}</button>`
+                    `<button id="hashtag${data.id}" className="text-blue-600">${hashtag}</button>`
             );
     };
 
