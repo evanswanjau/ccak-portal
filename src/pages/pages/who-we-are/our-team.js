@@ -95,11 +95,16 @@ const CreateTeamForm = ({
                     variant: "success",
                 });
             })
-            .catch(({ response }) => {
-                let errors = response.data;
-                let keys = Object.keys(response.data);
-
-                setError(errors[keys[0]][0]);
+            .catch((response) => {
+                if (response.statusText === "Unauthorized") {
+                    localStorage.setItem("token", "");
+                    window.location.replace("/login");
+                } else {
+                    setError(
+                        response?.data?.error ||
+                            "Unable to submit, please check your connection and try again"
+                    );
+                }
             })
             .finally(() => {
                 setBtnLoading(false);

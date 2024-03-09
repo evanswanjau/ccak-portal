@@ -35,10 +35,16 @@ export const HomeSlider = ({ data }) => {
                     variant: "success",
                 });
             })
-            .catch(() => {
-                setError(
-                    "Unable to submit, please check your connection try again"
-                );
+            .catch((response) => {
+                if (response.statusText === "Unauthorized") {
+                    localStorage.setItem("token", "");
+                    window.location.replace("/login");
+                } else {
+                    setError(
+                        response?.data?.error ||
+                            "Unable to submit, please check your connection and try again"
+                    );
+                }
             })
             .finally(() => {
                 setBtnLoading(false);

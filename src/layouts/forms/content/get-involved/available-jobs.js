@@ -27,10 +27,16 @@ export const AvailableJobsSection = ({ data }) => {
                     variant: "success",
                 });
             })
-            .catch(() => {
-                setError(
-                    "Unable to submit, please check your connection try again"
-                );
+            .catch((response) => {
+                if (response.statusText === "Unauthorized") {
+                    localStorage.setItem("token", "");
+                    window.location.replace("/login");
+                } else {
+                    setError(
+                        response?.data?.error ||
+                            "Unable to submit, please check your connection and try again"
+                    );
+                }
             })
             .finally(() => {
                 setBtnLoading(false);
@@ -45,9 +51,7 @@ export const AvailableJobsSection = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">
-                    Available Jobs
-                </h2>
+                <h2 className="text-xl font-semibold">Available Jobs</h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (
