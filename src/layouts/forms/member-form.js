@@ -397,6 +397,13 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                                 </span>
                                 <div className="flex-grow border-t border-gray-200"></div>
                             </div>
+                            <Input
+                                item="membership_no"
+                                label="Membership Number"
+                                type="text"
+                                data={data}
+                                updateData={updateData}
+                            />
                             <Select
                                 item="subscription_category"
                                 list={[

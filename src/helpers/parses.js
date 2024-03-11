@@ -1,4 +1,5 @@
 import { RiQuillPenFill, RiSendPlaneFill } from "react-icons/ri";
+import { format } from "date-fns";
 
 export const parseData = (page, data) => {
     if (page === "posts") {
@@ -59,6 +60,14 @@ export const parseData = (page, data) => {
 
             if (item.author) {
                 item.author = <p className="capitalize">{item.author}</p>;
+            }
+
+            if (item.published) {
+                item.published = (
+                    <p className="capitalize">
+                        {format(item.published, "dd-MM-yyyy hh:mm a")}
+                    </p>
+                );
             }
 
             return item;

@@ -7,6 +7,7 @@ export const getTitles = (url) => {
             { name: "Views", value: "views" },
             { name: "Status", value: "status" },
             { name: "Author", value: "author" },
+            { name: "Published", value: "published" },
         ];
 
     if (url === "payments")

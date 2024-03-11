@@ -44,7 +44,9 @@ export const PostForm = ({ setRevealForm, id, getData }) => {
             data.step === "writing" &&
             (data.title === "" || data.content === "")
         ) {
-            const confirmExit = window.confirm("Exit without title?");
+            const confirmExit = window.confirm(
+                "Exit without " + (data.title === "" ? "title?" : "content?")
+            );
             if (!confirmExit) {
                 return;
             }
