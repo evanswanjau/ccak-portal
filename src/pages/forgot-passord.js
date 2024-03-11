@@ -1,29 +1,49 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import { Input } from "../components/forms/input";
-import { loginAdministrator } from "../api/api-calls";
+import { submitFormData } from "../api/api-calls";
 import { BtnLoader } from "../components/btnLoader";
 
-export const Login = () => {
+export const ForgotPassword = () => {
     const [btnLoading, setBtnLoading] = useState(false);
-    const [data, updateData] = useState({ email: "", password: "" });
+    const [data, updateData] = useState({
+        email: "",
+        user_type: "admin",
+    });
     const [error, setError] = useState("");
 
-    let disabled = data.email === "" || data.password === "";
+    const { enqueueSnackbar } = useSnackbar();
 
-    useEffect(() => {
-        const handleKeyUp = (event) => {
-            if (event.keyCode === 13 && !disabled) {
-                loginAdministrator(data, setBtnLoading, setError);
-            }
-        };
+    let disabled = data.email === "";
 
-        document.addEventListener("keyup", handleKeyUp);
-
-        return () => {
-            document.removeEventListener("keyup", handleKeyUp);
-        };
-    }, [disabled, data]); // eslint-disable-line
+    const handleSubmit = () => {
+        setError("");
+        setBtnLoading(true);
+        submitFormData("post", "auth/resetlink", data)
+            .then(() => {
+                enqueueSnackbar(
+                    "Instructions to reset your password have been sent to your email",
+                    {
+                        variant: "success",
+                    }
+                );
+            })
+            .catch((response) => {
+                if (response.statusText === "Unauthorized") {
+                    localStorage.setItem("token", "");
+                    window.location.replace("/login");
+                } else {
+                    setError(
+                        response?.data?.error ||
+                            "Unable to submit, please check your connection and try again"
+                    );
+                }
+            })
+            .finally(() => {
+                setBtnLoading(false);
+            });
+    };
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-teal-900">
@@ -32,6 +52,14 @@ export const Login = () => {
             </h1>
             <div className="w-11/12 sm:w-10/12 md:w-7/12 lg:w-5/12 xl:w-4/12 shadow-lg rounded-lg mx-auto p-5 bg-white shadow-gray-800">
                 <img src="/logo.png" alt="CCAK Logo" className="w-28 mx-auto" />
+                <div className="text-center my-5">
+                    <h3 className="font-bold tracking-wide">FORGOT PASSWORD</h3>
+                    <p className=" text-gray-500 my-2">
+                        Enter your email address and we'll send you instructions
+                        to reset your password.
+                    </p>
+                </div>
+
                 {error !== "" && (
                     <div
                         className="flex items-center p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50"
@@ -58,13 +86,6 @@ export const Login = () => {
                     data={data}
                     updateData={updateData}
                 />
-                <Input
-                    item="password"
-                    label="Password"
-                    type="password"
-                    data={data}
-                    updateData={updateData}
-                />
                 <button
                     type="button"
                     disabled={disabled}
@@ -73,9 +94,7 @@ export const Login = () => {
                             ? "bg-gray-100"
                             : " bg-teal-900 hover:bg-teal-950"
                     } w-full text-white font-medium rounded-lg text-sm pt-3 pb-[1em] transition duration-150 ease-in-out`}
-                    onClick={() => {
-                        loginAdministrator(data, setBtnLoading, setError);
-                    }}
+                    onClick={handleSubmit}
                 >
                     {btnLoading ? (
                         <BtnLoader />
@@ -84,10 +103,10 @@ export const Login = () => {
                     )}
                 </button>
                 <Link
-                    to="/forgot-password"
+                    to="/login"
                     className="flex mt-5 text-blue-600 justify-end hover:text-blue-800"
                 >
-                    Forgot Password
+                    Back to login
                 </Link>
             </div>
         </div>
