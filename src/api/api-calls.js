@@ -45,16 +45,15 @@ export const apiRequest = (
 };
 
 export const submitFormData = (method, url, data) => {
-    if (method === "patch" && data.password && data.password.length > 30)
-        delete data["password"];
-
     return axios({
         method: "post",
         url: process.env.REACT_APP_API_URL + url,
         data: data,
         headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            ...(localStorage.getItem("token") && {
+                Authorization: "Bearer " + localStorage.getItem("token"),
+            }),
         },
     });
 };

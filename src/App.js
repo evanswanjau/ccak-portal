@@ -34,11 +34,17 @@ import { PackagesPage } from "./pages/pages/membership/packages";
 import { OurMembersPage } from "./pages/pages/membership/our-members";
 import { RegistrationPage } from "./pages/pages/membership/register";
 import { ContactUsPage } from "./pages/pages/get-involved/contact-us";
+import { ForgotPassword } from "./pages/forgot-passord";
+import { ResetPassword } from "./pages/reset-password";
 
 const App = () => {
     return (
         <Router>
-            {window.location.pathname !== "/login" && <TopNav />}
+            {!(
+                window.location.pathname === "/login" ||
+                window.location.pathname === "/forgot-password" ||
+                window.location.pathname.startsWith("/reset-password")
+            ) && <TopNav />}
 
             <Switch>
                 <Route
@@ -144,6 +150,15 @@ const App = () => {
                 <Route exact path="/posts" component={PostsPage} />
                 <Route exact path="/socialposts" component={SocialPostsPage} />
                 <Route exact path="/login" component={Login} />
+                <Route
+                    exact
+                    path="/forgot-password"
+                    component={ForgotPassword}
+                />
+                <Route
+                    path="/reset-password/:token"
+                    component={ResetPassword}
+                />
                 <Route exact path="/" component={DashboardPage} />
             </Switch>
         </Router>
