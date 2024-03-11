@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { HeaderForm } from "../../../layouts/forms/header-form";
 import { ContentPageLayout } from "../../layouts/contentPageLayout";
 import { HomeSlider } from "../../layouts/forms/content/home/home-slider";
 import { AdvocateSection } from "../../layouts/forms/content/home/advocate";

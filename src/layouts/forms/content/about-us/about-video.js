@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSnackbar } from "notistack";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 import { submitFormData } from "../../../../api/api-calls";
@@ -43,6 +43,21 @@ export const AboutVideo = ({ data }) => {
                 setBtnLoading(false);
             });
     };
+
+    const getYoutubeVideoId = (url) => {
+        const urlParts = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+        return urlParts[2] !== undefined
+            // eslint-disable-next-line no-useless-escape
+            ? urlParts[2].split(/[^0-9a-z_\-]/i)[0]
+            : urlParts[0];
+    };
+
+    useEffect(() => {
+        updateContent({
+            ...content,
+            youtubeId: getYoutubeVideoId(content.youtubeId),
+        });
+    }, [content]);
 
     return (
         <div className="w-full lg:w-8/12 rounded-lg shadow-lg mx-auto">
