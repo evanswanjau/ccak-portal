@@ -5,6 +5,7 @@ import { BtnLoader } from "../../../../components/btnLoader";
 import { submitFormData } from "../../../../api/api-calls";
 import { Alert } from "../../../../components/forms/alert";
 import { Carousel } from "../../../../components/carousel";
+import { CustomImageUpload } from "../../../../components/customImageUpload";
 
 export const HomeSlider = ({ data }) => {
     const [content, updateContent] = useState(data?.content);
@@ -19,7 +20,7 @@ export const HomeSlider = ({ data }) => {
 
     const updateItem = (index, key, event) => {
         const newArray = [...content];
-        newArray[index][key] = event.target.value;
+        newArray[index][key] = event?.target?.value || event;
         updateContent(newArray);
     };
 
@@ -73,6 +74,15 @@ export const HomeSlider = ({ data }) => {
                     <Carousel
                         items={content.map((item, i) => (
                             <div key={i} className="flex space-y-4 p-8">
+                                <CustomImageUpload
+                                    data={item}
+                                    updateData={(updatedItem) =>
+                                        updateItem(i, "image", updatedItem.image)
+                                    }
+                                    ratio={16 / 9}
+                                    folder="home"
+                                    file_name={`slider${i + 1}.jpg`}
+                                />
                                 <h1 className="font-lg font-semibold">
                                     SLIDER {i + 1}
                                 </h1>

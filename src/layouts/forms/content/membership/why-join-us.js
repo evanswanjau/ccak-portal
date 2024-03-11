@@ -57,7 +57,7 @@ export const WhyJoinUsSection = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">Key Strategic Pillars</h2>
+                <h2 className="text-xl font-semibold">Registration - Why join us</h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (
