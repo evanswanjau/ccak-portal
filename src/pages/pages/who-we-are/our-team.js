@@ -38,7 +38,7 @@ const CreateTeamForm = ({
         const newArray = JSON.parse(JSON.stringify(data));
         newArray[1]["content"][memberData.groupIndex].members[memberData.index][
             key
-        ] = event.target.value;
+        ] = event.target ? event.target.value : event;
         setPushData(newArray);
     };
 
@@ -185,7 +185,7 @@ const CreateTeamForm = ({
                         >
                             <IKUpload
                                 id="imageUpload"
-                                useUniqueFileName={false}
+                                useUniqueFileName={true}
                                 overwriteFile={true}
                                 fileName={
                                     memberData.name.replace(" ", "-") + ".jpg"
@@ -201,6 +201,11 @@ const CreateTeamForm = ({
                                     setImageLoading(false);
                                 }}
                                 onSuccess={(response) => {
+                                    if (memberData.id)
+                                        updateMember(
+                                            "image",
+                                            response.filePath.substring(1)
+                                        );
                                     setMemberData({
                                         ...memberData,
                                         image: response.filePath.substring(1),

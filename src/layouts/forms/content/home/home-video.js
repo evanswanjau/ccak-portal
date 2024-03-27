@@ -29,7 +29,7 @@ export const HomeVideo = ({ data }) => {
             ...content,
             youtubeId: getYoutubeVideoId(content.youtubeId),
         });
-    }, [content]);
+    }, [content.youtubeId]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const submitData = () => {
         setError("");
