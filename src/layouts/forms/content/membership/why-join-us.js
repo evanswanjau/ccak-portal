@@ -40,7 +40,7 @@ export const WhyJoinUsSection = ({ data }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })
@@ -57,7 +57,9 @@ export const WhyJoinUsSection = ({ data }) => {
                 }`}
                 onClick={() => setShowForm(!showForm)}
             >
-                <h2 className="text-xl font-semibold">Registration - Why join us</h2>
+                <h2 className="text-xl font-semibold">
+                    Registration - Why join us
+                </h2>
                 {showForm ? (
                     <HiMinus className="text-xl text-white" />
                 ) : (

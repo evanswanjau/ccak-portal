@@ -35,7 +35,7 @@ export const CleanCookingSection = ({ data }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })

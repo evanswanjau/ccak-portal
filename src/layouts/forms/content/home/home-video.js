@@ -19,8 +19,8 @@ export const HomeVideo = ({ data }) => {
     const getYoutubeVideoId = (url) => {
         const urlParts = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
         return urlParts[2] !== undefined
-            // eslint-disable-next-line no-useless-escape
-            ? urlParts[2].split(/[^0-9a-z_\-]/i)[0]
+            ? // eslint-disable-next-line no-useless-escape
+              urlParts[2].split(/[^0-9a-z_\-]/i)[0]
             : urlParts[0];
     };
 
@@ -50,7 +50,7 @@ export const HomeVideo = ({ data }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })

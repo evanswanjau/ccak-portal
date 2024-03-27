@@ -82,7 +82,7 @@ export const PaymentForm = ({ setRevealForm, id, getData, setID }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })

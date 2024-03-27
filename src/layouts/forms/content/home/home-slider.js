@@ -43,7 +43,7 @@ export const HomeSlider = ({ data }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })
@@ -77,7 +77,11 @@ export const HomeSlider = ({ data }) => {
                                 <CustomImageUpload
                                     data={item}
                                     updateData={(updatedItem) =>
-                                        updateItem(i, "image", updatedItem.image)
+                                        updateItem(
+                                            i,
+                                            "image",
+                                            updatedItem.image
+                                        )
                                     }
                                     ratio={16 / 9}
                                     folder="home"

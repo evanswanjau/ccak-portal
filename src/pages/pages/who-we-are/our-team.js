@@ -102,7 +102,7 @@ const CreateTeamForm = ({
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })
@@ -117,7 +117,9 @@ const CreateTeamForm = ({
     return (
         <div className="w-full lg:w-6/12 mx-auto rounded-lg shadow-lg">
             <div className="flex items-center justify-between px-5 py-2 shadow-sm rounded-t-lg">
-                <h3 className="text-xl text-gray-600">{memberData.id ? 'Update' : 'Create'} Team Member</h3>
+                <h3 className="text-xl text-gray-600">
+                    {memberData.id ? "Update" : "Create"} Team Member
+                </h3>
                 <div
                     className="p-2 rounded-full hover:bg-gray-100 cursor-pointer transition duration-900"
                     title="close"

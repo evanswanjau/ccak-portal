@@ -14,7 +14,9 @@ export const AboutUsSection = ({ data }) => {
 
     const { enqueueSnackbar } = useSnackbar();
 
-    const disabled = content.title === "" || content.content.some((item) => item.content === "");
+    const disabled =
+        content.title === "" ||
+        content.content.some((item) => item.content === "");
 
     const updateItem = (index, key, event) => {
         const newArray = [...content.content];
@@ -41,7 +43,7 @@ export const AboutUsSection = ({ data }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })

@@ -63,7 +63,7 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
             first_name: "",
             last_name: "",
             email: "",
-            phone_number:"",
+            phone_number: "",
             password: "",
             company: "",
             designation: "",
@@ -121,7 +121,7 @@ export const MemberForm = ({ setRevealForm, id, getData, setID }) => {
                 } else {
                     setError(
                         response?.data?.error ||
-                            "Unable to submit, please check your connection and try again"
+                            "Unable to submit, please refresh your page and try again"
                     );
                 }
             })
