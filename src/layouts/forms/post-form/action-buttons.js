@@ -92,18 +92,24 @@ export const ActionButtons = ({ data, updateData, submitData, exit }) => {
     let continueDisabled = draftDisabled;
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            setAutoSave(true);
-            submitData("post", "post/update/" + data.id, {
-                ...data,
-                status: "draft",
-            }).then(() => {
-                setAutoSave(false);
-            });
-        }, 10000);
+        let intervalId = null;
+
+        if (data.id) {
+            intervalId = setInterval(() => {
+                setAutoSave(true);
+                submitData("post", "post/update/" + data.id, {
+                    ...data,
+                    status: "draft",
+                }).then(() => {
+                    setAutoSave(false);
+                });
+            }, 30000);
+        }
 
         return () => {
-            clearInterval(intervalId);
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
         };
     }, [data]); // eslint-disable-line
 
