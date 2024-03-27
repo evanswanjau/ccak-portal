@@ -1,13 +1,29 @@
 import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
-import { dashboardStats, searchData } from "../api/api-calls";
+import { dashboardStats, searchData, apiRequest } from "../api/api-calls";
 import { useSnackbar } from "notistack";
 import SideNav from "../components/sideNav";
 import { AuthAdministrator } from "../helpers/auth";
 
+const getUserID = () => {
+    const token = localStorage.getItem("token");
+    let user_id = "";
+
+    if (!token) {
+        window.location.replace("/login");
+    } else {
+        const decodedToken = jwt_decode(token);
+
+        user_id = decodedToken.user_id;
+    }
+
+    return user_id;
+};
+
 export const DashboardPage = () => {
     const [invoices, setInvoices] = useState([]);
     const [payments, setPayments] = useState([]);
+    const [user, setUser] = useState({ role: "content-admin" });
     const [generalStats, setGeneralStats] = useState({
         members: 0,
         subscribers: 0,
@@ -30,26 +46,38 @@ export const DashboardPage = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     useEffect(() => {
-        AuthAdministrator(jwt_decode);
-    
-        dashboardStats(generalStats, setGeneralStats, "general")
-        dashboardStats(moneyStats, setMoneyStats, "money")
-        dashboardStats(memberStats, setMemberStats, "member");
-
-        searchData(
-            "invoices",
-            {
-                keyword: "",
-                member_id:"",
-                type: "",
-                status: "",
-                page: 1,
-                limit: 5,
-            },
-            setInvoices,
-            null,
+        apiRequest(
+            "get",
+            "administrator/" + getUserID(),
+            user,
+            setUser,
             enqueueSnackbar
         );
+    }, []); //eslint-disable-line
+
+    useEffect(() => {
+        AuthAdministrator(jwt_decode);
+
+        dashboardStats(generalStats, setGeneralStats, "general");
+        dashboardStats(moneyStats, setMoneyStats, "money");
+        dashboardStats(memberStats, setMemberStats, "member");
+
+        if (user.role !== "content-admin") {
+            searchData(
+                "invoices",
+                {
+                    keyword: "",
+                    member_id: "",
+                    type: "",
+                    status: "",
+                    page: 1,
+                    limit: 5,
+                },
+                setInvoices,
+                null,
+                enqueueSnackbar
+            );
+        }
         searchData(
             "payments",
             {
@@ -63,7 +91,7 @@ export const DashboardPage = () => {
             null,
             enqueueSnackbar
         );
-    }, []); // eslint-disable-line
+    }, [user]); // eslint-disable-line
 
     return (
         <div className="flex">
@@ -276,9 +304,9 @@ export const DashboardPage = () => {
                             <h3 className="text-md">Invoices</h3>
                         </div>
                         <div className="max-h-[20em] overflow-y-auto mb-2">
-                            {invoices.map((invoice) => {
+                            {user.role !== "content-admin" && invoices.map((invoice) => {
                                 return (
-                                    <div className="m-2 p-2 rounded text-sm space-y-1 capitalize text-black bg-teal-50">
+                                    <div key={invoice.id} className="m-2 p-2 rounded text-sm space-y-1 capitalize text-black bg-teal-50">
                                         <p>
                                             <span className="text-gray-600">
                                                 Invoice No:
@@ -340,7 +368,7 @@ export const DashboardPage = () => {
                         <div className="max-h-[20em] overflow-y-auto mb-2">
                             {payments.map((payment) => {
                                 return (
-                                    <div className="m-2 p-2 rounded text-sm space-y-1 capitalize text-black bg-teal-50">
+                                    <div key={payment.id} className="m-2 p-2 rounded text-sm space-y-1 capitalize text-black bg-teal-50">
                                         <p>
                                             <span className="text-gray-600">
                                                 Transaction ID:
